@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lista de reading</title>
+
+</head>
+
+<body >
+{% extends "bootstrap/base.html" %}
+{% block content %}
+  <div class="container">
+    <div class="table-responsive">
+        <table class="table table-sm table-borderless mb-0">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Row Number</th>
+                    <th>Chapter ID</th>
+                    <th>Edition ID</th>
+                    <th>User ID</th>
+                     <th>Percent</th>
+                    <th>New percent</th>
+                    <th>Words</th>
+                    <th>New words</th>
+                    <th>Offset</th>
+                    <th>New Offset</th>
+                    <th>Premium</th>
+                    <th>Device</th>
+                    <th>Version</th>
+                    <th>Timezone</th>
+                    <th>Country</th>
+                    <th>Edition Language</th>
+                    <th>Offline</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for read in reading %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ read['chapter_id'] }}
+                    <td>{{ read['edition_id'] }}</td>
+                    <td>{{ read['user_id'] }}</td>
+                    <td>{{ read['percent'] }}</td>
+                    <td>{{ read['new_percent'] }}</td>
+                    <td>{{ read['words'] }}</td>
+                    <td>{{ read['new_words'] }}</td>
+                    <td>{{ read['offset'] }}</td>
+                    <td>{{ read['new_offset'] }}</td>
+                    <td>{{ read['premium'] }}</td>
+                    <td>{{ read['device'] }}</td>
+                    <td>{{ read['version'] }}</td>
+                    <td>{{ read['timezone'] }}</td>
+                    <td>{{ read['country'] }}</td>
+                    <td>{{ read['edition_language'] }}</td>
+                    <td>{{ read['offline'] }}</td>
+                    <td>{{ read['created_at'] }}</td>
+                    <td>{{ read['updated_at'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <a href="/listar_reading?page={{prev}}">Previous</a><a href="/listar_reading?page={{ next }}">Next</a>
+    </div>
+  </div>
+
+{%- endblock %}
+</body>
+
+</html>

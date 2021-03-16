@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lista de events</title>
+
+</head>
+
+<body >
+{% extends "bootstrap/base.html" %}
+{% block content %}
+  <div class="container">
+    <div class="table-responsive">
+        <table class="table table-sm table-borderless mb-0">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Row Number</th>
+                    <th>User ID</th>
+                    <th>Edition ID</th>
+                    <th>Chapter ID</th>
+                    <th>Percent</th>
+                    <th>Event Class</th>
+                    <th>Event Obj ID</th>
+                    <th>Event Type</th>
+                    <th>Event info</th>
+                    <th>Device</th>
+                    <th>Version</th>
+                    <th>Timezone</th>
+                    <th>Country</th>
+                    <th>Edition Language</th>
+                    <th>Offline</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ event['user_id'] }}</td>
+                    <td>{{ event['edition_id'] }}</td>
+                    <td>{{ event['chapter_id'] }}</td>
+                    <td>{{ event['percent'] }}</td>
+                    <td>{{ event['event_class'] }}</td>
+                    <td>{{ event['event_obj_id'] }}</td>
+                    <td>{{ event['event_type'] }}</td>
+                    <td>{{ event['event_info'] }}</td>
+                    <td>{{ event['device'] }}</td>
+                    <td>{{ event['version'] }}</td>
+                    <td>{{ event['timezone'] }}</td>
+                    <td>{{ event['country'] }}</td>
+                    <td>{{ event['edition_language'] }}</td>
+                    <td>{{ event['offline'] }}</td>
+                    <td>{{ event['created_at'] }}</td>
+                    <td>{{ event['updated_at'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <a href="/listar_events?page={{prev}}">Previous</a><a href="/listar_events?page={{ next }}">Next</a>
+    </div>
+  </div>
+
+
+
+
+{%- endblock %}
+</body>
+
+</html>
