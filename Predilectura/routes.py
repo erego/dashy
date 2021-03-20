@@ -57,7 +57,11 @@ def lista_reading():
 
     return render_template('lista_reading.jinja2', reading=data, prev=current_page -1, next=current_page +1)
 
+@app.route("/generar_abt")
+def generar_abt():
 
-    return render_template(
-        "lista_reading.jinja2"
-    )
+    """
+    Page where ou are able to select the field which will be part of the analytics base table
+    """
+
+    return render_template('generar_abt.jinja2')
