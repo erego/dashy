@@ -3,6 +3,8 @@ from flask import current_app as app
 from flask import render_template, request
 from wsgi import mongo
 
+from Predilectura.data.etl import get_reading_stats
+
 @app.route("/")
 def home():
     """Landing page."""
@@ -53,15 +55,51 @@ def lista_reading():
 
 
     # convert the mongodb object to a list
-    data = list(mongo.db.reading.find().skip(number_to_skip).limit(number_of_records))
+    data = list(mongo.db.readings.find().skip(number_to_skip).limit(number_of_records))
 
-    return render_template('lista_reading.jinja2', reading=data, prev=current_page -1, next=current_page +1)
+    return render_template('lista_reading.jinja2', readings=data, prev=current_page -1, next=current_page +1)
+
 
 @app.route("/generar_abt")
 def generar_abt():
 
     """
-    Page where ou are able to select the field which will be part of the analytics base table
+    Page where you are able to select the field which will be part of the analytics base table
     """
+    # List of users
+
+    # TODO undo mongo db consult
+    lst_users = [2074459, 2074562, 2074565]
+
+    for user in lst_users:
+        # Get readings data by user
+        result_readings = get_readings_stats(user)
+
+        for result in result_readings:
+            print(result)
+
+        # Get events data by user
+        result_readings = get_events_stats(user)
+
+        for result in result_readings:
+            print(result)
+
+        a = 5
+
+    #lst_users = mongo.db.readings.distinct("user_id")
+
+
+    return render_template('generar_abt.jinja2')
+
+@app.route("/create_abt")
+def create_abt():
+
+    """
+    Create the analytics base table from selected fields before
+    """
+
+    # List of users
+    mongo.db.readings.find().distinct("user_id")
+
 
     return render_template('generar_abt.jinja2')
