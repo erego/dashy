@@ -3,7 +3,8 @@ from flask import current_app as app
 from flask import render_template, request
 from wsgi import mongo
 
-from Predilectura.data.etl import get_reading_stats
+from Predilectura.data.etl import get_readings_stats, get_events_stats
+
 
 @app.route("/")
 def home():
@@ -68,23 +69,88 @@ def generar_abt():
     """
     # List of users
 
-    # TODO undo mongo db consult
+    # TODO undo mongo db query
     lst_users = [2074459, 2074562, 2074565]
 
+    # Collection name
+    collection_abt = mongo.db["abt"]
+
+    # drop collection col1
+    collection_abt.drop()
+
     for user in lst_users:
+
         # Get readings data by user
         result_readings = get_readings_stats(user)
-
+        user_data = []
         for result in result_readings:
-            print(result)
+            dict_user = {
+                "user_id": result["_id"]["user_id"],
+                "book": result["_id"]["edition_id"],
+                "language": result["_id"]["edition_language"],
+                "min_percent": result["min_percent"],
+                "max_percent": result["max_percent"],
+                "avg_percent": result["avg_percent"],
+                "max_words": result["min_words"],
+                "avg_words": result["avg_words"],
+                "premium": result["avg_words"],
+                "devices_readings": len(result["devices"]),
+                "versions_readings": len(result["versions"]),
+                "chapters_readings": len(result["chapters"]),
+                "event_classes": 0,
+                "event_objs": 0,
+                "event_types": 0,
+                "devices_events": 0,
+                "versions_events": 0,
+                "chapters_events": 0
+            }
+            user_data.append(dict_user)
 
         # Get events data by user
-        result_readings = get_events_stats(user)
+        result_events = get_events_stats(user)
 
-        for result in result_readings:
-            print(result)
+        for result in result_events:
 
-        a = 5
+            # Find this data in readings to update, if not create a new one
+            element_found =None
+            for element in user_data:
+                if element["user_id"] == result["_id"]["user_id"] and element["book"] == result["_id"]["edition_id"] \
+                        and element["language"] == result["_id"]["edition_language"]:
+                    element_found = element
+                    break
+
+            if element_found is None:
+                dict_user = {
+                    "user_id": result["_id"]["user_id"],
+                    "book": result["_id"]["edition_id"],
+                    "language": result["_id"]["edition_language"],
+                    "min_percent": 0,
+                    "max_percent": 0,
+                    "avg_percent": 0,
+                    "max_words": 0,
+                    "avg_words": 0,
+                    "premium": 0,
+                    "devices_readings": 0,
+                    "versions_readings": 0,
+                    "chapters_readings": 0,
+                    "event_classes": result["event_classes"],
+                    "event_objs": result["event_objs"],
+                    "event_types": len(result["event_types"]),
+                    "devices_events": len(result["devices"]),
+                    "versions_events": len(result["versions"]),
+                    "chapters_events": len(result["chapters"]),
+                }
+                user_data.append(dict_user)
+            else:
+                element_found["event_classes"] = result["event_classes"],
+                element_found["event_objs"] = result["event_objs"],
+                element_found["event_types"] = len(result["event_types"]),
+                element_found["devices_events"] = len(result["devices"]),
+                element_found["versions_events"] = len(result["versions"]),
+                element_found["chapters_events"] = len(result["chapters"])
+
+        for element in user_data:
+            collection_abt.insert(element)
 
     #lst_users = mongo.db.readings.distinct("user_id")
 

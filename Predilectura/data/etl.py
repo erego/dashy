@@ -51,6 +51,9 @@ def get_readings_stats(user_id):
                 },
                 u"versions": {
                     u"$addToSet": u"$version"
+                },
+                u"chapters": {
+                    u"$addToSet": u"$chapter_id"
                 }
             }
         }
@@ -83,39 +86,30 @@ def get_events_stats(user_id):
                     u"user_id": u"$user_id",
                     u"edition_language": u"$edition_language"
                 },
-                u"min_percent": {
-                    u"$min": u"$percent"
-                },
-                u"max_percent": {
-                    u"$max": u"$percent"
-                },
-                u"avg_percent": {
-                    u"$avg": u"$percent"
-                },
-                u"max_words": {
-                    u"$max": u"$words"
-                },
-                u"min_words": {
-                    u"$min": u"$words"
-                },
-                u"avg_words": {
-                    u"$avg": u"$words"
-                },
-                u"premium": {
-                    u"$max": u"$premium"
-                },
                 u"devices": {
                     u"$addToSet": u"$device"
                 },
                 u"versions": {
                     u"$addToSet": u"$version"
+                },
+                u"event_classes": {
+                    u"$addToSet": u"$event_class"
+                },
+                u"event_objs": {
+                    u"$addToSet": u"$event_obj"
+                },
+                u"event_types": {
+                    u"$addToSet": u"$event_type"
+                },
+                u"chapters": {
+                    u"$addToSet": u"$chapter_id"
                 }
             }
         }
     ]
 
-    result_readings = mongo.db.readings.aggregate(
-        pipeline_readings
+    result_events = mongo.db.events.aggregate(
+        pipeline_events
     )
 
-    return result_readings
+    return result_events
