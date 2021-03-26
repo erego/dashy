@@ -35,30 +35,36 @@ def lista_events():
     """
     Page which list events collection from db
     """
-    number_of_records = 10
-    current_page = int(request.args.get('page', default=0))
-    number_to_skip = number_of_records * current_page
 
+    total_records = mongo.db.events.count()
+    number_of_records = 10
+    total_pages = int(total_records/10) + 1
+    current_page = int(request.args.get('page', default=1))
+    number_to_skip = number_of_records * (current_page-1)
 
     data = list(mongo.db.events.find().skip(number_to_skip).limit(number_of_records))
-    return render_template('lista_events.jinja2', events=data, prev=current_page -1, next=current_page +1)
+    return render_template('lista_events.jinja2', events=data, prev=current_page-1, current=current_page,
+                           next=current_page+1, total_pages=total_pages)
 
-@app.route("/listar_reading")
-def lista_reading():
+@app.route("/listar_readings")
+def lista_readings():
 
     """
     Page which list reading collection from db
     """
 
+    total_records = mongo.db.readings.count()
     number_of_records = 10
-    current_page = int(request.args.get('page', default=0))
-    number_to_skip = number_of_records * current_page
+    total_pages = int(total_records / 10) + 1
+    current_page = int(request.args.get('page', default=1))
+    number_to_skip = number_of_records * (current_page-1)
 
 
     # convert the mongodb object to a list
     data = list(mongo.db.readings.find().skip(number_to_skip).limit(number_of_records))
 
-    return render_template('lista_reading.jinja2', readings=data, prev=current_page -1, next=current_page +1)
+    return render_template('lista_readings.jinja2', readings=data, prev=current_page-1, current=current_page,
+                           next=current_page+1, total_pages=total_pages)
 
 
 @app.route("/generar_abt")
