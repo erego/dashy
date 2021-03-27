@@ -1,25 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Lista de datos</title>
-
-</head>
-
-<body >
+{% extends "base.html" %}
+{% block styles %}
+    {{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='css/small-business.css')}}">
+{% endblock %}
+{% block content %}
+      <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="{{url_for('static', filename='images/quantified.png')}}"  height="50" class="d-inline-block align-top" alt="">
+          </a>
+                <a class="navbar-brand" href="#">
+            <img src="{{url_for('static', filename='images/logo_uned.gif')}}"  height="50" class="d-inline-block align-top" alt="">
+          </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <br>
     <form>
-        <h1>SELECCION DE CARACTERISTICAS DE LOS CONCEPTOS DEL DOMINIO</h1>
             <div class="container">
-                <h2>PREDICCION DE ABANDONO DE LA LECTURA</h2>
-                <h3>DETALLES DEL LECTOR</h3>
-                <input type="checkbox"> Identificador del usuario
-                <input type="checkbox"> Valor de premium
+             <h2 class="font-weight-light">SELECCION DE CARACTERISTICAS DE LOS CONCEPTOS DEL DOMINIO</h2>
+            <p>
+                En esta sección eligiremos las características de los datos que tenemos con el objetivo de crear una tabla de análisis de datos que usaremos en los algoritmos de predicción.
+                Para ello crearemos crearemos conceptos del dominio del cual derivaremos las características resultante.
+            </p>
+                <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">Detalles del lector</legend>
+                    <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="id_user">
+                          <label class="form-check-label" for="id_user">
+                            Identificador del usuario
+                          </label>
 
-                <h3>DETALLES DEL LIBRO</h3>
-                <input type="checkbox"> Identificador del libro
-                <input type="checkbox"> Idioma del libro
+                    </div>
+                    <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="premium">
+                          <label class="form-check-label" for="premium">
+                            Valor de premium
+                          </label>
+                    </div>
+
+                </fieldset>
+
+
+
+               <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">Detalles del libro</legend>
+                    <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="book">
+                          <label class="form-check-label" for="book">
+                            Identificador del libro
+                          </label>
+
+                    </div>
+                    <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="language">
+                          <label class="form-check-label" for="language">
+                            Idioma del libro
+                          </label>
+                    </div>
+
+                </fieldset>
+
 
                 <h3>HISTORICO DE LECTURA</h3>
                 <h4>HISTORICO DE CAPITULOS</h4>
@@ -45,7 +108,4 @@
             </div>
     </form>
 
-
-</body>
-
-</html>
+{% endblock %}

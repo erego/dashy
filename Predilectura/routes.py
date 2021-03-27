@@ -95,8 +95,21 @@ def generar_abt():
     """
     Page where you are able to select the field which will be part of the analytics base table
     """
+
+
+
+    return render_template('generar_abt.jinja2')
+
+
+@app.route("/create_abt")
+def create_abt():
+
+    """
+    Create the analytics base table from selected fields before
+    """
+
     # List of users
-    #lst_users = [2074459, 2074562, 2074565]
+    # lst_users = [2074459, 2074562, 2074565]
     lst_users = mongo.db.readings.distinct("user_id")
 
     # Collection name
@@ -140,7 +153,7 @@ def generar_abt():
         for result in result_events:
 
             # Find this data in readings to update, if not create a new one
-            element_found =None
+            element_found = None
             for element in user_data:
                 if element["user_id"] == result["_id"]["user_id"] and element["book"] == result["_id"]["edition_id"] \
                         and element["language"] == result["_id"]["edition_language"]:
@@ -180,19 +193,4 @@ def generar_abt():
         for element in user_data:
             collection_abt.insert(element)
 
-
-    return render_template('generar_abt.jinja2')
-
-
-@app.route("/create_abt")
-def create_abt():
-
-    """
-    Create the analytics base table from selected fields before
-    """
-
-    # List of users
-    mongo.db.readings.find().distinct("user_id")
-
-
-    return render_template('generar_abt.jinja2')
+    return render_template('lista_abt.jinja2')
