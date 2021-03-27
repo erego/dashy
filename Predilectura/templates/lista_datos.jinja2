@@ -1,23 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block styles %}
+    {{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='css/small-business.css')}}">
+{% endblock %}
+{% block content %}
+      <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="{{url_for('static', filename='images/quantified.png')}}"  height="50" class="d-inline-block align-top" alt="">
+          </a>
+                <a class="navbar-brand" href="#">
+            <img src="{{url_for('static', filename='images/logo_uned.gif')}}"  height="50" class="d-inline-block align-top" alt="">
+          </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <br>
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Lista de datos</title>
-
-</head>
-
-<body >
   <div class="container">
-	  <ul>
-          <li><a href="/listar_events">Events</a></li>
-          <li><a href="/listar_readings">Readings</a></li>
-          <li><a href="/listar_ABT">Tabla Base de Análisis(ABT)</a></li>
-          <li><a href="/generar_abt">Generar Tabla Base de Análisis(ABT)</a></li>
+	  <ul class="list-group">
+          <li class="list-group-item"><a href="/listar_events">Events</a></li>
+          <li class="list-group-item"><a href="/listar_readings">Readings</a></li>
+          <li class="list-group-item"><a href="/listar_ABT">Tabla Base de Análisis(ABT)</a></li>
+          <li class="list-group-item"><a href="/generar_abt">Generar Tabla Base de Análisis(ABT)</a></li>
       </ul>
   </div>
 
-</body>
 
-</html>
+
+{% endblock %}
