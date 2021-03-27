@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block styles %}
+    {{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='css/small-business.css')}}">
+{% endblock %}
+
+{% block content %}
+      <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="{{url_for('static', filename='images/quantified.png')}}"  height="50" class="d-inline-block align-top" alt="">
+          </a>
+                <a class="navbar-brand" href="#">
+            <img src="{{url_for('static', filename='images/logo_uned.gif')}}"  height="50" class="d-inline-block align-top" alt="">
+          </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <br>
+
+  <div class="container-fluid">
+    <div class="table-responsive">
+        <table class="table table-sm table-borderless mb-0 table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Row Number</th>
+                    <th>User ID</th>
+                    <th>Book</th>
+                    <th>Language</th>
+                    <th>Min Percent</th>
+                    <th>Max Percent</th>
+                    <th>Avg Percent</th>
+                    <th>Min Words</th>
+                    <th>Max Words</th>
+                    <th>Avg Words</th>
+                    <th>Premium</th>
+                    <th>Device Readings</th>
+                    <th>Version Readings</th>
+                    <th>Chapter Readings</th>
+                    <th>Event Classes</th>
+                    <th>Event Objs</th>
+                    <th>Event Types</th>
+                    <th>Device Events</th>
+                    <th>Version Events</th>
+                    <th>Chapter Events</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in abt %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ data['user_id'] }}</td>
+                    <td>{{ data['book'] }}</td>
+                    <td>{{ data['language'] }}</td>
+                    <td>{{ data['min_percent'] }}</td>
+                    <td>{{ data['max_percent'] }}</td>
+                    <td>{{ data['avg_percent'] }}</td>
+                    <td>{{ data['min_words'] }}</td>
+                    <td>{{ data['max_words'] }}</td>
+                    <td>{{ data['avg_words'] }}</td>
+                    <td>{{ data['premium'] }}</td>
+                    <td>{{ data['device_readings'] }}</td>
+                    <td>{{ data['versions_reading'] }}</td>
+                    <td>{{ data['chapter_readins'] }}</td>
+                    <td>{{ data['event_classes'] }}</td>
+                    <td>{{ data['event_obj'] }}</td>
+                    <td>{{ data['event_types'] }}</td>
+                    <td>{{ data['device_events'] }}</td>
+                    <td>{{ data['version_events'] }}</td>
+                    <td>{{ data['chapter_events'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- Pagination Links-->
+    <div class="text-right">
+        <a href="/listar_events?page={{1}}"
+           class="btn btn-outline-dark
+           {% if current == 1 %}disabled{% endif %}">
+            &laquo;
+        </a>
+        <a href="/listar_events?page={{prev}}"
+           class="btn btn-outline-dark
+           {% if current == 1 %}disabled{% endif %}">
+            &lt;
+        </a>
+        {% for page_num in range(1, 4)|reverse  %}
+            {% if current - page_num > 0 %}
+                <a href="/listar_events?page={{ current - page_num}}"
+                   class="btn btn-outline-dark">
+                    {{ current - page_num}}
+                </a>
+            {% endif %}
+        {% endfor %}
+        <a href="/listar_events?page={{ current }}"
+           class="btn btn-dark">
+            {{ current }}
+        </a>
+        {% for page_num in range(1, 4)  %}
+            {% if current + page_num <= total_pages %}
+                <a href="/listar_events?page={{ current + page_num }}"
+                   class="btn btn-outline-dark">
+                    {{ current + page_num }}
+                </a>
+            {% endif %}
+        {% endfor %}
+        <a href="/listar_events?page={{next}}"
+           class="btn btn-outline-dark
+           {% if page_num == total_pages %}disabled{% endif %}">
+            &gt;
+        </a>
+        <a href="/listar_events?page={{total_pages}}"
+           class="btn btn-outline-dark
+           {% if page_num == total_pages %}disabled{% endif %}">
+            &raquo;
+        </a>
+    </div>
+    <p class="text-right mt-3">
+       Showing page {{ current }} of {{ total_pages }}
+    </p>
+
+</div>
+
+
+
+
+{%- endblock %}

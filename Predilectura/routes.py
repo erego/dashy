@@ -67,6 +67,28 @@ def lista_readings():
                            next=current_page+1, total_pages=total_pages)
 
 
+
+@app.route("/listar_ABT")
+def lista_ABT():
+
+    """
+    Page which list reading collection from db
+    """
+
+    total_records = mongo.db.abt.count()
+    number_of_records = 10
+    total_pages = int(total_records / 10) + 1
+    current_page = int(request.args.get('page', default=1))
+    number_to_skip = number_of_records * (current_page-1)
+
+
+    # convert the mongodb object to a list
+    data = list(mongo.db.abt.find().skip(number_to_skip).limit(number_of_records))
+
+    return render_template('lista_abt.jinja2', abt=data, prev=current_page-1, current=current_page,
+                           next=current_page+1, total_pages=total_pages)
+
+
 @app.route("/generar_abt")
 def generar_abt():
 
@@ -74,9 +96,8 @@ def generar_abt():
     Page where you are able to select the field which will be part of the analytics base table
     """
     # List of users
-
-    # TODO undo mongo db query
-    lst_users = [2074459, 2074562, 2074565]
+    #lst_users = [2074459, 2074562, 2074565]
+    lst_users = mongo.db.readings.distinct("user_id")
 
     # Collection name
     collection_abt = mongo.db["abt"]
@@ -97,7 +118,8 @@ def generar_abt():
                 "min_percent": result["min_percent"],
                 "max_percent": result["max_percent"],
                 "avg_percent": result["avg_percent"],
-                "max_words": result["min_words"],
+                "max_words": result["max_words"],
+                "min_words": result["min_words"],
                 "avg_words": result["avg_words"],
                 "premium": result["avg_words"],
                 "devices_readings": len(result["devices"]),
@@ -158,10 +180,9 @@ def generar_abt():
         for element in user_data:
             collection_abt.insert(element)
 
-    #lst_users = mongo.db.readings.distinct("user_id")
-
 
     return render_template('generar_abt.jinja2')
+
 
 @app.route("/create_abt")
 def create_abt():
