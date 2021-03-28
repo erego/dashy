@@ -38,73 +38,241 @@
     </div>
   </nav>
     <br>
-    <form>
+    <form action={{url_for("create_abt")}} method="post">
             <div class="container">
              <h2 class="font-weight-light">SELECCION DE CARACTERISTICAS DE LOS CONCEPTOS DEL DOMINIO</h2>
             <p>
                 En esta sección eligiremos las características de los datos que tenemos con el objetivo de crear una tabla de análisis de datos que usaremos en los algoritmos de predicción.
                 Para ello crearemos crearemos conceptos del dominio del cual derivaremos las características resultante.
             </p>
+
+
+                <h3 class="font-weight-light "><u>Dominio: Datos del lector</u></h3>
                 <fieldset class="form-group border p-3">
                     <legend class="w-auto px-2">Detalles del lector</legend>
-                    <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="id_user">
-                          <label class="form-check-label" for="id_user">
-                            Identificador del usuario
-                          </label>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="id_user" checked disabled>
+                              <label class="form-check-label" for="id_user">
+                                Identificador del usuario
+                              </label>
 
+                            </div>
+                        </div>
+                       <div class="col">
+                       <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="premium" checked>
+                              <label class="form-check-label" for="premium">
+                                Valor de premium
+                              </label>
+                        </div>
                     </div>
-                    <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value="" id="premium">
-                          <label class="form-check-label" for="premium">
-                            Valor de premium
-                          </label>
                     </div>
+
+
 
                 </fieldset>
 
 
-
+                <h3 class="font-weight-light "><u>Dominio: Datos del libro</u></h3>
                <fieldset class="form-group border p-3">
                     <legend class="w-auto px-2">Detalles del libro</legend>
-                    <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="book">
-                          <label class="form-check-label" for="book">
-                            Identificador del libro
-                          </label>
+                   <div class="row">
+                       <div class="col">
+                           <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="book" id="book" checked disabled>
+                                  <label class="form-check-label" for="book">
+                                    Identificador del libro
+                                  </label>
 
-                    </div>
-                    <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value="" id="language">
-                          <label class="form-check-label" for="language">
-                            Idioma del libro
-                          </label>
+                            </div>
+                       </div>
+                       <div class="col">
+                            <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="language" id="language" checked disabled>
+                                  <label class="form-check-label" for="language">
+                                    Idioma del libro
+                                  </label>
+                            </div>
+                       </div>
+                   </div>
+
+
+
+                </fieldset>
+
+                <h3 class="font-weight-light "><u>Dominio: Histórico de lectura</u></h3>
+                <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">Histórico de capítulos</legend>
+                    <div class="row">
+                        <div class="col">
+                           <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="chapters_readings"
+                                         id="num_chapter_readings" checked>
+                                  <label class="form-check-label" for="chapters_readings">
+                                    Número de capitulos leidos
+                                  </label>
+
+                            </div>
+                            <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="min_percent"
+                                         id="min_percent" checked>
+                                  <label class="form-check-label" for="min_percent">
+                                    Mínimo porcentaje leído
+                                  </label>
+                            </div>
+
+                            <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="max_percent"
+                                         id="max_percent" checked>
+                                  <label class="form-check-label" for="max_percent">
+                                    Máximo porcentaje leído
+                                  </label>
+                            </div>
+
+                            <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="avg_percent"
+                                         id="avg_percent" checked>
+                                  <label class="form-check-label" for="avg_percent">
+                                    Porcentaje  medio leído
+                                  </label>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                           <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="num_words"
+                                         id="num_words" checked>
+                                  <label class="form-check-label" for="num_words">
+                                    Número de palabras leídas
+                                  </label>
+                            </div>
+                            <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="min_words"
+                                         id="min_words" checked>
+                                  <label class="form-check-label" for="min_words">
+                                    Mínimo de palabras leídas
+                                  </label>
+                            </div>
+                            <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="max_words"
+                                         id="max_words" checked>
+                                  <label class="form-check-label" for="max_words">
+                                    Máximo de palabras leídas
+                                  </label>
+                            </div>
+                            <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="avg_words"
+                                         id="avg_words" checked>
+                                  <label class="form-check-label" for="avg_words">
+                                    Media de palabras leídas
+                                  </label>
+                            </div>
+
+                        </div>
+
                     </div>
 
                 </fieldset>
 
+               <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">Dispositivos usados</legend>
+                   <div class="row">
+                       <div class="col">
+                             <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="devices_readings"
+                                         id="devices_redings" checked>
+                                  <label class="form-check-label" for="devices_readings">
+                                    Dispositivos usados
+                                  </label>
 
-                <h3>HISTORICO DE LECTURA</h3>
-                <h4>HISTORICO DE CAPITULOS</h4>
-                <input type="checkbox"> Número de capitulos leidos
-                <input type="checkbox"> Número de palabras leídas
-                <input type="checkbox"> Porcentaje leído
-                <input type="checkbox"> Media de palabras leídas
-                <input type="checkbox"> Máximo de palabras leídas
-                <input type="checkbox"> Máximo de palabras leídas
-                <h4>DISPOSITIVOS</h4>
-                <input type="checkbox"> Número de dispositivos usados
-                <input type="checkbox"> Número de versiones
+                            </div>
+                       </div>
+                       <div class="col">
+                            <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="versions_readings"
+                                         id="versions_readings" checked>
+                                  <label class="form-check-label" for="versions_readings">
+                                    Versiones Usadas
+                                  </label>
+                            </div>
+                       </div>
+                   </div>
 
-                <h3>HISTORICO DE EVENTOS</h3>
-                <h4>ESTADISTICAS EVENTOS</h4>
-                <input type="checkbox"> Número de eventos
-                <input type="checkbox"> Número de clases de eventos
 
-                <h4>DISPOSITIVOS</h4>
-                <input type="checkbox"> Número de dispositivos usados
-                <input type="checkbox"> Número de versiones
 
+                </fieldset>
+
+                <h3 class="font-weight-light "><u>Dominio: Histórico de eventos</u></h3>
+                <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">Estadísticas de eventos</legend>
+
+                    <div class="row">
+                        <div class="col">
+                             <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="event_classes"
+                                         id="event_classes" checked>
+                                  <label class="form-check-label" for="event_classes">
+                                    Clases de Eventos
+                                  </label>
+
+                            </div>
+                            <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="event_objs"
+                                         id="event_objs" checked>
+                                  <label class="form-check-label" for="event_objs">
+                                    Objetos de eventos
+                                  </label>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="event_types"
+                                         id="event_types" checked>
+                                  <label class="form-check-label" for="event_types">
+                                    Tipos de eventos
+                                  </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+              <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">Dispositivos usados</legend>
+                    <div class="row">
+                        <div class="col">
+                             <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="devices_events"
+                                         id="devices_events" checked>
+                                  <label class="form-check-label" for="device_events">
+                                    Dispositivos usados
+                                  </label>
+
+                            </div>
+                            <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="versions_events"
+                                         id="versions_events" checked>
+                                  <label class="form-check-label" for="version_events">
+                                    Versiones Usadas
+                                  </label>
+                            </div>
+                        </div>
+                        <div class="col">
+                             <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="chapters_events"
+                                         id="chapters_events" checked>
+                                  <label class="form-check-label" for="chapter_events">
+                                    Capítulos con eventos
+                                  </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <button type="submit" class="btn btn-dark">Aceptar</button>
+                <br>
             </div>
     </form>
 
