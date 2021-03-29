@@ -166,8 +166,9 @@ def generar_abt():
     """
     Page where you are able to select the field which will be part of the analytics base table
     """
-
-    return render_template('generar_abt.jinja2')
+    from .forms import FormABT
+    form = FormABT()
+    return render_template('generar_abt.jinja2', form=form)
 
 
 @app.route("/create_abt", methods=["POST"])

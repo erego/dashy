@@ -53,19 +53,15 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-check">
-                              <input class="form-check-input" type="checkbox" id="id_user" checked disabled>
-                              <label class="form-check-label" for="id_user">
-                                Identificador del usuario
-                              </label>
+                                {{ form.id_user(class_="form-check-input", disabled='disabled') }}
+                                {{ form.id_user.label(class_="form-check-label") }}
 
                             </div>
                         </div>
                        <div class="col">
                        <div class="form-check">
-                              <input class="form-check-input" type="checkbox" id="premium" checked>
-                              <label class="form-check-label" for="premium">
-                                Valor de premium
-                              </label>
+                                {{ form.premium(class_="form-check-input") }}
+                                {{ form.premium.label(class_="form-check-label") }}
                         </div>
                     </div>
                     </div>
@@ -81,25 +77,18 @@
                    <div class="row">
                        <div class="col">
                            <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="book" id="book" checked disabled>
-                                  <label class="form-check-label" for="book">
-                                    Identificador del libro
-                                  </label>
-
+                                {{ form.book(class_="form-check-input", disabled='disabled') }}
+                                {{ form.book.label(class_="form-check-label") }}
                             </div>
                        </div>
                        <div class="col">
                             <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="language" id="language" checked disabled>
-                                  <label class="form-check-label" for="language">
-                                    Idioma del libro
+                                {{ form.language(class_="form-check-input", disabled='disabled') }}
+                                {{ form.language.label(class_="form-check-label") }}
                                   </label>
                             </div>
                        </div>
                    </div>
-
-
-
                 </fieldset>
 
                 <h3 class="font-weight-light "><u>Dominio: Histórico de lectura</u></h3>
@@ -108,100 +97,61 @@
                     <div class="row">
                         <div class="col">
                            <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="chapters_readings"
-                                         id="num_chapter_readings" checked>
-                                  <label class="form-check-label" for="chapters_readings">
-                                    Número de capitulos leidos
-                                  </label>
-
+                                {{ form.chapters_readings(class_="form-check-input") }}
+                                {{ form.chapters_readings.label(class_="form-check-label") }}
                             </div>
                             <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="min_percent"
-                                         id="min_percent" checked>
-                                  <label class="form-check-label" for="min_percent">
-                                    Mínimo porcentaje leído
-                                  </label>
+                                {{ form.min_percent(class_="form-check-input") }}
+                                {{ form.min_percent.label(class_="form-check-label") }}
                             </div>
 
                             <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="max_percent"
-                                         id="max_percent" checked>
-                                  <label class="form-check-label" for="max_percent">
-                                    Máximo porcentaje leído
-                                  </label>
+                                {{ form.max_percent(class_="form-check-input") }}
+                                {{ form.max_percent.label(class_="form-check-label") }}
                             </div>
 
                             <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="avg_percent"
-                                         id="avg_percent" checked>
-                                  <label class="form-check-label" for="avg_percent">
-                                    Porcentaje  medio leído
-                                  </label>
+                                {{ form.avg_percent(class_="form-check-input") }}
+                                {{ form.avg_percent.label(class_="form-check-label") }}
                             </div>
-
                         </div>
                         <div class="col">
                            <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="num_words"
-                                         id="num_words" checked>
-                                  <label class="form-check-label" for="num_words">
-                                    Número de palabras leídas
-                                  </label>
+                                {{ form.num_words(class_="form-check-input") }}
+                                {{ form.num_words.label(class_="form-check-label") }}
                             </div>
                             <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="min_words"
-                                         id="min_words" checked>
-                                  <label class="form-check-label" for="min_words">
-                                    Mínimo de palabras leídas
-                                  </label>
+                                {{ form.min_words(class_="form-check-input") }}
+                                {{ form.min_words.label(class_="form-check-label") }}
                             </div>
                             <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="max_words"
-                                         id="max_words" checked>
-                                  <label class="form-check-label" for="max_words">
-                                    Máximo de palabras leídas
-                                  </label>
+                                {{ form.max_words(class_="form-check-input") }}
+                                {{ form.max_words.label(class_="form-check-label") }}
                             </div>
                             <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="avg_words"
-                                         id="avg_words" checked>
-                                  <label class="form-check-label" for="avg_words">
-                                    Media de palabras leídas
-                                  </label>
+                                {{ form.avg_words(class_="form-check-input") }}
+                                {{ form.avg_words.label(class_="form-check-label") }}
                             </div>
-
                         </div>
-
                     </div>
-
                 </fieldset>
 
                <fieldset class="form-group border p-3">
                     <legend class="w-auto px-2">Dispositivos usados</legend>
                    <div class="row">
                        <div class="col">
-                             <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="devices_readings"
-                                         id="devices_redings" checked>
-                                  <label class="form-check-label" for="devices_readings">
-                                    Dispositivos usados
-                                  </label>
-
+                            <div class="form-check">
+                                {{ form.devices_readings(class_="form-check-input") }}
+                                {{ form.devices_readings.label(class_="form-check-label") }}
                             </div>
                        </div>
                        <div class="col">
                             <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="versions_readings"
-                                         id="versions_readings" checked>
-                                  <label class="form-check-label" for="versions_readings">
-                                    Versiones Usadas
-                                  </label>
+                                {{ form.versions_readings(class_="form-check-input") }}
+                                {{ form.versions_readings.label(class_="form-check-label") }}
                             </div>
                        </div>
                    </div>
-
-
-
                 </fieldset>
 
                 <h3 class="font-weight-light "><u>Dominio: Histórico de eventos</u></h3>
@@ -211,29 +161,19 @@
                     <div class="row">
                         <div class="col">
                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="event_classes"
-                                         id="event_classes" checked>
-                                  <label class="form-check-label" for="event_classes">
-                                    Clases de Eventos
-                                  </label>
-
+                                {{ form.event_classes(class_="form-check-input") }}
+                                {{ form.event_classes.label(class_="form-check-label") }}
                             </div>
                             <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="event_objs"
-                                         id="event_objs" checked>
-                                  <label class="form-check-label" for="event_objs">
-                                    Objetos de eventos
-                                  </label>
+                                {{ form.event_objs(class_="form-check-input") }}
+                                {{ form.event_objs.label(class_="form-check-label") }}
                             </div>
                         </div>
 
                         <div class="col">
                             <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="event_types"
-                                         id="event_types" checked>
-                                  <label class="form-check-label" for="event_types">
-                                    Tipos de eventos
-                                  </label>
+                                {{ form.event_types(class_="form-check-input") }}
+                                {{ form.event_types.label(class_="form-check-label") }}
                             </div>
                         </div>
 
@@ -245,33 +185,23 @@
                     <div class="row">
                         <div class="col">
                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="devices_events"
-                                         id="devices_events" checked>
-                                  <label class="form-check-label" for="device_events">
-                                    Dispositivos usados
-                                  </label>
-
+                                {{ form.devices_events(class_="form-check-input") }}
+                                {{ form.devices_events.label(class_="form-check-label") }}
                             </div>
                             <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="versions_events"
-                                         id="versions_events" checked>
-                                  <label class="form-check-label" for="version_events">
-                                    Versiones Usadas
-                                  </label>
+                                {{ form.versions_events(class_="form-check-input") }}
+                                {{ form.versions_events.label(class_="form-check-label") }}
                             </div>
                         </div>
                         <div class="col">
                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="chapters_events"
-                                         id="chapters_events" checked>
-                                  <label class="form-check-label" for="chapter_events">
-                                    Capítulos con eventos
-                                  </label>
+                                {{ form.chapters_events(class_="form-check-input") }}
+                                {{ form.chapters_events.label(class_="form-check-label") }}
                             </div>
                         </div>
                     </div>
                 </fieldset>
-                <button type="submit" class="btn btn-dark">Aceptar</button>
+                {{ form.submit(class_="btn btn-dark") }}
                 <br>
             </div>
     </form>
