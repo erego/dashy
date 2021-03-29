@@ -1,51 +1,209 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Lista de datos</title>
-
-</head>
-
-<body >
-    <form>
-        <h1>SELECCION DE CARACTERISTICAS DE LOS CONCEPTOS DEL DOMINIO</h1>
+{% extends "base.html" %}
+{% block styles %}
+    {{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='css/small-business.css')}}">
+{% endblock %}
+{% block content %}
+      <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="{{url_for('static', filename='images/quantified.png')}}"  height="50" class="d-inline-block align-top" alt="">
+          </a>
+                <a class="navbar-brand" href="#">
+            <img src="{{url_for('static', filename='images/logo_uned.gif')}}"  height="50" class="d-inline-block align-top" alt="">
+          </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <br>
+    <form action={{url_for("create_abt")}} method="post">
             <div class="container">
-                <h2>PREDICCION DE ABANDONO DE LA LECTURA</h2>
-                <h3>DETALLES DEL LECTOR</h3>
-                <input type="checkbox"> Identificador del usuario
-                <input type="checkbox"> Valor de premium
+             <h2 class="font-weight-light">SELECCION DE CARACTERISTICAS DE LOS CONCEPTOS DEL DOMINIO</h2>
+            <p>
+                En esta sección eligiremos las características de los datos que tenemos con el objetivo de crear una tabla de análisis de datos que usaremos en los algoritmos de predicción.
+                Para ello crearemos crearemos conceptos del dominio del cual derivaremos las características resultante.
+            </p>
 
-                <h3>DETALLES DEL LIBRO</h3>
-                <input type="checkbox"> Identificador del libro
-                <input type="checkbox"> Idioma del libro
 
-                <h3>HISTORICO DE LECTURA</h3>
-                <h4>HISTORICO DE CAPITULOS</h4>
-                <input type="checkbox"> Número de capitulos leidos
-                <input type="checkbox"> Número de palabras leídas
-                <input type="checkbox"> Porcentaje leído
-                <input type="checkbox"> Media de palabras leídas
-                <input type="checkbox"> Máximo de palabras leídas
-                <input type="checkbox"> Máximo de palabras leídas
-                <h4>DISPOSITIVOS</h4>
-                <input type="checkbox"> Número de dispositivos usados
-                <input type="checkbox"> Número de versiones
+                <h3 class="font-weight-light "><u>Dominio: Datos del lector</u></h3>
+                <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">Detalles del lector</legend>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+                                {{ form.id_user(class_="form-check-input", disabled='disabled') }}
+                                {{ form.id_user.label(class_="form-check-label") }}
 
-                <h3>HISTORICO DE EVENTOS</h3>
-                <h4>ESTADISTICAS EVENTOS</h4>
-                <input type="checkbox"> Número de eventos
-                <input type="checkbox"> Número de clases de eventos
+                            </div>
+                        </div>
+                       <div class="col">
+                       <div class="form-check">
+                                {{ form.premium(class_="form-check-input") }}
+                                {{ form.premium.label(class_="form-check-label") }}
+                        </div>
+                    </div>
+                    </div>
 
-                <h4>DISPOSITIVOS</h4>
-                <input type="checkbox"> Número de dispositivos usados
-                <input type="checkbox"> Número de versiones
 
+
+                </fieldset>
+
+
+                <h3 class="font-weight-light "><u>Dominio: Datos del libro</u></h3>
+               <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">Detalles del libro</legend>
+                   <div class="row">
+                       <div class="col">
+                           <div class="form-check">
+                                {{ form.book(class_="form-check-input", disabled='disabled') }}
+                                {{ form.book.label(class_="form-check-label") }}
+                            </div>
+                       </div>
+                       <div class="col">
+                            <div class="form-check">
+                                {{ form.language(class_="form-check-input", disabled='disabled') }}
+                                {{ form.language.label(class_="form-check-label") }}
+                                  </label>
+                            </div>
+                       </div>
+                   </div>
+                </fieldset>
+
+                <h3 class="font-weight-light "><u>Dominio: Histórico de lectura</u></h3>
+                <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">Histórico de capítulos</legend>
+                    <div class="row">
+                        <div class="col">
+                           <div class="form-check">
+                                {{ form.chapters_readings(class_="form-check-input") }}
+                                {{ form.chapters_readings.label(class_="form-check-label") }}
+                            </div>
+                            <div class="form-check">
+                                {{ form.min_percent(class_="form-check-input") }}
+                                {{ form.min_percent.label(class_="form-check-label") }}
+                            </div>
+
+                            <div class="form-check">
+                                {{ form.max_percent(class_="form-check-input") }}
+                                {{ form.max_percent.label(class_="form-check-label") }}
+                            </div>
+
+                            <div class="form-check">
+                                {{ form.avg_percent(class_="form-check-input") }}
+                                {{ form.avg_percent.label(class_="form-check-label") }}
+                            </div>
+                        </div>
+                        <div class="col">
+                           <div class="form-check">
+                                {{ form.num_words(class_="form-check-input") }}
+                                {{ form.num_words.label(class_="form-check-label") }}
+                            </div>
+                            <div class="form-check">
+                                {{ form.min_words(class_="form-check-input") }}
+                                {{ form.min_words.label(class_="form-check-label") }}
+                            </div>
+                            <div class="form-check">
+                                {{ form.max_words(class_="form-check-input") }}
+                                {{ form.max_words.label(class_="form-check-label") }}
+                            </div>
+                            <div class="form-check">
+                                {{ form.avg_words(class_="form-check-input") }}
+                                {{ form.avg_words.label(class_="form-check-label") }}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+               <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">Dispositivos usados</legend>
+                   <div class="row">
+                       <div class="col">
+                            <div class="form-check">
+                                {{ form.devices_readings(class_="form-check-input") }}
+                                {{ form.devices_readings.label(class_="form-check-label") }}
+                            </div>
+                       </div>
+                       <div class="col">
+                            <div class="form-check">
+                                {{ form.versions_readings(class_="form-check-input") }}
+                                {{ form.versions_readings.label(class_="form-check-label") }}
+                            </div>
+                       </div>
+                   </div>
+                </fieldset>
+
+                <h3 class="font-weight-light "><u>Dominio: Histórico de eventos</u></h3>
+                <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">Estadísticas de eventos</legend>
+
+                    <div class="row">
+                        <div class="col">
+                             <div class="form-check">
+                                {{ form.event_classes(class_="form-check-input") }}
+                                {{ form.event_classes.label(class_="form-check-label") }}
+                            </div>
+                            <div class="form-check">
+                                {{ form.event_objs(class_="form-check-input") }}
+                                {{ form.event_objs.label(class_="form-check-label") }}
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-check">
+                                {{ form.event_types(class_="form-check-input") }}
+                                {{ form.event_types.label(class_="form-check-label") }}
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+              <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">Dispositivos usados</legend>
+                    <div class="row">
+                        <div class="col">
+                             <div class="form-check">
+                                {{ form.devices_events(class_="form-check-input") }}
+                                {{ form.devices_events.label(class_="form-check-label") }}
+                            </div>
+                            <div class="form-check">
+                                {{ form.versions_events(class_="form-check-input") }}
+                                {{ form.versions_events.label(class_="form-check-label") }}
+                            </div>
+                        </div>
+                        <div class="col">
+                             <div class="form-check">
+                                {{ form.chapters_events(class_="form-check-input") }}
+                                {{ form.chapters_events.label(class_="form-check-label") }}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                {{ form.submit(class_="btn btn-dark") }}
+                <br>
             </div>
     </form>
 
-
-</body>
-
-</html>
+{% endblock %}

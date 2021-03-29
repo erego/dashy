@@ -24,3 +24,8 @@ class Config:
     STATIC_FOLDER = "static"
     TEMPLATES_FOLDER = "templates"
     COMPRESSOR_DEBUG = environ.get("COMPRESSOR_DEBUG")
+
+    #WKT CSRF
+    WTF_CSRF_ENABLED = True
+    SECRET_KEY = 'quantified_reading'
+
