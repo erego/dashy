@@ -1,7 +1,7 @@
 """Routes for parent Flask app."""
 from flask import current_app as app
 from flask import render_template, request
-from wsgi import mongo
+from Predilectura import mongo
 
 from Predilectura.data.etl import get_readings_stats, get_events_stats
 

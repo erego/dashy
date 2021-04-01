@@ -2,7 +2,7 @@
 Extract transform and load data from mongodb to generate the analytics base data
 """
 
-from wsgi import mongo
+from Predilectura import mongo
 
 
 def get_readings_stats(user_id):
