@@ -50,6 +50,7 @@
 
 
       <form action={{url_for("auth_bp.login")}} method="post">
+      {{ form.hidden_tag() }}
             <div class="container">
                 <fieldset class="form-group border p-3">
                     <legend class="w-auto px-2">Login usuario</legend>
@@ -83,11 +84,11 @@
                             {{ form.password }}
                         </div>
                     </div>
+
                     <div clas="row">
                         <div>
                             {{ form.submit }}
                           </div>
-
                     </div>
 
                 </fieldset>

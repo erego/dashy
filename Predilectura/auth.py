@@ -5,6 +5,7 @@ from flask_login import current_user, login_user
 from . import login_manager
 from .forms import FormLogin, FormSignup
 from .models import User
+from Predilectura import mongo
 
 # Blueprint Configuration
 auth_bp = Blueprint(
@@ -23,6 +24,7 @@ def signup():
     """
     form = FormSignup()
     if form.validate_on_submit():
+        firstElement = mongo.db.users.find_one({"email": form.email})
         existing_user = User.query.filter_by(email=form.email.data).first()
         if existing_user is None:
             user = User(

@@ -103,10 +103,10 @@ class FormSignup(FlaskForm):
             EqualTo('password', message='Passwords must match.')
         ]
     )
-    website = StringField(
-        'Website',
-        validators=[Optional()]
+    is_admin = BooleanField(
+        'Admin', default=False
     )
+
     submit = SubmitField('Register')
 
 
@@ -120,4 +120,5 @@ class FormLogin(FlaskForm):
         ]
     )
     password = PasswordField('Password', validators=[DataRequired()])
+
     submit = SubmitField('Log In')

@@ -1,8 +1,10 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
-login_manager = LoginManager()
+from flask_pymongo import PyMongo
 
+login_manager = LoginManager()
+mongo = PyMongo()
 
 def init_app():
     """Construct core Flask application with embedded Dash app."""
@@ -11,6 +13,7 @@ def init_app():
     app.config["MONGO_URI"] = "mongodb://localhost:27017/Predilectura"
     Bootstrap(app)
     login_manager.init_app(app)
+    mongo.init_app(app)
 
     with app.app_context():
         # Import parts of our core Flask app
