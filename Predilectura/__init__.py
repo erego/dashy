@@ -6,6 +6,7 @@ from flask_pymongo import PyMongo
 login_manager = LoginManager()
 mongo = PyMongo()
 
+
 def init_app():
     """Construct core Flask application with embedded Dash app."""
     app = Flask(__name__, instance_relative_config=False)

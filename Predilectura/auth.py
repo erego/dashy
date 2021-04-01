@@ -24,19 +24,19 @@ def signup():
     """
     form = FormSignup()
     if form.validate_on_submit():
-        firstElement = mongo.db.users.find_one({"email": form.email})
-        existing_user = User.query.filter_by(email=form.email.data).first()
+        existing_user = mongo.db.users.find_one({"email": form.email.data})
         if existing_user is None:
             user = User(
                 name=form.name.data,
                 email=form.email.data,
-                website=form.website.data
+                password=form.password.data,
+                is_admin=form.is_admin.data
             )
-            user.set_password(form.password.data)
-            db.session.add(user)
-            db.session.commit()  # Create new user
+
+            user_id = mongo.db.users.insert(user.get_json())
+            user.set_id(user_id)
             login_user(user)  # Log in as newly created user
-            return redirect(url_for('main_bp.dashboard'))
+            return redirect(url_for('/dashapp/'))
         flash('A user already exists with that email address.')
     return render_template(
         'signup.jinja2',
@@ -56,16 +56,17 @@ def login():
     """
     # Bypass if user is logged in
     if current_user.is_authenticated:
-        return redirect(url_for('main_bp.dashboard'))
+        return redirect(url_for('/dashapp/'))
 
     form = FormLogin()
     # Validate login attempt
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = mongo.db.users.find_one({"email": form.email.data})
+
         if user and user.check_password(password=form.password.data):
             login_user(user)
             next_page = request.args.get('next')
-            return redirect(next_page or url_for('main_bp.dashboard'))
+            return redirect(next_page or url_for('/dashapp/'))
         flash('Invalid username/password combination')
         return redirect(url_for('auth_bp.login'))
     return render_template(
@@ -81,7 +82,8 @@ def login():
 def load_user(user_id):
     """Check if user is logged-in upon page load."""
     if user_id is not None:
-        return User.query.get(user_id)
+        return mongo.db.users.find_one({"_id": user_id})
+
     return None
 
 
