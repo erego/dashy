@@ -7,14 +7,14 @@ class User(UserMixin):
         self.id = None
         self.name = name
         self.email = email
-        self.password = generate_password_hash(password)
+        self.password = generate_password_hash(password, method='sha256')
         self.is_admin = is_admin
 
     def set_id(self, id_user):
         self.id = id_user
 
     def set_password(self, password):
-        self.password = generate_password_hash(password)
+        self.password = generate_password_hash(password, method='sha256')
 
     def check_password(self, password):
         return check_password_hash(self.password, password)

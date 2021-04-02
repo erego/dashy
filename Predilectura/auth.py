@@ -1,6 +1,7 @@
 """Routes for user authentication."""
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_user
+from werkzeug.security import check_password_hash
 
 from . import login_manager
 from .forms import FormLogin, FormSignup
@@ -63,8 +64,9 @@ def login():
     if form.validate_on_submit():
         user = mongo.db.users.find_one({"email": form.email.data})
 
-        if user and user.check_password(password=form.password.data):
-            login_user(user)
+        if user and check_password_hash(user["password"], form.password.data):
+            loginuser = User(user["name"], user["email"], form.password.data, user["is_admin"])
+            login_user(loginuser)
             next_page = request.args.get('next')
             return redirect(next_page or url_for('/dashapp/'))
         flash('Invalid username/password combination')
