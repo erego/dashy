@@ -22,7 +22,6 @@ def init_dashboard(server):
         ],
     )
 
-    # Load DataFrame
     df = create_dataframe()
 
     # Custom HTML layout
@@ -36,10 +35,10 @@ def init_dashboard(server):
                 figure={
                     "data": [
                         {
-                            "x": df["complaint_type"],
-                            "text": df["complaint_type"],
-                            "customdata": df["key"],
-                            "name": "311 Calls by region.",
+                            "x": df["user_id"],
+                            "text": df["user_id"],
+
+                            "name": "user_id.",
                             "type": "histogram",
                         }
                     ],
@@ -54,6 +53,7 @@ def init_dashboard(server):
         ],
         id="dash-container",
     )
+
     return dash_app.server
 
 

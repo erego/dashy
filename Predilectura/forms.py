@@ -1,6 +1,6 @@
 """Form object declaration."""
 from flask_wtf import FlaskForm
-from wtforms import BooleanField,StringField, PasswordField, SubmitField
+from wtforms import BooleanField,StringField, PasswordField, SubmitField, SelectField
 from wtforms.validators import (
     DataRequired,
     Email,
@@ -72,6 +72,9 @@ class FormABT(FlaskForm):
     chapters_events = BooleanField(
         'Capítulos con eventos', default=True
     )
+
+    output_format = SelectField(u'Formato de salida', choices=[('mongodb', 'Base de datos'), ('pandas', 'CSV')])
+
     submit = SubmitField('Aceptar')
 
 
