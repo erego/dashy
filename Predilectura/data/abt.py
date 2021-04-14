@@ -6,6 +6,7 @@ import pandas as pd
 
 from Predilectura import mongo
 
+
 @dataclass
 class ABT:
     features: dict
@@ -61,7 +62,6 @@ class ABTMongoDB(ABT):
         )
 
         return result_events
-
 
     @staticmethod
     def get_readings_stats(user_id):
@@ -205,7 +205,8 @@ class ABTMongoDB(ABT):
                 # Find this data in readings to update, if not create a new one
                 element_found = None
                 for element in user_data:
-                    if element["user_id"] == result["_id"]["user_id"] and element["book"] == result["_id"]["edition_id"] \
+                    if element["user_id"] == result["_id"]["user_id"] \
+                            and element["book"] == result["_id"]["edition_id"] \
                             and element["language"] == result["_id"]["edition_language"]:
                         element_found = element
                         break
@@ -294,19 +295,12 @@ class ABTMongoDB(ABT):
 class ABTPandas(ABT):
 
     @staticmethod
-    def get_readings_stats():
-        pass
-
-    @staticmethod
-    def get_events_stats():
-        pass
-
-
-
-    def create_ABT(self):
-
-        path_to_readings = Path(current_app.root_path).joinpath("data", "readings.csv")
-
+    def get_readings_stats(path_to_readings):
+        """
+        Return data frame with readings statistics
+        :param path_to_readings: Path were readings csv is
+        :return: data frame with readings statistics
+        """
         readings = pd.read_csv(path_to_readings.as_posix())
 
         df_readings = readings.groupby(["user_id", "edition_id", "edition_language"], as_index=False)
@@ -318,12 +312,19 @@ class ABTPandas(ABT):
                                           max_percent=('percent', 'max'),
                                           avg_percent=('percent', 'mean'),
                                           premium=('premium', 'max'),
-                                          device_readings=('device', 'nunique'),
-                                          version_readings=('version', 'nunique'),
-                                          chapter_readings=('chapter_id', 'nunique')
+                                          devices_readings=('device', 'nunique'),
+                                          versions_readings=('version', 'nunique'),
+                                          chapters_readings=('chapter_id', 'nunique')
                                           )
+        return result_readings
 
-        path_to_events = Path(current_app.root_path).joinpath("data", "events.csv")
+    @staticmethod
+    def get_events_stats(path_to_events):
+        """
+        Return data frame with events statistics
+        :param path_to_events: Path were events csv is
+        :return: data frame with events statistics
+        """
 
         events = pd.read_csv(path_to_events.as_posix())
 
@@ -332,12 +333,77 @@ class ABTPandas(ABT):
         result_events = df_events.agg(event_classes=('event_class', 'unique'),
                                       event_objs=('event_obj_id', 'unique'),
                                       event_types=('event_type', 'nunique'),
-                                      device_events=('device', 'nunique'),
-                                      version_events=('version', 'nunique'),
-                                      chapter_id=('chapter_id', 'nunique'))
+                                      devices_events=('device', 'nunique'),
+                                      versions_events=('version', 'nunique'),
+                                      chapters_events=('chapter_id', 'nunique'))
+        return result_events
+
+    def create_ABT(self):
+
+        path_to_readings = Path(current_app.root_path).joinpath("data", "readings.csv")
+
+        result_readings = ABTPandas.get_readings_stats(path_to_readings)
+
+        # Do a drop of not selected options
+        columns_to_delete = []
+        if self.features["min_percent"] is not True:
+            columns_to_delete.append("min_percent")
+
+        if self.features["max_percent"] is not True:
+            columns_to_delete.append("max_percent")
+
+        if self.features["avg_percent"] is not True:
+            columns_to_delete.append("avg_percent")
+
+        if self.features["max_words"] is not True:
+            columns_to_delete.append("max_words")
+
+        if self.features["min_words"] is not True:
+            columns_to_delete.append("min_words")
+
+        if self.features["avg_words"] is not True:
+            columns_to_delete.append("avg_words")
+
+        if self.features["premium"] is not True:
+            columns_to_delete.append("premium")
+
+        if self.features["devices_readings"] is not True:
+            columns_to_delete.append("devices_readings")
+
+        if self.features["versions_readings"] is not True:
+            columns_to_delete.append("versions_readings")
+
+        if self.features["chapters_readings"] is not True:
+            columns_to_delete.append("chapters_readings")
+
+        path_to_events = Path(current_app.root_path).joinpath("data", "events.csv")
+
+        result_events = ABTPandas.get_events_stats(path_to_events)
+
+        # Do a drop of not selected options
+        if self.features["event_classes"] is not True:
+            columns_to_delete.append("devices_readings")
+
+        if self.features["event_objs"] is not True:
+            columns_to_delete.append("devices_readings")
+
+        if self.features["event_types"] is not True:
+            columns_to_delete.append("devices_readings")
+
+        if self.features["devices_events"] is not True:
+            columns_to_delete.append("devices_events")
+
+        if self.features["versions_events"] is not True:
+            columns_to_delete.append("versions_events")
+
+        if self.features["chapters_events"] is True:
+            columns_to_delete.append("chapters_events")
 
         result = pd.merge(result_readings, result_events, on=['user_id', 'edition_id', "edition_language"], how='outer')
-        result.to_csv('abt.csv', index=False)
+        result.drop(columns_to_delete, axis=1,  inplace=True)
+        path_to_output = Path(current_app.root_path).joinpath("data", "abt.csv")
 
+        if path_to_output.exists():
+            path_to_output.unlink()
 
-
+        result.to_csv(path_to_output.as_posix(), index=False)
