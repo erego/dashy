@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block styles %}
+    {{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='css/small-business.css')}}">
+{% endblock %}
+{% extends "base.html" %}
+{% block styles %}
+    {{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='css/small-business.css')}}">
+{% endblock %}
+
+{% block content %}
+{% include 'navbar.jinja2' %}
+
+  <div class="container-fluid">
+    <div class="table-responsive">
+        <table class="table table-sm table-borderless mb-0 table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Row Number</th>
+                    <th>User ID</th>
+                    <th>Book</th>
+                    <th>Language</th>
+                    {% if header["min_percent"] == true  %}
+                        <th>Min Percent</th>
+                    {% endif %}
+                    {% if header["max_percent"] == true  %}
+                        <th>Max Percent</th>
+                    {% endif %}
+                    {% if header["avg_percent"] == true  %}
+                        <th>Avg Percent</th>
+                    {% endif %}
+                    {% if header["min_words"] == true  %}
+                        <th>Min Words</th>
+                    {% endif %}
+                    {% if header["max_words"] == true  %}
+                        <th>Max Words</th>
+                    {% endif %}
+                    {% if header["avg_words"] == true  %}
+                        <th>Avg Words</th>
+                    {% endif %}
+                    {% if header["premium"] == true  %}
+                        <th>Premium</th>
+                    {% endif %}
+                    {% if header["devices_readings"] == true  %}
+                        <th>Device Readings</th>
+                    {% endif %}
+                    {% if header["versions_readings"] == true  %}
+                        <th>Version Readings</th>
+                    {% endif %}
+                    {% if header["chapters_readings"] == true  %}
+                        <th>Chapter Readings</th>
+                    {% endif %}
+                    {% if header["event_classes"] == true  %}
+                        <th>Event Classes</th>
+                    {% endif %}
+                    {% if header["event_objs"] == true  %}
+                        <th>Event Objs</th>
+                    {% endif %}
+                    {% if header["event_types"] == true  %}
+                        <th>Event Types</th>
+                    {% endif %}
+                    {% if header["devices_events"] == true  %}
+                        <th>Device Events</th>
+                    {% endif %}
+                    {% if header["versions_events"] == true  %}
+                        <th>Version Events</th>
+                    {% endif %}
+                    {% if header["chapters_events"] == true  %}
+                        <th>Chapter Events</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in abt %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ data['user_id'] }}</td>
+                    <td>{{ data['book'] }}</td>
+                    <td>{{ data['language'] }}</td>
+                    {% if header["min_percent"] == true  %}
+                        <td>{{ data['min_percent'] }}</td>
+                    {% endif %}
+                    {% if header["max_percent"] == true  %}
+                        <td>{{ data['max_percent'] }}</td>
+                    {% endif %}
+                    {% if header["avg_percent"] == true  %}
+                        <td>{{ data['avg_percent'] }}</td>
+                    {% endif %}
+                    {% if header["min_words"] == true  %}
+                        <td>{{ data['min_words'] }}</td>
+                    {% endif %}
+                    {% if header["max_words"] == true  %}
+                        <td>{{ data['max_words'] }}</td>
+                    {% endif %}
+                    {% if header["avg_words"] == true  %}
+                        <td>{{ data['avg_words'] }}</td>
+                    {% endif %}
+                    {% if header["premium"] == true  %}
+                        <td>{{ data['premium'] }}</td>
+                    {% endif %}
+                    <td>{{ data['devices_readings'] }}</td>
+                    {% if header["versions_readings"] == true  %}
+                        <td>{{ data['versions_readings'] }}</td>
+                    {% endif %}
+                    {% if header["chapters_readings"] == true  %}
+                        <td>{{ data['chapters_readings'] }}</td>
+                    {% endif %}
+                    {% if header["event_classes"] == true  %}
+                        <td>{{ data['event_classes'] }}</td>
+                    {% endif %}
+                    {% if header["event_objs"] == true  %}
+                        <td>{{ data['event_objs'] }}</td>
+                    {% endif %}
+                    {% if header["event_types"] == true  %}
+                        <td>{{ data['event_types'] }}</td>
+                    {% endif %}
+                    {% if header["devices_events"] == true  %}
+                        <td>{{ data['devices_events'] }}</td>
+                    {% endif %}
+                    {% if header["versions_events"] == true  %}
+                        <td>{{ data['versions_events'] }}</td>
+                    {% endif %}
+                    {% if header["chapters_events"] == true  %}
+                        <td>{{ data['chapters_events'] }}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+
+
+
+{%- endblock %}
