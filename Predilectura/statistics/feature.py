@@ -53,4 +53,10 @@ class FeatureCategorical(Feature):
         self.statistics["count"] = values.size
         self.statistics["missing"] = values.isna().sum()
         self.statistics["cardinality"] = values.nunique()
+        self.statistics["mode"] = values.mode().iat[0]
+        self.statistics["mode_frequency"] = values.mode().iat[0]
+        self.statistics["mode_percent"] = self.statistics["mode"] / self.statistics["count"]
+        self.statistics["mode_second"] = values.mode().iat[1]
+        self.statistics["mode_second_frequency"] = values.nunique()
+        self.statistics["mode_second_percent"] = self.statistics["mode_second"] / self.statistics["count"]
 
