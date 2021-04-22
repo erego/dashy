@@ -288,11 +288,11 @@ def train_algorithm():
         # Train cart selection
         x_train, x_test, y_train, y_test = model.get_train_test(path_to_data.as_posix())
 
-        cart_model = CARTAlgorithm(x_train, x_test, y_train, y_test, request.form.get("cart_criterion"))
+        cart_model = CARTAlgorithm(x_train, y_train, x_test, y_test, request.form.get("cart_criterion"))
         cart_model.build_model()
         prediction = cart_model.get_predictions(x_test)
 
-        scores = cart_model.get_statistical_measures(x_test)
+        scores = cart_model.get_statistical_measures()
 
         # print("The prediction accuracy is: ", cart_model.score(test_features, test_targets) * 100, "%")
         a = 5

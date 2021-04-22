@@ -12,7 +12,7 @@ def get_train_test(path_to_data):
 
     # TODO analize data in order to not drop nan
     data = data.dropna()
-    x = data.drop(columns=["edition_language", "event_classes", "event_objs", "target"])
+    x = data.drop(columns=["edition_id", "edition_language", "event_classes", "event_objs", "target"])
     y = data["target"]
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.33)
 
