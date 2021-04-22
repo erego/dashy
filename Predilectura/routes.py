@@ -10,6 +10,10 @@ import pandas as pd
 from Predilectura import mongo
 from Predilectura.data.abt import ABTMongoDB, ABTPandas
 from Predilectura.statistics.feature import Feature, FeatureContinuous, FeatureCategorical
+from Predilectura.mlearning.information_based import CARTAlgorithm
+from Predilectura.forms import FormAlgorithm
+
+from Predilectura.mlearning import model
 
 
 @app.route("/")
@@ -266,4 +270,35 @@ def quality_abt(format_data):
 
     return render_template('calidad_abt.jinja2', data_continuous=dict_quality_continuous,
                            data_categorical=dict_quality_categorical)
+
+@app.route('/algorithm_train')
+def algorithm_train():
+
+    form = FormAlgorithm()
+    return render_template('algorithm_train.jinja2', form=form)
+
+
+@app.route('/train_algorithm', methods=["POST"])
+def train_algorithm():
+
+    # TODO load training data from field
+    path_to_data = Path(app.root_path).joinpath("data", "abt.csv")
+
+    if request.form.get("cart_select") is not None:
+        # Train cart selection
+        x_train, x_test, y_train, y_test = model.get_train_test(path_to_data.as_posix())
+
+        cart_model = CARTAlgorithm(x_train, x_test, y_train, y_test, request.form.get("cart_criterion"))
+        cart_model.build_model()
+        prediction = cart_model.get_predictions(x_test)
+
+        scores = cart_model.get_statistical_measures(x_test)
+
+        # print("The prediction accuracy is: ", cart_model.score(test_features, test_targets) * 100, "%")
+        a = 5
+
+
+
+
+
 

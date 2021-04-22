@@ -1,6 +1,7 @@
 """Form object declaration."""
 from flask_wtf import FlaskForm
-from wtforms import BooleanField,StringField, PasswordField, SubmitField, SelectField
+from flask_wtf.file import FileField, FileRequired
+from wtforms import BooleanField, StringField, PasswordField, SubmitField, SelectField
 from wtforms.validators import (
     DataRequired,
     Email,
@@ -8,7 +9,6 @@ from wtforms.validators import (
     Length,
     Optional
 )
-
 
 class FormABT(FlaskForm):
     """Analysis Base Table Form."""
@@ -125,3 +125,15 @@ class FormLogin(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
 
     submit = SubmitField('Log In')
+
+
+class FormAlgorithm(FlaskForm):
+    #TODO Set the validator
+    #data_file = FileField(validators=[FileRequired()])
+    data_file = FileField()
+    cart_criterion = SelectField(u'Impurity Metrics', choices=[('entropy', 'Entropy'), ('gini', 'Gini index')])
+    cart_select = BooleanField(
+        'Select Cart algorithm to train', default=True
+    )
+
+    submit = SubmitField('Train')

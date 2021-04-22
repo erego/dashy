@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block styles %}
+    {{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='css/small-business.css')}}">
+{% endblock %}
+{% block content %}
+{% include 'navbar.jinja2' %}
+    <form action={{url_for("train_algorithm")}} method="post"  enctype="multipart/form-data">
+            <div class="container">
+             <h2 class="font-weight-light">SELECTION OF THE ALGORITHM TO BE USED</h2>
+            <p>
+                In this section we will select the different algorithms to be used for training.
+            </p>
+
+          <fieldset class="form-group border p-3">
+            <legend class="w-auto px-2">Select data to train</legend>
+            <div class="row">
+                <div class="col">
+                    <div class="form-check">
+
+                        Select file to upload:
+                        {{ form.data_file }}
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </fieldset>
+
+                <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">CART Algorithm</legend>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+
+                                {{ form.cart_select(class_="form-check-input") }}
+                                {{ form.cart_select.label(class_="form-check-label") }}
+
+
+                            </div>
+                        </div>
+                       <div class="col">
+                           <div class="form-check">
+                                {{ form.cart_criterion.label }}:
+                                {{ form.cart_criterion }}
+                            </div>
+                        </div>
+                    </div>
+
+
+                </fieldset>
+
+                <br>
+                {{ form.submit(class_="btn btn-dark") }}
+            </div>
+    </form>
+
+{% endblock %}
