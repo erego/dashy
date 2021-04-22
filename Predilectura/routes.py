@@ -288,9 +288,9 @@ def train_algorithm():
         # Train cart selection
         x_train, x_test, y_train, y_test = model.get_train_test(path_to_data.as_posix())
 
-        cart_model = CARTAlgorithm(x_train, y_train, x_test, y_test, request.form.get("cart_criterion"))
+        cart_model = CARTAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values, request.form.get("cart_criterion"))
         cart_model.build_model()
-        prediction = cart_model.get_predictions(x_test)
+        prediction = cart_model.get_predictions(x_test.values)
 
         scores = cart_model.get_statistical_measures()
 

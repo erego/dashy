@@ -4,7 +4,7 @@ Import the DecisionTreeClassifier model.
 
 
 from sklearn.tree import DecisionTreeClassifier
-
+from sklearn.metrics import confusion_matrix
 
 class CARTAlgorithm:
 
@@ -37,7 +37,9 @@ class CARTAlgorithm:
         self.model.fit(self.data_train, self.target_train)
 
     def get_statistical_measures(self):
-        score = self.model.score(self.target_test, self.get_predictions(self.data_test))
+
+        predictions = self.get_predictions(self.data_test)
+        score = confusion_matrix(self.target_test, predictions)
         return score
 
     def get_predictions(self, data_to_predict):
