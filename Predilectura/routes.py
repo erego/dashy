@@ -4,6 +4,7 @@ from pathlib import Path
 
 from flask import current_app as app
 from flask import render_template, request
+from flask_login import login_required
 
 import pandas as pd
 
@@ -30,6 +31,8 @@ def home():
 
 
 @app.route("/datos")
+# TODO uncomment login_required
+#@login_required
 def lista_datos():
 
     """
