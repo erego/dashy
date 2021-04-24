@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block title %}Analysis Base Table generation page{% endblock %}
 {% block styles %}
     {{super()}}
 <link rel="stylesheet"
@@ -6,8 +7,10 @@
 {% endblock %}
 {% block content %}
 {% include 'navbar.jinja2' %}
+    <div class="container-fluid">
     <form action={{url_for("create_abt")}} method="post">
             <div class="container">
+                <h1 class="font-weight-light">Generation of the Base Analysis Table.</h1>
              <h2 class="font-weight-light">SELECCION DE CARACTERISTICAS DE LOS CONCEPTOS DEL DOMINIO</h2>
             <p>
                 En esta sección eligiremos las características de los datos que tenemos con el objetivo de crear una tabla de análisis de datos que usaremos en los algoritmos de predicción.
@@ -20,7 +23,7 @@
                         <div class="col">
                             <div class="form-check">
                                 {{ form.output_format.label }}:
-                                {{ form.output_format }}
+                                {{ form.output_format}}
 
                             </div>
                         </div>
@@ -31,7 +34,7 @@
 
                 </fieldset>
 
-                <h3 class="font-weight-light "><u>Dominio: Datos del lector</u></h3>
+                <h3 class="font-weight-light ">Dominio: Datos del lector</h3>
                 <fieldset class="form-group border p-3">
                     <legend class="w-auto px-2">Detalles del lector</legend>
                     <div class="row">
@@ -55,7 +58,7 @@
                 </fieldset>
 
 
-                <h3 class="font-weight-light "><u>Dominio: Datos del libro</u></h3>
+                <h3 class="font-weight-light ">Dominio: Datos del libro</h3>
                <fieldset class="form-group border p-3">
                     <legend class="w-auto px-2">Detalles del libro</legend>
                    <div class="row">
@@ -75,7 +78,7 @@
                    </div>
                 </fieldset>
 
-                <h3 class="font-weight-light "><u>Dominio: Histórico de lectura</u></h3>
+                <h3 class="font-weight-light ">Dominio: Histórico de lectura</h3>
                 <fieldset class="form-group border p-3">
                     <legend class="w-auto px-2">Histórico de capítulos</legend>
                     <div class="row">
@@ -138,7 +141,7 @@
                    </div>
                 </fieldset>
 
-                <h3 class="font-weight-light "><u>Dominio: Histórico de eventos</u></h3>
+                <h3 class="font-weight-light ">Dominio: Histórico de eventos</h3>
                 <fieldset class="form-group border p-3">
                     <legend class="w-auto px-2">Estadísticas de eventos</legend>
 
@@ -188,6 +191,9 @@
                 {{ form.submit(class_="btn btn-dark") }}
                 <br>
             </div>
-    </form>
 
+    </form>
+    <a href="/datos" class="link_tfg">Back to data management section</a>
+    <br><br>
+    </div>
 {% endblock %}
