@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block title %}Detail of the readings table{% endblock %}
 {% block styles %}
     {{super()}}
 <link rel="stylesheet"
@@ -7,6 +8,7 @@
 {% block content %}
 {% include 'navbar.jinja2' %}
 
+    <h1 class="font-weight-light">Detail of the readings table.</h1>
     <div class="container-fluid">
 
     <div class="table-responsive">
@@ -61,7 +63,9 @@
             </tbody>
         </table>
     </div>
-{{ current }}
+
+    <a href="/datos" class="link_tfg">Back to data management section</a>
+
 
         <!-- Pagination Links-->
     <div class="text-right">
