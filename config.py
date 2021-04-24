@@ -15,6 +15,13 @@ class Config:
     FLASK_ENV = environ.get("FLASK_ENV")
     SECRET_KEY = environ.get("SECRET_KEY")
 
+    # Multilingual
+    # -*- coding: utf-8 -*-
+    LANGUAGES = {
+        'en': 'English',
+        'es': 'Español'
+    }
+
     # Assets
     LESS_BIN = environ.get("LESS_BIN")
     ASSETS_DEBUG = environ.get("ASSETS_DEBUG")

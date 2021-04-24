@@ -28,6 +28,18 @@
           </li>
         </ul>
       </div>
+        <div class="language-picker">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle mr-2" href="index.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language
+                </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ url_for(request.endpoint, lang_code='en') }}">English</a>
+                        <a class="dropdown-item" href="{{ url_for(request.endpoint, lang_code='es') }}">Spanish</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
   </nav>
     <br>

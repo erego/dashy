@@ -3,12 +3,12 @@
 from pathlib import Path
 
 from flask import current_app as app
-from flask import render_template, request
+from flask import render_template, request, g
 from flask_login import login_required
 
 import pandas as pd
 
-from Predilectura import mongo
+from Predilectura import mongo, babel
 from Predilectura.data.abt import ABTMongoDB, ABTPandas
 from Predilectura.statistics.feature import Feature, FeatureContinuous, FeatureCategorical
 from Predilectura.mlearning.information_based import CARTAlgorithm
@@ -16,6 +16,31 @@ from Predilectura.forms import FormAlgorithm
 
 from Predilectura.mlearning import model
 
+
+@babel.localeselector
+def get_locale():
+    if not g.get('lang_code', None):
+        g.lang_code = request.accept_languages.best_match(app.config['LANGUAGES'].keys())
+    return g.lang_code
+
+
+@app.url_defaults
+def add_language_code(endpoint, values):
+    if 'lang_code' in request.args:
+        values.setdefault('lang_code', request.args["lang_code"])
+    else:
+        values.setdefault('lang_code', g.lang_code)
+
+
+@app.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    if 'lang_code' not in request.args and 'lang_code' not in values:
+        g.lang_code = request.accept_languages.best_match(app.config['LANGUAGES'])
+    else:
+        if 'lang_code' in request.args:
+            g.lang_code = request.args.get('lang_code')
+        else:
+            g.lang_code = values.pop('lang_code')
 
 @app.route("/")
 def home():
