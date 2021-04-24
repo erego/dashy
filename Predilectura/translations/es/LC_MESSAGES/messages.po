@@ -7,18 +7,185 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-04-24 11:01+0200\n"
-"PO-Revision-Date: 2021-04-24 11:06+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2021-04-24 19:13+0200\n"
+"PO-Revision-Date: 2021-04-24 19:20+0200\n"
+"Last-Translator: \n"
 "Language: es\n"
 "Language-Team: es <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
+"X-Generator: Poedit 2.4.2\n"
+
+#: Predilectura/forms.py:87
+msgid "Name"
+msgstr "Nombre"
+
+#: Predilectura/forms.py:91 Predilectura/forms.py:122
+msgid "Email"
+msgstr "Correo Electrónico"
+
+#: Predilectura/forms.py:94 Predilectura/forms.py:125
+msgid "Enter a valid email"
+msgstr "Introduce un Correo Electrónico Válido"
+
+#: Predilectura/forms.py:99 Predilectura/forms.py:128
+msgid "Password"
+msgstr "Contraseña"
+
+#: Predilectura/forms.py:102
+msgid "Select a stronger password"
+msgstr "Seleccione una Contraseña más Segura"
+
+#: Predilectura/forms.py:106
+msgid "Confirm Your Password"
+msgstr "Confirme su Contraseña"
+
+#: Predilectura/forms.py:109
+msgid "Passwords must match"
+msgstr "Las Contraseñas deben ser Iguales"
+
+#: Predilectura/forms.py:113 Predilectura/templates/navbar.jinja2:24
+msgid "Admin"
+msgstr "Administración"
+
+#: Predilectura/forms.py:116
+msgid "Register"
+msgstr "Regístrese"
+
+#: Predilectura/forms.py:130
+msgid "Log In"
+msgstr "Iniciar sesión"
+
+#: Predilectura/templates/index.jinja2:2
+msgid "Index Page"
+msgstr "Página Indice"
 
 #: Predilectura/templates/index.jinja2:19
 msgid "Reading dropout prediction from reading behavior data"
 msgstr "Predicción del abandono de la lectura a partir de datos sobre el comportamiento lector"
 
+#: Predilectura/templates/index.jinja2:21
+msgid "The objective of the project is the development of a scorecard that, based on real data on reading behavior, provides indicators of the risk of reading abandonment. For this purpose, several algorithms will be tested algorithms will be tested, and we will analyze the results to come up with what could be the best option"
+msgstr "El objetivo del proyecto es el desarrollo de un cuadro de mando que, a partir de datos reales sobre el comportamiento lector, proporcione indicadores del riesgo de abandono de la lectura.  Para ello, se probarán varios algoritmos y se analizarán los resultados para llegar a la mejor opción"
+
+#: Predilectura/templates/index.jinja2:24
+msgid "Using real reader behavior data, the project will focus on the creation of a dashboard that, a set of rules, heuristics, algorithms and machine learning, provides indicators of reading abandonment risk. Interventions will also be considered in order to validate some results (e.g. reading comprehension tests). The result will be a responsive web application and a backend composed of the above elements. It will be realized in the context of a microservices architecture"
+msgstr "Utilizando datos reales del comportamiento de los lectores, el proyecto se centrará en la creación de un cuadro de mando que, un conjunto de reglas, heurística, algoritmos y aprendizaje automático, proporcione indicadores de riesgo de abandono de la lectura. abandono de la lectura. También se plantearán intervenciones para validar algunos resultados (por ejemplo, pruebas de comprensión lectora). comprensión lectora). El resultado será una aplicación web responsiva y un backend compuesto por los elementos mencionados. elementos mencionados. Se realizará en el contexto de una arquitectura de microservicios"
+
+#: Predilectura/templates/index.jinja2:43
+msgid "Data Extraction, Transformation and Loading"
+msgstr "Extracción, transformación y carga de datos"
+
+#: Predilectura/templates/index.jinja2:45
+msgid "In this section we will obtain from the initial data a Data Analysis Table (ABT) that will\n"
+"                be used later in the prediction algorithms that we will use later in the prediction algorithms"
+msgstr "En esta sección obtendremos de los datos iniciales una Tabla de Análisis de Datos (ABT) que\n"
+"                se utilizarán más adelante en los algoritmos de predicción que usaremos más adelante en los algoritmos de predicción"
+
+#: Predilectura/templates/index.jinja2:50
+#: Predilectura/templates/index.jinja2:63
+msgid "More Info"
+msgstr "Más Información"
+
+#: Predilectura/templates/index.jinja2:58
+msgid "Algorithm Selection and Results Visualization"
+msgstr "Selección de algoritmos y visualización de resultados"
+
+#: Predilectura/templates/index.jinja2:59
+msgid "We will test different algorithms on the generated data analysis table and will be able to select the most appropriate one. We will also be able to visualize different results and metrics on them"
+msgstr "Probaremos diferentes algoritmos sobre la tabla de análisis de datos generada y podremos seleccionar el más adecuado. También podremos visualizar diferentes resultados y métricas sobre ellos"
+
+#: Predilectura/templates/login.jinja2:2 Predilectura/templates/login.jinja2:21
+msgid "Login user page"
+msgstr "Página de inicio de sesión del usuario"
+
+#: Predilectura/templates/login.jinja2:26
+msgid "Login user area"
+msgstr "Área de usuario de inicio de sesión"
+
+#: Predilectura/templates/login.jinja2:66
+msgid "Do not have an account?"
+msgstr "¿No tiene una cuenta de usuario?"
+
+#: Predilectura/templates/login.jinja2:67
+msgid "Sign up"
+msgstr "Inscríbase"
+
+#: Predilectura/templates/navbar.jinja2:16
+msgid "Home"
+msgstr "Inicio"
+
+#: Predilectura/templates/navbar.jinja2:21
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: Predilectura/templates/navbar.jinja2:27
+msgid "Contact"
+msgstr "Contacto"
+
+#: Predilectura/templates/navbar.jinja2:34
+msgid "Language"
+msgstr "Idioma"
+
+#: Predilectura/templates/navbar.jinja2:37
+msgid "English"
+msgstr "Inglés"
+
+#: Predilectura/templates/navbar.jinja2:38
+#, fuzzy
+msgid "Spanish"
+msgstr "Español"
+
+#: Predilectura/templates/signup.jinja2:2
+#: Predilectura/templates/signup.jinja2:20
+msgid "Signup user page"
+msgstr "Página de inscripción de usuario"
+
+#: Predilectura/templates/signup.jinja2:25
+msgid "Signup user area"
+msgstr "Área de inscripción usuario"
+
+#~ msgid "Reading dropout prediction from reading behavior data"
+#~ msgstr ""
+#~ "Predicción del abandono de la lectura"
+#~ " a partir de datos sobre el "
+#~ "comportamiento lector"
+
+#~ msgid ""
+#~ "Predicción del abandono de la lectura"
+#~ " a partir de datos sobre el "
+#~ "comportamiento lector"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Using real reader behavior data, the "
+#~ "project will focus on the creation "
+#~ "of a dashboard that,\n"
+#~ "            a set of rules, heuristics,"
+#~ " algorithms and machine learning, provides"
+#~ " indicators of reading abandonment risk."
+#~ "\n"
+#~ "            reading abandonment. Interventions "
+#~ "will also be considered in order "
+#~ "to validate some results (e.g. reading"
+#~ " comprehension tNameests).\n"
+#~ "            reading comprehension). The result"
+#~ " will be a responsive web application"
+#~ " and a backend composed of the "
+#~ "above elements.\n"
+#~ "            above-mentioned elements. It "
+#~ "will be realized in the context of"
+#~ " a microservices architecture"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "We will test different algorithms on "
+#~ "the generated data analysis table\n"
+#~ "                and will be able to select the most appropriate one.\n"
+#~ "                We will also be able "
+#~ "to visualize different results and "
+#~ "metrics on them"
+#~ msgstr ""

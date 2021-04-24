@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Signup user page{% endblock %}
+{% block title %}{{ _('Signup user page') }}{% endblock %}
 {% block styles %}
     {{super()}}
 <link rel="stylesheet"
@@ -17,12 +17,12 @@
       </div>
     {% endfor %}
 
-  <h1 class="font-weight-light">Signup user page.</h1>
+  <h1 class="font-weight-light">{{ _('Signup user page') }}.</h1>
       <form action={{url_for("auth_bp.signup")}} method="post">
       {{ form.hidden_tag() }}
             <div class="container">
                 <fieldset class="form-group border p-3">
-                    <legend class="w-auto px-2">Signup user area</legend>
+                    <legend class="w-auto px-2">{{ _('Signup user area') }}</legend>
                     <div class="row">
                         <div class="col-3">
                             {{ form.name.label }}:

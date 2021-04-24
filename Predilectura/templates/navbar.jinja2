@@ -13,29 +13,29 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-              <a class="nav-link" href="{{url_for("home")}}">Home
+              <a class="nav-link" href="{{url_for("home")}}">{{ _('Home') }}
                 <span class="sr-only">(current)</span>
               </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for("auth_bp.login")}}">Login</a>
+            <a class="nav-link" href="{{url_for("auth_bp.login")}}">{{ _('Login') }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Admin</a>
+            <a class="nav-link" href="#">{{ _('Admin') }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link" href="#">{{ _('Contact') }}</a>
           </li>
         </ul>
       </div>
         <div class="language-picker">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle mr-2" href="index.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language
+                    <a class="nav-link dropdown-toggle mr-2" href="index.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ _('Language') }}
                 </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url_for(request.endpoint, lang_code='en') }}">English</a>
-                        <a class="dropdown-item" href="{{ url_for(request.endpoint, lang_code='es') }}">Spanish</a>
+                        <a class="dropdown-item" href="{{ url_for(request.endpoint, lang_code='en') }}">{{ _('English') }}</a>
+                        <a class="dropdown-item" href="{{ url_for(request.endpoint, lang_code='es') }}">{{ _('Spanish') }}</a>
                     </div>
                 </li>
             </ul>

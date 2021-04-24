@@ -1,4 +1,6 @@
 """Form object declaration."""
+
+from flask_babel import lazy_gettext
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired
 from wtforms import BooleanField, StringField, PasswordField, SubmitField, SelectField
@@ -9,6 +11,7 @@ from wtforms.validators import (
     Length,
     Optional
 )
+
 
 class FormABT(FlaskForm):
     """Analysis Base Table Form."""
@@ -81,50 +84,50 @@ class FormABT(FlaskForm):
 class FormSignup(FlaskForm):
     """User Sign-up Form."""
     name = StringField(
-        'Name',
+        lazy_gettext('Name'),
         validators=[DataRequired()]
     )
     email = StringField(
-        'Email',
+        lazy_gettext('Email'),
         validators=[
             Length(min=6),
-            Email(message='Enter a valid email.'),
+            Email(message=lazy_gettext('Enter a valid email')),
             DataRequired()
         ]
     )
     password = PasswordField(
-        'Password',
+        lazy_gettext('Password'),
         validators=[
             DataRequired(),
-            Length(min=6, message='Select a stronger password.')
+            Length(min=6, message=lazy_gettext('Select a stronger password'))
         ]
     )
     confirm = PasswordField(
-        'Confirm Your Password',
+        lazy_gettext('Confirm Your Password'),
         validators=[
             DataRequired(),
-            EqualTo('password', message='Passwords must match.')
+            EqualTo('password', message=lazy_gettext('Passwords must match'))
         ]
     )
     is_admin = BooleanField(
-        'Admin', default=False
+        lazy_gettext('Admin'), default=False
     )
 
-    submit = SubmitField('Register')
+    submit = SubmitField(lazy_gettext('Register'))
 
 
 class FormLogin(FlaskForm):
     """User Log-in Form."""
     email = StringField(
-        'Email',
+        lazy_gettext('Email'),
         validators=[
             DataRequired(),
-            Email(message='Enter a valid email.')
+            Email(message=lazy_gettext('Enter a valid email'))
         ]
     )
-    password = PasswordField('Password', validators=[DataRequired()])
+    password = PasswordField(lazy_gettext('Password'), validators=[DataRequired()])
 
-    submit = SubmitField('Log In')
+    submit = SubmitField(lazy_gettext('Log In'))
 
 
 class FormAlgorithm(FlaskForm):
