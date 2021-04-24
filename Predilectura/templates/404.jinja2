@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Page Not Found{% endblock %}
+{% block styles %}
+    {{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='css/small-business.css')}}">
+{% endblock %}
+{% block content %}
+
+{% include 'navbar.jinja2' %}
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Heading Row -->
+    <div class="row align-items-center my-5">
+
+      <div class="col-lg-10">
+        <h1 class="font-weight-light">Page not found.</h1>
+        <p>Looks like the page doesn't exist anymore</p>
+
+        <a href="{{ url_for('home') }}" class="link_tfg">Click Here to go to the Home Page</a>
+
+      </div>
+      <!-- /.col-md-4 -->
+    </div>
+    <!-- /.row -->
+
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+
+    </div>
+    <!-- /.container -->
+  </footer>
+
+{% endblock %}
