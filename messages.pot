@@ -1,0 +1,270 @@
+# Translations template for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-04-25 18:19+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: Predilectura/forms.py:87
+msgid "Name"
+msgstr ""
+
+#: Predilectura/forms.py:91 Predilectura/forms.py:122
+msgid "Email"
+msgstr ""
+
+#: Predilectura/forms.py:94 Predilectura/forms.py:125
+msgid "Enter a valid email"
+msgstr ""
+
+#: Predilectura/forms.py:99 Predilectura/forms.py:128
+msgid "Password"
+msgstr ""
+
+#: Predilectura/forms.py:102
+msgid "Select a stronger password"
+msgstr ""
+
+#: Predilectura/forms.py:106
+msgid "Confirm Your Password"
+msgstr ""
+
+#: Predilectura/forms.py:109
+msgid "Passwords must match"
+msgstr ""
+
+#: Predilectura/forms.py:113 Predilectura/templates/navbar.jinja2:24
+msgid "Admin"
+msgstr ""
+
+#: Predilectura/forms.py:116
+msgid "Register"
+msgstr ""
+
+#: Predilectura/forms.py:130
+msgid "Log In"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:2
+msgid "Quality Report Page"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:13
+msgid "Continuous Features Table"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:18
+#: Predilectura/templates/calidad_abt.jinja2:57
+msgid "Feature"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:19
+#: Predilectura/templates/calidad_abt.jinja2:58
+msgid "Count"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:20
+#: Predilectura/templates/calidad_abt.jinja2:59
+msgid "Percent Missing"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:21
+#: Predilectura/templates/calidad_abt.jinja2:60
+msgid "Cardinality"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:22
+#: Predilectura/templates/calidad_abt.jinja2:24
+msgid "Minimum"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:23
+msgid "First Quartile"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:25
+msgid "Mean"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:26
+msgid "Third Quartile"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:27
+msgid "Maximum"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:28
+msgid "Standard Deviation"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:52
+msgid "Categorical Features Table"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:61
+msgid "Mode"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:62
+msgid "Mode Frequency"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:63
+msgid "Mode Percent"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:64
+msgid "Second Mode"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:65
+msgid "Second Mode Frequency"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:66
+msgid "Second Mode Percent"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:87
+msgid "Back to data management section"
+msgstr ""
+
+#: Predilectura/templates/index.jinja2:2
+msgid "Index Page"
+msgstr ""
+
+#: Predilectura/templates/index.jinja2:19
+msgid "Reading dropout prediction from reading behavior data"
+msgstr ""
+
+#: Predilectura/templates/index.jinja2:21
+msgid ""
+"The objective of the project is the development of a scorecard that, "
+"based on real data on reading behavior, provides indicators of the risk "
+"of reading abandonment. For this purpose, several algorithms will be "
+"tested algorithms will be tested, and we will analyze the results to come"
+" up with what could be the best option"
+msgstr ""
+
+#: Predilectura/templates/index.jinja2:24
+msgid ""
+"Using real reader behavior data, the project will focus on the creation "
+"of a dashboard that, a set of rules, heuristics, algorithms and machine "
+"learning, provides indicators of reading abandonment risk. Interventions "
+"will also be considered in order to validate some results (e.g. reading "
+"comprehension tests). The result will be a responsive web application and"
+" a backend composed of the above elements. It will be realized in the "
+"context of a microservices architecture"
+msgstr ""
+
+#: Predilectura/templates/index.jinja2:43
+msgid "Data Extraction, Transformation and Loading"
+msgstr ""
+
+#: Predilectura/templates/index.jinja2:45
+msgid ""
+"In this section we will obtain from the initial data a Data Analysis "
+"Table (ABT) that will\n"
+"                be used later in the prediction algorithms that we will "
+"use later in the prediction algorithms"
+msgstr ""
+
+#: Predilectura/templates/index.jinja2:50
+#: Predilectura/templates/index.jinja2:63
+msgid "More Info"
+msgstr ""
+
+#: Predilectura/templates/index.jinja2:58
+msgid "Algorithm Selection and Results Visualization"
+msgstr ""
+
+#: Predilectura/templates/index.jinja2:59
+msgid ""
+"We will test different algorithms on the generated data analysis table "
+"and will be able to select the most appropriate one. We will also be able"
+" to visualize different results and metrics on them"
+msgstr ""
+
+#: Predilectura/templates/lista_datos.jinja2:2
+msgid "Data management page"
+msgstr ""
+
+#: Predilectura/templates/lista_datos.jinja2:12
+msgid "Section for data management and visualization"
+msgstr ""
+
+#: Predilectura/templates/lista_datos.jinja2:15
+msgid "Visualization"
+msgstr ""
+
+#: Predilectura/templates/lista_datos.jinja2:30
+msgid "Extraction, Transformation and Loading"
+msgstr ""
+
+#: Predilectura/templates/lista_datos.jinja2:35
+#: Predilectura/templates/lista_datos.jinja2:36
+msgid "Informe de la calidad de los datos"
+msgstr ""
+
+#: Predilectura/templates/login.jinja2:2 Predilectura/templates/login.jinja2:21
+msgid "Login user page"
+msgstr ""
+
+#: Predilectura/templates/login.jinja2:26
+msgid "Login user area"
+msgstr ""
+
+#: Predilectura/templates/login.jinja2:66
+msgid "Do not have an account?"
+msgstr ""
+
+#: Predilectura/templates/login.jinja2:67
+msgid "Sign up"
+msgstr ""
+
+#: Predilectura/templates/navbar.jinja2:16
+msgid "Home"
+msgstr ""
+
+#: Predilectura/templates/navbar.jinja2:21
+msgid "Login"
+msgstr ""
+
+#: Predilectura/templates/navbar.jinja2:27
+msgid "Contact"
+msgstr ""
+
+#: Predilectura/templates/navbar.jinja2:34
+msgid "Language"
+msgstr ""
+
+#: Predilectura/templates/navbar.jinja2:37
+msgid "English"
+msgstr ""
+
+#: Predilectura/templates/navbar.jinja2:38
+msgid "Spanish"
+msgstr ""
+
+#: Predilectura/templates/signup.jinja2:2
+#: Predilectura/templates/signup.jinja2:20
+msgid "Signup user page"
+msgstr ""
+
+#: Predilectura/templates/signup.jinja2:25
+msgid "Signup user area"
+msgstr ""
+

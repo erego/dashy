@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block title %}{{ _('Index Page') }}{% endblock %}
 {% block styles %}
     {{super()}}
 <link rel="stylesheet"
@@ -15,28 +16,20 @@
     <div class="row align-items-center my-5">
 
       <div class="col-lg-10">
-        <h1 class="font-weight-light">Predicción de abandono de lectura a partir de datos de comportamiento lector</h1>
+        <h1 class="font-weight-light">{{ _('Reading dropout prediction from reading behavior data') }}.</h1>
         <p>
-            El objetivo del proyecto es el desarrollo de un cuadro de mandos que, a partir de datos reales de
-            comportamiento lector, provea indicadores de riesgo de abandono de la lectura. Para ello se probarán
-            varios algoritmos, y analizaremos los resultados para plantear lo que podría ser la mejor o mejores
-            opciones.
+            {{ _('The objective of the project is the development of a scorecard that, based on real data on reading behavior, provides indicators of the risk of reading abandonment. For this purpose, several algorithms will be tested algorithms will be tested, and we will analyze the results to come up with what could be the best option') }}.
         </p>
           <p>
-            Utilizando datos reales de comportamiento lector, el proyecto se centrará en la creación de un cuadro de mandos que,
-            mediante un conjunto de reglas, heurísticas, algoritmos y aprendizaje automático, provea indicadores de riesgo de
-            abandono de lectura. También se plantearán intervenciones para poder validar algunos resultados (p.e. tests de
-            comprensión lectora). El resultado será una aplicación web responsive y un backend compuesto por los elementos
-            anteriormente citados. Se realizará en el contexto de una arquitectura de microservicios.
+            {{ _('Using real reader behavior data, the project will focus on the creation of a dashboard that, a set of rules, heuristics, algorithms and machine learning, provides indicators of reading abandonment risk. Interventions will also be considered in order to validate some results (e.g. reading comprehension tests). The result will be a responsive web application and a backend composed of the above elements. It will be realized in the context of a microservices architecture') }}.
         </p>
-        <a class="btn btn-primary" href="#">Call to Action!</a>
       </div>
       <!-- /.col-md-4 -->
     </div>
     <!-- /.row -->
 
     <!-- Call to Action Well -->
-    <div class="card text-white bg-secondary my-5 py-4 text-center">
+    <div class="card text-white bg-secondary my-5 py-1 text-center">
       <div class="card-body">
         <p class="text-white m-0"></p>
       </div>
@@ -47,14 +40,14 @@
       <div class="col-md-6 mb-5">
         <div class="card h-100">
           <div class="card-body">
-            <h2 class="card-title">Extracción, Transformación y Carga de Datos</h2>
+            <h2 class="card-title">{{ _('Data Extraction, Transformation and Loading') }}</h2>
             <p class="card-text">
-                En esta sección obtendremos a partir de los datos iniciales una Tabla de Análisis de Datos(ABT) que será
-                la que emplearemos posteriormente en los algoritmos de predicción.
+                {{ _('In this section we will obtain from the initial data a Data Analysis Table (ABT) that will
+                be used later in the prediction algorithms that we will use later in the prediction algorithms')}}.
             </p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary btn-sm">More Info</a>
+            <a href="#" class="btn btn-primary btn-sm bg-secondary">{{ _('More Info') }}</a>
           </div>
         </div>
       </div>
@@ -62,14 +55,12 @@
       <div class="col-md-6 mb-5">
         <div class="card h-100">
           <div class="card-body">
-            <h2 class="card-title">Selección de Algoritmos y Visualización de Resultados</h2>
-            <p class="card-text"> Probaremos diferentes algoritmos sobre la tabla de análisis de datos generada
-                pudiendo de esta forma seleccionar el más adecuado.
-                Podremos también visualizar diferentes resultados y métricas sobre los mismos
+            <h2 class="card-title">{{ _('Algorithm Selection and Results Visualization') }}</h2>
+            <p class="card-text"> {{ _('We will test different algorithms on the generated data analysis table and will be able to select the most appropriate one. We will also be able to visualize different results and metrics on them')}}.
             </p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary btn-sm">More Info</a>
+            <a href="#" class="btn btn-primary btn-sm bg-secondary">{{ _('More Info') }}</a>
           </div>
         </div>
       </div>
@@ -84,7 +75,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+
     </div>
     <!-- /.container -->
   </footer>

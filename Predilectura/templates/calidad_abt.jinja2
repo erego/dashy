@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Quality Report Page') }}{% endblock %}
+{% block styles %}
+    {{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='css/small-business.css')}}">
+{% endblock %}
+{% block content %}
+{% include 'navbar.jinja2' %}
+
+  <div class="container-fluid">
+    <h1>{{ _('Data quality report')}}</h1>
+    <h2>{{ _('Continuous Features Table') }} </h2>
+    <div class="table-responsive">
+        <table class="table table-sm table-borderless mb-0 table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>{{ _('Feature') }}</th>
+                    <th>{{ _('Count') }}</th>
+                    <th>{{ _('Percent Missing') }}</th>
+                    <th>{{ _('Cardinality') }}</th>
+                    <th>{{ _('Minimum') }}</th>
+                    <th>{{ _('First Quartile') }}</th>
+                    <th>{{ _('Minimum') }}</th>
+                    <th>{{ _('Mean') }}</th>
+                    <th>{{ _('Third Quartile') }}</th>
+                    <th>{{ _('Maximum') }}</th>
+                    <th>{{ _('Standard Deviation') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, dict_data in data_continuous.items() %}
+                <tr>
+                    <td> {{key}}</td>
+                    <td>{{ dict_data['count'] }}</td>
+                    <td>{{ dict_data['percent_missing'] }}</td>
+                    <td>{{ dict_data['cardinality'] }}</td>
+                    <td>{{ dict_data['min'] }}</td>
+                    <td>{{ dict_data['first_quartile'] }}</td>
+                    <td>{{ dict_data['mean'] }}</td>
+                    <td>{{ dict_data['median'] }}</td>
+                    <td>{{ dict_data['third_quartile'] }}</td>
+                    <td>{{ dict_data['max'] }}</td>
+                    <td>{{ dict_data['std_deviation'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+    <h2>{{ _('Categorical Features Table') }} </h2>
+    <div class="table-responsive">
+        <table class="table table-sm table-borderless mb-0 table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>{{ _('Feature') }}</th>
+                    <th>{{ _('Count') }}</th>
+                    <th>{{ _('Percent Missing') }}</th>
+                    <th>{{ _('Cardinality') }}</th>
+                    <th>{{ _('Mode') }}</th>
+                    <th>{{ _('Mode Frequency') }}</th>
+                    <th>{{ _('Mode Percent') }}</th>
+                    <th>{{ _('Second Mode') }}</th>
+                    <th>{{ _('Second Mode Frequency') }}</th>
+                    <th>{{ _('Second Mode Percent') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, dict_data in data_categorical.items() %}
+                <tr>
+                    <td> {{key}}</td>
+                    <td>{{ dict_data['count'] }}</td>
+                    <td>{{ dict_data['percent_missing'] }}</td>
+                    <td>{{ dict_data['cardinality'] }}</td>
+                    <td>{{ dict_data['mode'] }}</td>
+                    <td>{{ dict_data['mode_frequency'] }}</td>
+                    <td>{{ dict_data['mode_percent'] }}</td>
+                    <td>{{ dict_data['mode_second'] }}</td>
+                    <td>{{ dict_data['mode_second_frequency'] }}</td>
+                    <td>{{ dict_data['mode_second_percent'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  <a href="/datos" class="link_tfg">{{ _('Back to data management section') }}</a>
+</div>
+
+
+
+
+{%- endblock %}

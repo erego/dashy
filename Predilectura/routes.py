@@ -3,12 +3,44 @@
 from pathlib import Path
 
 from flask import current_app as app
-from flask import render_template, request
+from flask import render_template, request, g
+from flask_login import login_required
 
 import pandas as pd
 
-from Predilectura import mongo
+from Predilectura import mongo, babel
 from Predilectura.data.abt import ABTMongoDB, ABTPandas
+from Predilectura.statistics.feature import Feature, FeatureContinuous, FeatureCategorical
+from Predilectura.mlearning.information_based import CARTAlgorithm
+from Predilectura.forms import FormAlgorithm
+
+from Predilectura.mlearning import model
+
+
+@babel.localeselector
+def get_locale():
+    if not g.get('lang_code', None):
+        g.lang_code = request.accept_languages.best_match(app.config['LANGUAGES'].keys())
+    return g.lang_code
+
+
+@app.url_defaults
+def add_language_code(endpoint, values):
+    if 'lang_code' in request.args:
+        values.setdefault('lang_code', request.args["lang_code"])
+    else:
+        values.setdefault('lang_code', g.lang_code)
+
+
+@app.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    if 'lang_code' not in request.args and 'lang_code' not in values:
+        g.lang_code = request.accept_languages.best_match(app.config['LANGUAGES'])
+    else:
+        if 'lang_code' in request.args:
+            g.lang_code = request.args.get('lang_code')
+        else:
+            g.lang_code = values.pop('lang_code')
 
 @app.route("/")
 def home():
@@ -24,6 +56,8 @@ def home():
 
 
 @app.route("/datos")
+# TODO uncomment login_required
+#@login_required
 def lista_datos():
 
     """
@@ -32,6 +66,7 @@ def lista_datos():
     return render_template(
         "lista_datos.jinja2"
     )
+
 
 @app.route("/listar_events")
 def lista_events():
@@ -50,6 +85,7 @@ def lista_events():
     return render_template('lista_events.jinja2', events=data, prev=current_page-1, current=current_page,
                            next=current_page+1, total_pages=total_pages)
 
+
 @app.route("/listar_readings")
 def lista_readings():
 
@@ -63,7 +99,6 @@ def lista_readings():
     current_page = int(request.args.get('page', default=1))
     number_to_skip = number_of_records * (current_page-1)
 
-
     # convert the mongodb object to a list
     data = list(mongo.db.readings.find().skip(number_to_skip).limit(number_of_records))
 
@@ -73,13 +108,17 @@ def lista_readings():
 
 @app.route("/listar_ABT", defaults={'format_data': "mongodb"})
 @app.route('/listar_ABT/<format_data>')
-def lista_ABT(format_data):
+def list_abt(format_data):
 
     """
     Page which list reading collection from db
     """
 
     number_of_records = 10
+    data = None
+    current_page = 0
+    total_pages = 0
+    dict_header = None
 
     if format_data == "mongodb":
         total_records = mongo.db.abt.count()
@@ -226,3 +265,84 @@ def create_abt():
         abt_to_create = ABTMongoDB(dict_abt_features)
         abt_to_create.create_ABT()
     return render_template('lista_datos.jinja2')
+
+
+@app.route("/calidad_abt", defaults={'format_data': "mongodb"})
+@app.route('/calidad_abt/<format_data>')
+def quality_abt(format_data):
+
+    data_continuous = None
+    data_categorical = None
+
+    if format_data == "mongodb":
+        pass
+    elif format_data == "pandas":
+
+        path_to_data = Path(app.root_path).joinpath("data", "abt.csv")
+
+        data = pd.read_csv(path_to_data.as_posix())
+
+        total_records = data.shape[0]
+
+        dict_quality_continuous = dict()
+        dict_quality_categorical = dict()
+
+        for column in data.columns:
+
+            if column == "user_id":
+                continue
+
+            # If cardinality of feature is 1 we discard this column
+            if Feature.check_cardinality_one(data[column]):
+                continue
+
+            if Feature.check_type(data[column]) == "Continuous":
+                feature = FeatureContinuous(column)
+                try:
+                    dict_quality_continuous[column] = feature.get_statistics(data[column])
+
+                except Exception as excp:
+                    a = 5
+
+            elif Feature.check_type(data[column]) == "Categorical":
+                feature = FeatureCategorical(column)
+                try:
+                    dict_quality_categorical[column] = feature.get_statistics(data[column])
+                except Exception as excp:
+                    a = 5
+
+
+    return render_template('calidad_abt.jinja2', data_continuous=dict_quality_continuous,
+                           data_categorical=dict_quality_categorical)
+
+@app.route('/algorithm_train')
+def algorithm_train():
+
+    form = FormAlgorithm()
+    return render_template('algorithm_train.jinja2', form=form)
+
+
+@app.route('/train_algorithm', methods=["POST"])
+def train_algorithm():
+
+    # TODO load training data from field
+    path_to_data = Path(app.root_path).joinpath("data", "abt.csv")
+
+    if request.form.get("cart_select") is not None:
+        # Train cart selection
+        x_train, x_test, y_train, y_test = model.get_train_test(path_to_data.as_posix())
+
+        cart_model = CARTAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values, request.form.get("cart_criterion"))
+        cart_model.build_model()
+        prediction = cart_model.get_predictions(x_test.values)
+
+        scores = cart_model.get_statistical_measures()
+
+        # print("The prediction accuracy is: ", cart_model.score(test_features, test_targets) * 100, "%")
+        a = 5
+
+
+
+
+
+

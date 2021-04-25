@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block title %}{{ _('Data management page')}}{% endblock %}
 {% block styles %}
     {{super()}}
 <link rel="stylesheet"
@@ -8,31 +9,47 @@
 {% include 'navbar.jinja2' %}
 
   <div class="container">
+      <h1 class="font-weight-light">{{ _('Section for data management and visualization')}}.</h1>
       <div class="container-fluid">
           <div class="row">
-             <h3 class="bg-dark text-light p-2">Visualización</h3><br>
+             <h2 class="bg-dark text-light p-2">{{ _('Visualization')}}</h2><br>
           </div>
           <div class="row">
               <ul class="list-group" >
-                  <li class="list-group-item"><a href="/listar_events">Tabla Events</a>
-                  <li class="list-group-item"><a href="/listar_readings">Tabla Readings</a></li>
-                  <li class="list-group-item"><a href="/listar_ABT/mongodb">Tabla Base de Análisis(ABT)-MongoDB</a></li>
-                  <li class="list-group-item"><a href="/listar_ABT/pandas">Tabla Base de Análisis(ABT)-CSV</a></li>
+                  <li class="list-group-item link_tfg"><a href="/listar_events" class="link_tfg">{{ _('Events Table')}}</a>
+                  <li class="list-group-item link_tfg"><a href="/listar_readings" class="link_tfg">{{ _('Readings Table')}}</a></li>
+                  <li class="list-group-item link_tfg"><a href="/listar_ABT/mongodb" class="link_tfg">{{ _('Base Analysis Table')}}(ABT)-MongoDB</a></li>
+                  <li class="list-group-item link_tfg"><a href="/listar_ABT/pandas" class="link_tfg">{{ _('Base Analysis Table')}}(ABT)-CSV</a></li>
               </ul>
 
           </div>
        </div>
         <br>
-      <div class="container-fluid">
+        <div class="container-fluid">
           <div class="row">
-             <h3 class="bg-dark text-light p-2">Extracción, Transformación y Carga</h3><br>
+             <h2 class="bg-dark text-light p-2">{{ _('Extraction, Transformation and Loading')}}</h2><br>
           </div>
           <div class="row">
               <ul class="list-group">
-                  <li class="list-group-item"><a href="/generar_abt">Generar Tabla Base de Análisis(ABT)</a></li>
-                  <li class="list-group-item"><a href="/calidad_abt">Informe de la calidad de los datos</a></li>
-                  <li class="list-group-item"><a href="/dashapp">Visualización de los datos del ABT</a></li>
+                  <li class="list-group-item"><a href="/generar_abt" class="link_tfg">{{ _('Base Analysis Table Generation')}}(ABT)</a></li>
+                  <li class="list-group-item"><a href="/calidad_abt/mongodb" class="link_tfg">{{ _('Data quality report')}}(mongodb)</a></li>
+                  <li class="list-group-item"><a href="/calidad_abt/pandas" class="link_tfg">{{ _('Data quality report')}}(pandas)</a></li>
 
+                  <li class="list-group-item"><a href="/dashapp" class="link_tfg">{{ _('Visualización de los datos del ABT')}}</a></li>
+
+              </ul>
+          </div>
+       </div>
+        <br>
+        <div class="container-fluid">
+          <div class="row">
+             <h2 class="bg-dark text-light p-2">Machine Learning Algorithms</h2><br>
+          </div>
+          <div class="row">
+              <ul class="list-group">
+                  <li class="list-group-item"><a href="/algorithm_train" class="link_tfg">Algorithm selection and training</a></li>
+
+                  <li class="list-group-item"><a href="/algorithm_prediction" class="link_tfg">Value prediction</a></li>
               </ul>
           </div>
        </div>

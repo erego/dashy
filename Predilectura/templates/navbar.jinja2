@@ -2,10 +2,10 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="{{url_for('static', filename='images/quantified.png')}}"  height="50" class="d-inline-block align-top" alt="">
+            <img src="{{url_for('static', filename='images/quantified.png')}}"  height="50" class="d-inline-block align-top" alt="Quantified Reading logo">
           </a>
                 <a class="navbar-brand" href="#">
-            <img src="{{url_for('static', filename='images/logo_uned.gif')}}"  height="50" class="d-inline-block align-top" alt="">
+            <img src="{{url_for('static', filename='images/logo_uned.gif')}}"  height="50" class="d-inline-block align-top" alt="UNED logo">
           </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -13,21 +13,39 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-              <a class="nav-link" href="{{url_for("home")}}">Home
+              <a class="nav-link" href="{{url_for("home")}}">{{ _('Home') }}
                 <span class="sr-only">(current)</span>
               </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for("auth_bp.login")}}">Login</a>
+            <a class="nav-link" href="{{url_for("auth_bp.login")}}">{{ _('Login') }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Admin</a>
+            <a class="nav-link" href="#">{{ _('Admin') }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link" href="#">{{ _('Contact') }}</a>
           </li>
         </ul>
       </div>
+        <div class="language-picker">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle mr-2" href="index.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ _('Language') }}
+                </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        {% if 'format_data' in request.view_args %}
+                            <a class="dropdown-item" href="{{ url_for(request.endpoint, format_data=request.view_args['format_data'], lang_code='en') }}">{{ _('English') }}</a>
+                            <a class="dropdown-item" href="{{ url_for(request.endpoint, format_data=request.view_args['format_data'], lang_code='es') }}">{{ _('Spanish') }}</a>
+                        {% else %}
+                            <a class="dropdown-item" href="{{ url_for(request.endpoint, lang_code='en') }}">{{ _('English') }}</a>
+                            <a class="dropdown-item" href="{{ url_for(request.endpoint, lang_code='es') }}">{{ _('Spanish') }}</a>
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
   </nav>
     <br>
