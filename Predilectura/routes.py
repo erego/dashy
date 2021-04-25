@@ -300,6 +300,7 @@ def quality_abt(format_data):
                 feature = FeatureContinuous(column)
                 try:
                     dict_quality_continuous[column] = feature.get_statistics(data[column])
+
                 except Exception as excp:
                     a = 5
 
