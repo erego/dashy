@@ -34,8 +34,14 @@
                     <a class="nav-link dropdown-toggle mr-2" href="index.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ _('Language') }}
                 </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url_for(request.endpoint, lang_code='en') }}">{{ _('English') }}</a>
-                        <a class="dropdown-item" href="{{ url_for(request.endpoint, lang_code='es') }}">{{ _('Spanish') }}</a>
+
+                        {% if 'format_data' in request.view_args %}
+                            <a class="dropdown-item" href="{{ url_for(request.endpoint, format_data=request.view_args['format_data'], lang_code='en') }}">{{ _('English') }}</a>
+                            <a class="dropdown-item" href="{{ url_for(request.endpoint, format_data=request.view_args['format_data'], lang_code='es') }}">{{ _('Spanish') }}</a>
+                        {% else %}
+                            <a class="dropdown-item" href="{{ url_for(request.endpoint, lang_code='en') }}">{{ _('English') }}</a>
+                            <a class="dropdown-item" href="{{ url_for(request.endpoint, lang_code='es') }}">{{ _('Spanish') }}</a>
+                        {% endif %}
                     </div>
                 </li>
             </ul>
