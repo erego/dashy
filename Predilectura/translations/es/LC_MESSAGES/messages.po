@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-04-24 19:13+0200\n"
-"PO-Revision-Date: 2021-04-24 19:20+0200\n"
+"POT-Creation-Date: 2021-04-25 18:19+0200\n"
+"PO-Revision-Date: 2021-04-25 18:26+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
 "Language-Team: es <LL@li.org>\n"
@@ -59,6 +59,91 @@ msgstr "Regístrese"
 msgid "Log In"
 msgstr "Iniciar sesión"
 
+#: Predilectura/templates/calidad_abt.jinja2:2
+msgid "Quality Report Page"
+msgstr "Página del informe de calidad"
+
+#: Predilectura/templates/calidad_abt.jinja2:13
+msgid "Continuous Features Table"
+msgstr "Tabla de características continuas"
+
+#: Predilectura/templates/calidad_abt.jinja2:18
+#: Predilectura/templates/calidad_abt.jinja2:57
+msgid "Feature"
+msgstr "Característica"
+
+#: Predilectura/templates/calidad_abt.jinja2:19
+#: Predilectura/templates/calidad_abt.jinja2:58
+msgid "Count"
+msgstr "Total"
+
+#: Predilectura/templates/calidad_abt.jinja2:20
+#: Predilectura/templates/calidad_abt.jinja2:59
+msgid "Percent Missing"
+msgstr "Porcentaje de ausencia"
+
+#: Predilectura/templates/calidad_abt.jinja2:21
+#: Predilectura/templates/calidad_abt.jinja2:60
+msgid "Cardinality"
+msgstr "Cardinalidad"
+
+#: Predilectura/templates/calidad_abt.jinja2:22
+#: Predilectura/templates/calidad_abt.jinja2:24
+msgid "Minimum"
+msgstr "Mínimo"
+
+#: Predilectura/templates/calidad_abt.jinja2:23
+msgid "First Quartile"
+msgstr "Primer Cuartil"
+
+#: Predilectura/templates/calidad_abt.jinja2:25
+msgid "Mean"
+msgstr "Media"
+
+#: Predilectura/templates/calidad_abt.jinja2:26
+msgid "Third Quartile"
+msgstr "Tercer Cuartil"
+
+#: Predilectura/templates/calidad_abt.jinja2:27
+msgid "Maximum"
+msgstr "Máximo"
+
+#: Predilectura/templates/calidad_abt.jinja2:28
+msgid "Standard Deviation"
+msgstr "Desviación Estándar"
+
+#: Predilectura/templates/calidad_abt.jinja2:52
+msgid "Categorical Features Table"
+msgstr "Tabla de características categóricas"
+
+#: Predilectura/templates/calidad_abt.jinja2:61
+msgid "Mode"
+msgstr "Moda"
+
+#: Predilectura/templates/calidad_abt.jinja2:62
+msgid "Mode Frequency"
+msgstr "Frecuencia de la moda"
+
+#: Predilectura/templates/calidad_abt.jinja2:63
+msgid "Mode Percent"
+msgstr "Porcentaje de la moda"
+
+#: Predilectura/templates/calidad_abt.jinja2:64
+msgid "Second Mode"
+msgstr "Segunda Moda"
+
+#: Predilectura/templates/calidad_abt.jinja2:65
+msgid "Second Mode Frequency"
+msgstr "Frecuencia de la segunda moda"
+
+#: Predilectura/templates/calidad_abt.jinja2:66
+msgid "Second Mode Percent"
+msgstr "Porcentaje de la segunda moda"
+
+#: Predilectura/templates/calidad_abt.jinja2:87
+msgid "Back to data management section"
+msgstr "Volver a la sección de gestión de datos"
+
 #: Predilectura/templates/index.jinja2:2
 msgid "Index Page"
 msgstr "Página Indice"
@@ -97,6 +182,28 @@ msgstr "Selección de algoritmos y visualización de resultados"
 #: Predilectura/templates/index.jinja2:59
 msgid "We will test different algorithms on the generated data analysis table and will be able to select the most appropriate one. We will also be able to visualize different results and metrics on them"
 msgstr "Probaremos diferentes algoritmos sobre la tabla de análisis de datos generada y podremos seleccionar el más adecuado. También podremos visualizar diferentes resultados y métricas sobre ellos"
+
+#: Predilectura/templates/lista_datos.jinja2:2
+msgid "Data management page"
+msgstr "Página de gestión de datos"
+
+#: Predilectura/templates/lista_datos.jinja2:12
+msgid "Section for data management and visualization"
+msgstr "Sección de gestión y visualización de datos"
+
+#: Predilectura/templates/lista_datos.jinja2:15
+msgid "Visualization"
+msgstr "Visualización"
+
+#: Predilectura/templates/lista_datos.jinja2:30
+#, fuzzy
+msgid "Extraction, Transformation and Loading"
+msgstr "Extracción, transformación y carga de datos"
+
+#: Predilectura/templates/lista_datos.jinja2:35
+#: Predilectura/templates/lista_datos.jinja2:36
+msgid "Informe de la calidad de los datos"
+msgstr ""
 
 #: Predilectura/templates/login.jinja2:2 Predilectura/templates/login.jinja2:21
 msgid "Login user page"

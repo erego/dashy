@@ -10,10 +10,17 @@ class Feature:
 
     @staticmethod
     def check_type(values):
-        if values.size/values.nunique() < 0.2:
+        if values.nunique()/values.size < 0.05:
             return "Categorical"
         else:
             return "Continuous"
+
+    @staticmethod
+    def check_cardinality_one(values):
+        if len(values.value_counts()) == 1:
+            return True
+        else:
+            return False
 
 
 class FeatureContinuous(Feature):
@@ -27,16 +34,14 @@ class FeatureContinuous(Feature):
         self.statistics["count"] = values.size
         self.statistics["missing"] = values.isna().sum()
         self.statistics["cardinality"] = values.nunique()
-        self.statistics["count"] = values.size
-        self.statistics["percent_miss"] = values.isna().sum()
-        self.statistics["cadinality"] = values.nunique()
-        self.statistics["min"] = values.min()
+        self.statistics["percent_missing"] = round((values.isna().sum() / self.statistics["count"]) * 100, 4)
+        self.statistics["min"] = round(values.min(), 4)
         self.statistics["first_quartile"] = values.quantile(0.25)
-        self.statistics["mean"] = values.mean()
-        self.statistics["median"] = values.median()
-        self.statistics["third_quartile"] = values.quantile(0.75)
-        self.statistics["max"] = values.max()
-        self.statistics["std_deviation"] = values.std()
+        self.statistics["mean"] = round(values.mean(), 4)
+        self.statistics["median"] = round(values.median(), 4)
+        self.statistics["third_quartile"] = round(values.quantile(0.75), 4)
+        self.statistics["max"] = round(values.max(), 4)
+        self.statistics["std_deviation"] = round(values.std(), 4)
         return self.statistics
 
 
@@ -47,16 +52,16 @@ class FeatureCategorical(Feature):
         self.statistics = None
         return self.statistics
 
-
     def get_statistics(self, values):
         self.statistics = dict()
         self.statistics["count"] = values.size
         self.statistics["missing"] = values.isna().sum()
         self.statistics["cardinality"] = values.nunique()
-        self.statistics["mode"] = values.mode().iat[0]
-        self.statistics["mode_frequency"] = values.mode().iat[0]
-        self.statistics["mode_percent"] = self.statistics["mode"] / self.statistics["count"]
-        self.statistics["mode_second"] = values.mode().iat[1]
-        self.statistics["mode_second_frequency"] = values.nunique()
-        self.statistics["mode_second_percent"] = self.statistics["mode_second"] / self.statistics["count"]
-
+        self.statistics["percent_missing"] = round((values.isna().sum() / self.statistics["count"]) * 100, 4)
+        self.statistics["mode"] = values.value_counts().index[0]
+        self.statistics["mode_frequency"] = values.value_counts().iat[0]
+        self.statistics["mode_percent"] = round((self.statistics["mode_frequency"] / self.statistics["count"]) * 100, 4)
+        self.statistics["mode_second"] = values.value_counts().index[1]
+        self.statistics["mode_second_frequency"] = values.value_counts().iat[1]
+        self.statistics["mode_second_percent"] = round((self.statistics["mode_second_frequency"] / self.statistics["count"]) * 100, 4)
+        return self.statistics

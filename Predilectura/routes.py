@@ -288,13 +288,28 @@ def quality_abt(format_data):
         dict_quality_categorical = dict()
 
         for column in data.columns:
+
+            if column == "user_id":
+                continue
+
+            # If cardinality of feature is 1 we discard this column
+            if Feature.check_cardinality_one(data[column]):
+                continue
+
             if Feature.check_type(data[column]) == "Continuous":
                 feature = FeatureContinuous(column)
-                dict_quality_continuous[column] = feature.get_statistics(data[column])
+                try:
+                    dict_quality_continuous[column] = feature.get_statistics(data[column])
+                except Exception as excp:
+                    a = 5
 
             elif Feature.check_type(data[column]) == "Categorical":
                 feature = FeatureCategorical(column)
-                dict_quality_categorical[column] = feature.get_statistics(data[column])
+                try:
+                    dict_quality_categorical[column] = feature.get_statistics(data[column])
+                except Exception as excp:
+                    a = 5
+
 
     return render_template('calidad_abt.jinja2', data_continuous=dict_quality_continuous,
                            data_categorical=dict_quality_categorical)

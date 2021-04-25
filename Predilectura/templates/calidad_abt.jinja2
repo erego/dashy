@@ -1,138 +1,90 @@
 {% extends "base.html" %}
+{% block title %}{{ _('Quality Report Page') }}{% endblock %}
 {% block styles %}
     {{super()}}
 <link rel="stylesheet"
       href="{{url_for('.static', filename='css/small-business.css')}}">
 {% endblock %}
-{% extends "base.html" %}
-{% block styles %}
-    {{super()}}
-<link rel="stylesheet"
-      href="{{url_for('.static', filename='css/small-business.css')}}">
-{% endblock %}
-
 {% block content %}
 {% include 'navbar.jinja2' %}
 
   <div class="container-fluid">
+
+    <h1>{{ _('Continuous Features Table') }} </h1>
     <div class="table-responsive">
         <table class="table table-sm table-borderless mb-0 table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th>Row Number</th>
-                    <th>User ID</th>
-                    <th>Book</th>
-                    <th>Language</th>
-                    {% if header["min_percent"] == true  %}
-                        <th>Min Percent</th>
-                    {% endif %}
-                    {% if header["max_percent"] == true  %}
-                        <th>Max Percent</th>
-                    {% endif %}
-                    {% if header["avg_percent"] == true  %}
-                        <th>Avg Percent</th>
-                    {% endif %}
-                    {% if header["min_words"] == true  %}
-                        <th>Min Words</th>
-                    {% endif %}
-                    {% if header["max_words"] == true  %}
-                        <th>Max Words</th>
-                    {% endif %}
-                    {% if header["avg_words"] == true  %}
-                        <th>Avg Words</th>
-                    {% endif %}
-                    {% if header["premium"] == true  %}
-                        <th>Premium</th>
-                    {% endif %}
-                    {% if header["devices_readings"] == true  %}
-                        <th>Device Readings</th>
-                    {% endif %}
-                    {% if header["versions_readings"] == true  %}
-                        <th>Version Readings</th>
-                    {% endif %}
-                    {% if header["chapters_readings"] == true  %}
-                        <th>Chapter Readings</th>
-                    {% endif %}
-                    {% if header["event_classes"] == true  %}
-                        <th>Event Classes</th>
-                    {% endif %}
-                    {% if header["event_objs"] == true  %}
-                        <th>Event Objs</th>
-                    {% endif %}
-                    {% if header["event_types"] == true  %}
-                        <th>Event Types</th>
-                    {% endif %}
-                    {% if header["devices_events"] == true  %}
-                        <th>Device Events</th>
-                    {% endif %}
-                    {% if header["versions_events"] == true  %}
-                        <th>Version Events</th>
-                    {% endif %}
-                    {% if header["chapters_events"] == true  %}
-                        <th>Chapter Events</th>
-                    {% endif %}
+                    <th>{{ _('Feature') }}</th>
+                    <th>{{ _('Count') }}</th>
+                    <th>{{ _('Percent Missing') }}</th>
+                    <th>{{ _('Cardinality') }}</th>
+                    <th>{{ _('Minimum') }}</th>
+                    <th>{{ _('First Quartile') }}</th>
+                    <th>{{ _('Minimum') }}</th>
+                    <th>{{ _('Mean') }}</th>
+                    <th>{{ _('Third Quartile') }}</th>
+                    <th>{{ _('Maximum') }}</th>
+                    <th>{{ _('Standard Deviation') }}</th>
                 </tr>
             </thead>
             <tbody>
-                {% for data in abt %}
+                {% for key, dict_data in data_continuous.items() %}
                 <tr>
-                    <th scope="row">{{ loop.index }}</th>
-                    <td>{{ data['user_id'] }}</td>
-                    <td>{{ data['book'] }}</td>
-                    <td>{{ data['language'] }}</td>
-                    {% if header["min_percent"] == true  %}
-                        <td>{{ data['min_percent'] }}</td>
-                    {% endif %}
-                    {% if header["max_percent"] == true  %}
-                        <td>{{ data['max_percent'] }}</td>
-                    {% endif %}
-                    {% if header["avg_percent"] == true  %}
-                        <td>{{ data['avg_percent'] }}</td>
-                    {% endif %}
-                    {% if header["min_words"] == true  %}
-                        <td>{{ data['min_words'] }}</td>
-                    {% endif %}
-                    {% if header["max_words"] == true  %}
-                        <td>{{ data['max_words'] }}</td>
-                    {% endif %}
-                    {% if header["avg_words"] == true  %}
-                        <td>{{ data['avg_words'] }}</td>
-                    {% endif %}
-                    {% if header["premium"] == true  %}
-                        <td>{{ data['premium'] }}</td>
-                    {% endif %}
-                    <td>{{ data['devices_readings'] }}</td>
-                    {% if header["versions_readings"] == true  %}
-                        <td>{{ data['versions_readings'] }}</td>
-                    {% endif %}
-                    {% if header["chapters_readings"] == true  %}
-                        <td>{{ data['chapters_readings'] }}</td>
-                    {% endif %}
-                    {% if header["event_classes"] == true  %}
-                        <td>{{ data['event_classes'] }}</td>
-                    {% endif %}
-                    {% if header["event_objs"] == true  %}
-                        <td>{{ data['event_objs'] }}</td>
-                    {% endif %}
-                    {% if header["event_types"] == true  %}
-                        <td>{{ data['event_types'] }}</td>
-                    {% endif %}
-                    {% if header["devices_events"] == true  %}
-                        <td>{{ data['devices_events'] }}</td>
-                    {% endif %}
-                    {% if header["versions_events"] == true  %}
-                        <td>{{ data['versions_events'] }}</td>
-                    {% endif %}
-                    {% if header["chapters_events"] == true  %}
-                        <td>{{ data['chapters_events'] }}</td>
-                    {% endif %}
+                    <td> {{key}}</td>
+                    <td>{{ dict_data['count'] }}</td>
+                    <td>{{ dict_data['percent_missing'] }}</td>
+                    <td>{{ dict_data['cardinality'] }}</td>
+                    <td>{{ dict_data['min'] }}</td>
+                    <td>{{ dict_data['first_quartile'] }}</td>
+                    <td>{{ dict_data['mean'] }}</td>
+                    <td>{{ dict_data['median'] }}</td>
+                    <td>{{ dict_data['third_quartile'] }}</td>
+                    <td>{{ dict_data['max'] }}</td>
+                    <td>{{ dict_data['std_deviation'] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 
-
+    <br>
+    <h1>{{ _('Categorical Features Table') }} </h1>
+    <div class="table-responsive">
+        <table class="table table-sm table-borderless mb-0 table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>{{ _('Feature') }}</th>
+                    <th>{{ _('Count') }}</th>
+                    <th>{{ _('Percent Missing') }}</th>
+                    <th>{{ _('Cardinality') }}</th>
+                    <th>{{ _('Mode') }}</th>
+                    <th>{{ _('Mode Frequency') }}</th>
+                    <th>{{ _('Mode Percent') }}</th>
+                    <th>{{ _('Second Mode') }}</th>
+                    <th>{{ _('Second Mode Frequency') }}</th>
+                    <th>{{ _('Second Mode Percent') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, dict_data in data_categorical.items() %}
+                <tr>
+                    <td> {{key}}</td>
+                    <td>{{ dict_data['count'] }}</td>
+                    <td>{{ dict_data['percent_missing'] }}</td>
+                    <td>{{ dict_data['cardinality'] }}</td>
+                    <td>{{ dict_data['mode'] }}</td>
+                    <td>{{ dict_data['mode_frequency'] }}</td>
+                    <td>{{ dict_data['mode_percent'] }}</td>
+                    <td>{{ dict_data['mode_second'] }}</td>
+                    <td>{{ dict_data['mode_second_frequency'] }}</td>
+                    <td>{{ dict_data['mode_second_percent'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  <a href="/datos" class="link_tfg">{{ _('Back to data management section') }}</a>
 </div>
 
 

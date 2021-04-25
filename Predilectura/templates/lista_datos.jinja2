@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Data management page{% endblock %}
+{% block title %}{{ _('Data management page')}}{% endblock %}
 {% block styles %}
     {{super()}}
 <link rel="stylesheet"
@@ -9,10 +9,10 @@
 {% include 'navbar.jinja2' %}
 
   <div class="container">
-      <h1 class="font-weight-light">Section for data management and visualization.</h1>
+      <h1 class="font-weight-light">{{ _('Section for data management and visualization')}}.</h1>
       <div class="container-fluid">
           <div class="row">
-             <h2 class="bg-dark text-light p-2">Visualization</h2><br>
+             <h2 class="bg-dark text-light p-2">{{ _('Visualization')}}</h2><br>
           </div>
           <div class="row">
               <ul class="list-group" >
@@ -27,13 +27,13 @@
         <br>
         <div class="container-fluid">
           <div class="row">
-             <h2 class="bg-dark text-light p-2">Extraction, Transformation and Loading</h2><br>
+             <h2 class="bg-dark text-light p-2">{{ _('Extraction, Transformation and Loading')}}</h2><br>
           </div>
           <div class="row">
               <ul class="list-group">
                   <li class="list-group-item"><a href="/generar_abt" class="link_tfg">Base Analysis Table Generation(ABT)</a></li>
-                  <li class="list-group-item"><a href="/calidad_abt/mongodb" class="link_tfg">Informe de la calidad de los datos(mongodb)</a></li>
-                  <li class="list-group-item"><a href="/calidad_abt/pandas" class="link_tfg">Informe de la calidad de los datos(pandas)</a></li>
+                  <li class="list-group-item"><a href="/calidad_abt/mongodb" class="link_tfg">{{ _('Informe de la calidad de los datos')}}(mongodb)</a></li>
+                  <li class="list-group-item"><a href="/calidad_abt/pandas" class="link_tfg">{{ _('Informe de la calidad de los datos')}}(pandas)</a></li>
 
                   <li class="list-group-item"><a href="/dashapp" class="link_tfg">Visualización de los datos del ABT</a></li>
 

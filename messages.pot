@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-04-24 19:13+0200\n"
+"POT-Creation-Date: 2021-04-25 18:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,6 +55,91 @@ msgstr ""
 
 #: Predilectura/forms.py:130
 msgid "Log In"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:2
+msgid "Quality Report Page"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:13
+msgid "Continuous Features Table"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:18
+#: Predilectura/templates/calidad_abt.jinja2:57
+msgid "Feature"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:19
+#: Predilectura/templates/calidad_abt.jinja2:58
+msgid "Count"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:20
+#: Predilectura/templates/calidad_abt.jinja2:59
+msgid "Percent Missing"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:21
+#: Predilectura/templates/calidad_abt.jinja2:60
+msgid "Cardinality"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:22
+#: Predilectura/templates/calidad_abt.jinja2:24
+msgid "Minimum"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:23
+msgid "First Quartile"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:25
+msgid "Mean"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:26
+msgid "Third Quartile"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:27
+msgid "Maximum"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:28
+msgid "Standard Deviation"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:52
+msgid "Categorical Features Table"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:61
+msgid "Mode"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:62
+msgid "Mode Frequency"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:63
+msgid "Mode Percent"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:64
+msgid "Second Mode"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:65
+msgid "Second Mode Frequency"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:66
+msgid "Second Mode Percent"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:87
+msgid "Back to data management section"
 msgstr ""
 
 #: Predilectura/templates/index.jinja2:2
@@ -111,6 +196,27 @@ msgid ""
 "We will test different algorithms on the generated data analysis table "
 "and will be able to select the most appropriate one. We will also be able"
 " to visualize different results and metrics on them"
+msgstr ""
+
+#: Predilectura/templates/lista_datos.jinja2:2
+msgid "Data management page"
+msgstr ""
+
+#: Predilectura/templates/lista_datos.jinja2:12
+msgid "Section for data management and visualization"
+msgstr ""
+
+#: Predilectura/templates/lista_datos.jinja2:15
+msgid "Visualization"
+msgstr ""
+
+#: Predilectura/templates/lista_datos.jinja2:30
+msgid "Extraction, Transformation and Loading"
+msgstr ""
+
+#: Predilectura/templates/lista_datos.jinja2:35
+#: Predilectura/templates/lista_datos.jinja2:36
+msgid "Informe de la calidad de los datos"
 msgstr ""
 
 #: Predilectura/templates/login.jinja2:2 Predilectura/templates/login.jinja2:21
