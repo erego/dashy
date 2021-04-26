@@ -3,8 +3,10 @@
 from pathlib import Path
 
 from flask import current_app as app
-from flask import render_template, request, g
+from flask import render_template, request, g, redirect, url_for
 from flask_login import login_required
+
+from Predilectura.statistics.dataset_abt import DataSetABT
 
 import pandas as pd
 
@@ -331,9 +333,20 @@ def handling_quality_abt():
 @app.route("/handle_quality_issues", methods=["POST"])
 def handle_quality_issues():
 
-    a = request.form
     selected_option = request.form.get("handler")
+    lst_features = request.form.getlist("features_select")
+    path_to_data = Path(app.root_path).joinpath("data", "abt.csv")
+    dataset_abt = DataSetABT(path_to_data.as_posix())
+    if selected_option == "drop_features":
+        dataset_abt.drop_features(lst_features)
+    elif selected_option == "complete_case":
+        dataset_abt.complete_case_analysis()
+    elif selected_option == "imputation":
+        a = 5
+    elif selected_option == "clamp":
+        a = 5
 
+    return redirect(url_for('quality_abt', format_data="pandas"))
     return render_template('lista_datos.jinja2')
 
 @app.route('/algorithm_train')
