@@ -3,7 +3,7 @@
 from flask_babel import lazy_gettext
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired
-from wtforms import BooleanField, StringField, PasswordField, SubmitField, SelectField
+from wtforms import BooleanField, StringField, PasswordField, SubmitField, SelectField, RadioField, SelectMultipleField
 from wtforms.validators import (
     DataRequired,
     Email,
@@ -139,4 +139,18 @@ class FormAlgorithm(FlaskForm):
         'Select Cart algorithm to train', default=True
     )
 
-    submit = SubmitField('Train')
+    submit = SubmitField(lazy_gettext('Train'))
+
+
+class FormHandlingQuality(FlaskForm):
+    handler = RadioField('Label',
+                         default='complete_case',
+                         choices=[('complete_case', 'Complete Case Analysis'),
+                                  ('drop_features', 'Drop Features'),
+                                  ('imputation', 'Imputation'),
+                                  ('clamp', 'Clamp Transformation')])
+    imputation = SelectField(u'Type Of Imputation', choices=[('mean', 'mean'),
+                                                             ('median', 'median')])
+
+    features_select = SelectMultipleField(u'Select Features')
+    submit = SubmitField(lazy_gettext('Apply'))

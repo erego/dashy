@@ -2,3 +2,7 @@
     color: darkgreen; font-weight: bold;
     font-color: darkgreen;
 }
+.align_select_multiple_tfg{
+    display: inline-block;
+    vertical-align: middle;
+}

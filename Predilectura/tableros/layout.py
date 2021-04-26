@@ -6,7 +6,6 @@ html_layout = """
         <head>
             {%metas%}
             <title>{%title%}</title>
-            {%favicon%}
             {%css%}
         </head>
         <body class="dash-template">

@@ -12,7 +12,7 @@ from Predilectura import mongo, babel
 from Predilectura.data.abt import ABTMongoDB, ABTPandas
 from Predilectura.statistics.feature import Feature, FeatureContinuous, FeatureCategorical
 from Predilectura.mlearning.information_based import CARTAlgorithm
-from Predilectura.forms import FormAlgorithm
+from Predilectura.forms import FormAlgorithm, FormHandlingQuality, FormABT
 
 from Predilectura.mlearning import model
 
@@ -34,7 +34,10 @@ def add_language_code(endpoint, values):
 
 @app.url_value_preprocessor
 def pull_lang_code(endpoint, values):
-    if 'lang_code' not in request.args and 'lang_code' not in values:
+
+    if values is None and 'lang_code' not in request.args:
+        g.lang_code = request.accept_languages.best_match(app.config['LANGUAGES'])
+    elif 'lang_code' not in request.args and 'lang_code' not in values:
         g.lang_code = request.accept_languages.best_match(app.config['LANGUAGES'])
     else:
         if 'lang_code' in request.args:
@@ -48,7 +51,7 @@ def home():
 
     return render_template(
         "index.jinja2",
-        title="Plotly Dash Flask Tutorial",
+        title="Visualizatio Data",
         description="Embed Plotly Dash into your Flask applications.",
         template="home-template",
         body="This is a homepage served with Flask.",
@@ -226,7 +229,6 @@ def generar_abt():
     """
     Page where you are able to select the field which will be part of the analytics base table
     """
-    from .forms import FormABT
     form = FormABT()
     return render_template('generar_abt.jinja2', form=form)
 
@@ -311,9 +313,28 @@ def quality_abt(format_data):
                 except Exception as excp:
                     a = 5
 
-
     return render_template('calidad_abt.jinja2', data_continuous=dict_quality_continuous,
                            data_categorical=dict_quality_categorical)
+
+@app.route('/gestion_calidad_abt')
+def handling_quality_abt():
+    form = FormHandlingQuality()
+
+    path_to_data = Path(app.root_path).joinpath("data", "abt.csv")
+
+    columns = pd.read_csv(path_to_data.as_posix(), index_col=0, nrows=0).columns.tolist()
+
+    form.features_select.choices = [(column, column) for column in columns]
+
+    return render_template('gestion_calidad_abt.jinja2', form=form)
+
+@app.route("/handle_quality_issues", methods=["POST"])
+def handle_quality_issues():
+
+    a = request.form
+    selected_option = request.form.get("handler")
+
+    return render_template('lista_datos.jinja2')
 
 @app.route('/algorithm_train')
 def algorithm_train():

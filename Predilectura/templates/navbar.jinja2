@@ -10,6 +10,7 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+    {% if request.view_args is not none %}
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
@@ -28,6 +29,7 @@
           </li>
         </ul>
       </div>
+
         <div class="language-picker">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
@@ -42,10 +44,13 @@
                             <a class="dropdown-item" href="{{ url_for(request.endpoint, lang_code='en') }}">{{ _('English') }}</a>
                             <a class="dropdown-item" href="{{ url_for(request.endpoint, lang_code='es') }}">{{ _('Spanish') }}</a>
                         {% endif %}
+
                     </div>
                 </li>
             </ul>
+
         </div>
+            {% endif %}
     </div>
   </nav>
     <br>
