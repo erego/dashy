@@ -32,7 +32,7 @@ def init_app():
         app.register_blueprint(auth.auth_bp)
 
         # Import Dash application
-        from .tableros.datos import init_dashboard
+        from .dashboards.datos import init_dashboard
         app = init_dashboard(app)
 
         return app

@@ -1,5 +1,11 @@
 """Plotly Dash HTML layout override."""
 
+
+
+
+
+
+
 html_layout = """
 <!DOCTYPE html>
     <html>
