@@ -26,23 +26,14 @@ def init_dashboard(server):
 
     # Custom HTML layout
     dash_app.index_string = html_layout
-    dcc.Dropdown(
-        options=[
-            {'label': 'New York City', 'value': 'NYC'},
-            {'label': 'Montréal', 'value': 'MTL'},
-            {'label': 'San Francisco', 'value': 'SF'}
-        ],
-        value='MTL'
-    )
+
     # Create Layout
     dash_app.layout = html.Div(
         children=[
         html.Label('Select Feature'),
         dcc.Dropdown(
             options=[
-                {'label': 'New York City', 'value': 'NYC'},
-                {'label': u'Montréal', 'value': 'MTL'},
-                {'label': 'San Francisco', 'value': 'SF'}
+                {'label': column, 'value': column} for column in df.columns
             ],
         ),
 

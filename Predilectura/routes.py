@@ -332,7 +332,7 @@ def handling_quality_abt():
 
 @app.route("/handle_quality_issues", methods=["POST"])
 def handle_quality_issues():
-
+    #TODO crear una columna binaria para decir si un valor está o no está en caso de que haya mucho nan
     selected_option = request.form.get("handler")
     lst_features = request.form.getlist("features_select")
     path_to_data = Path(app.root_path).joinpath("data", "abt.csv")
@@ -342,6 +342,7 @@ def handle_quality_issues():
     elif selected_option == "complete_case":
         dataset_abt.complete_case_analysis()
     elif selected_option == "imputation":
+        dataset_abt.imputation(lst_features, request.form.get("imputation"))
         a = 5
     elif selected_option == "clamp":
         a = 5
