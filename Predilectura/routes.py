@@ -343,9 +343,8 @@ def handle_quality_issues():
         dataset_abt.complete_case_analysis()
     elif selected_option == "imputation":
         dataset_abt.imputation(lst_features, request.form.get("imputation"))
-        a = 5
     elif selected_option == "clamp":
-        a = 5
+        dataset_abt.clamp(lst_features)
 
     return redirect(url_for('quality_abt', format_data="pandas"))
     return render_template('lista_datos.jinja2')

@@ -1,5 +1,6 @@
 import pandas as pd
 
+from Predilectura.statistics.feature import Feature
 
 class DataSetABT:
 
@@ -27,6 +28,15 @@ class DataSetABT:
         data.to_csv(self.path)
 
     def clamp(self, lst_features):
-        pass
+        data = pd.read_csv(self.path)
+        for feature in lst_features:
+            # Only for continuous features
+            if Feature.check_type(data[feature]) == "Continuous":
+                first_quartile = data[feature].quantile(0.25)
+                third_quartile = data[feature].quantile(0.75)
+                data[feature].values[data[feature].values < first_quartile] = first_quartile
+                data[feature].values[data[feature].values > third_quartile] = third_quartile
+        data.to_csv(self.path)
+
 
 
