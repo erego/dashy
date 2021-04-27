@@ -9,15 +9,14 @@ mongo = PyMongo()
 babel = Babel()
 
 
-#def page_not_found(e):
-    # TODO check 404 page with dash
-    # return render_template('404.jinja2'), 404
+def page_not_found(e):
+    return render_template('404.jinja2'), 404
 
 
 def init_app():
     """Construct core Flask application with embedded Dash app."""
     app = Flask(__name__, instance_relative_config=False)
-    #app.register_error_handler(404, page_not_found)
+    app.register_error_handler(404, page_not_found)
     app.config.from_object('config.Config')
     app.config["MONGO_URI"] = "mongodb://localhost:27017/Predilectura"
     babel.init_app(app)
