@@ -4,14 +4,13 @@ from pathlib import Path
 
 from flask import current_app as app
 from flask import render_template, request, g, redirect, url_for
-from flask_login import login_required
 
 from Predilectura.statistics.dataset_abt import DataSetABT
 
 import pandas as pd
 
 from Predilectura import mongo, babel
-from Predilectura.data.abt import ABTMongoDB, ABTPandas
+from Predilectura.statistics.abt import ABTMongoDB, ABTPandas
 from Predilectura.statistics.feature import Feature, FeatureContinuous, FeatureCategorical
 from Predilectura.mlearning.information_based import CARTAlgorithm
 from Predilectura.forms import FormAlgorithm, FormHandlingQuality, FormABT
@@ -370,7 +369,7 @@ def train_algorithm():
         cart_model.build_model()
         prediction = cart_model.get_predictions(x_test.values)
 
-        scores = cart_model.get_statistical_measures()
+        scores = cart_model.get_statistical_metrics()
 
         # print("The prediction accuracy is: ", cart_model.score(test_features, test_targets) * 100, "%")
         a = 5

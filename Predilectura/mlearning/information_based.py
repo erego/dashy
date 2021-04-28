@@ -6,6 +6,7 @@ Import the DecisionTreeClassifier model.
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import confusion_matrix
 
+
 class CARTAlgorithm:
 
     """
@@ -36,11 +37,18 @@ class CARTAlgorithm:
         """
         self.model.fit(self.data_train, self.target_train)
 
-    def get_statistical_measures(self):
+    def get_statistical_metrics(self):
 
         predictions = self.get_predictions(self.data_test)
-        score = confusion_matrix(self.target_test, predictions)
-        return score
+        tn, fp, fn, tp = confusion_matrix(self.target_test, predictions).ravel()
+        accuracy = (tp + tn)/(tn + fn + tp + fp)
+        recall = tp/(tp+fn)
+        specificity = tn/(tn+fp)
+        precision = tp/(tp+fp)
+        f1_score = 2 * (recall * precision) / (recall + precision)
+        dict_metrics = {"accuracy": accuracy, "recall": recall, "specificity":specificity,
+                        "precision": precision, "f1_score": f1_score}
+        return dict_metrics
 
     def get_predictions(self, data_to_predict):
         """

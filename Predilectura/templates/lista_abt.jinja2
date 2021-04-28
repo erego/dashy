@@ -14,10 +14,10 @@
         <table class="table table-sm table-borderless mb-0 table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th>Row Number</th>
-                    <th>User ID</th>
-                    <th>Book</th>
-                    <th>Language</th>
+                    <th>{{ _('Row Number') }}</th>
+                    <th>{{ _('User ID') }}</th>
+                    <th>{{ _('Book') }}</th>
+                    <th>{{ _('Language') }}</th>
                     {% if header["min_percent"] == true  %}
                         <th>Min Percent</th>
                     {% endif %}
@@ -66,6 +66,7 @@
                     {% if header["chapters_events"] == true  %}
                         <th>Chapter Events</th>
                     {% endif %}
+                    <th>Target</th>
                 </tr>
             </thead>
             <tbody>
@@ -73,8 +74,8 @@
                 <tr>
                     <th scope="row">{{ loop.index }}</th>
                     <td>{{ data['user_id'] }}</td>
-                    <td>{{ data['book'] }}</td>
-                    <td>{{ data['language'] }}</td>
+                    <td>{{ data['edition_id'] }}</td>
+                    <td>{{ data['edition_language'] }}</td>
                     {% if header["min_percent"] == true  %}
                         <td>{{ data['min_percent'] }}</td>
                     {% endif %}
@@ -121,6 +122,7 @@
                     {% if header["chapters_events"] == true  %}
                         <td>{{ data['chapters_events'] }}</td>
                     {% endif %}
+                    <td>{{ data['target'] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
