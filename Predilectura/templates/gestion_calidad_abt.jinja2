@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}{{ _('Handling Data Quality Issues Page') }}{% endblock %}
+{% block styles %}
+    {{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='css/small-business.css')}}">
+{% endblock %}
+{% block content %}
+{% include 'navbar.jinja2' %}
+
+    <div class="container-fluid">
+
+      <form action={{url_for("handle_quality_issues")}} method="post">
+      {{ form.hidden_tag() }}
+            <div class="container">
+            <h1 class="font-weight-light">{{ _('Handling Data Quality Issues') }}.</h1>
+                <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">{{ _('Handling Data Quality Issues Area') }}</legend>
+                   <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+                                {{ form.features_select.label(class_="align_select_multiple_tfg") }}
+                                {{ form.features_select(class_="align_select_multiple_tfg") }}
+
+                            </div>
+                        </div>
+                   </div>
+                    {% for subfield in form.handler %}
+                    <div class="row">
+                        <div class="col">
+
+                           <div class="form-check">
+                                {{ subfield }}
+                               {{ subfield.label }}
+                           </div>
+                            {%if subfield.label.text == 'Imputation' %}
+                                <div class="form-check pl-xl-5">
+                                    {{ form.imputation.label }}
+                                    {{ form.imputation }}
+                               </div>
+                               {%endif%}
+
+                        </div>
+
+                    </div>
+                    {% endfor %}
+
+                </fieldset>
+                {{ form.submit(class_="btn btn-dark") }}
+            </div>
+
+    </form>
+
+<a href="/datos" class="link_tfg">{{ _('Back to data management section') }}</a>
+  </div>
+{% endblock %}
