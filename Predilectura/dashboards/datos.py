@@ -5,6 +5,7 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 import dash_table
 from dash.dependencies import Input, Output
+from flask import url_for
 import plotly.express as px
 
 
@@ -31,15 +32,30 @@ def init_dashboard(server):
 
     dash_app.layout = html.Div(children=[
         dbc.Row(
+            dbc.NavbarSimple(
+                children=[
+                    html.Img(src=dash_app.get_asset_url('quantified.png') ,height="50",
+                             alt="Quantified Reading logo"),
+                    html.Img(style={"margin-left": "15px"},src=dash_app.get_asset_url('logo_uned.gif') , height="50",
+                             alt="UNED logo"),
+                ],
+                brand_href="#",
+
+                dark=True,
+            )
+        ),
+
+        dbc.Row(
             [dbc.Col(children=
-                [html.Label('Select Feature'),
+                [html.Label('Select Feature',style = {"margin-left": "15px"}),
                 dcc.Dropdown(
                     id="select_feature",
+                    style={"margin-left": "15px"},
                     options=[
                         {'label': column, 'value': column} for column in df.columns
                     ],
                 )]
-            , width=3),
+            , width=2),
              dbc.Col(
                  html.Div(children=html.Div(id='graph_feature')),
              )
