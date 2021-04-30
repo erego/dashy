@@ -1,5 +1,5 @@
 """
-Import the DecisionTreeClassifier model.
+Class to define machine learning models related to information based learning
 """
 
 
@@ -58,3 +58,24 @@ class CARTAlgorithm:
         results = self.model.predict(data_to_predict)
         return results
 
+class C4dot5Algorith:
+    """
+       Class which represents the C4.5 Algorithm(Classification and Regression Trees) for Decision Trees
+       in order goal to to create a model that predicts the value of a target variable by learning simple decision rules
+       inferred from the data features
+       """
+
+    def __init__(self, data_train, target_train, data_test, target_test, impurity_metric):
+        """
+
+        :param data_train: features data used to train
+        :param target_train: target data used to train
+        :param data_test: features data used to tes
+        :param target_test: target data used to test
+        :param impurity_metric: type of impurity metric used for the algorithm (entropy, gini)
+        """
+        self.model = None
+        self.data_train = data_train
+        self.target_train = target_train
+        self.data_test = data_test
+        self.target_test = target_test
