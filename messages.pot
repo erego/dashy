@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-04-25 18:19+0200\n"
+"POT-Creation-Date: 2021-05-08 18:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,48 +17,148 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: Predilectura/forms.py:87
+#: Predilectura/forms.py:21 Predilectura/templates/lista_abt.jinja2:18
+msgid "User ID"
+msgstr ""
+
+#: Predilectura/forms.py:24
+msgid "Premium value"
+msgstr ""
+
+#: Predilectura/forms.py:27
+msgid "Book ID"
+msgstr ""
+
+#: Predilectura/forms.py:30
+msgid "Language book"
+msgstr ""
+
+#: Predilectura/forms.py:33
+msgid "Number of chapters read"
+msgstr ""
+
+#: Predilectura/forms.py:36
+msgid "Minimum percentage read"
+msgstr ""
+
+#: Predilectura/forms.py:39
+msgid "Maximum percentage read"
+msgstr ""
+
+#: Predilectura/forms.py:42
+msgid "Average percentage read"
+msgstr ""
+
+#: Predilectura/forms.py:45
+msgid "Number of words read"
+msgstr ""
+
+#: Predilectura/forms.py:48
+msgid "Minimum words read"
+msgstr ""
+
+#: Predilectura/forms.py:51
+msgid "Maximum words read"
+msgstr ""
+
+#: Predilectura/forms.py:54
+msgid "Average number of words read"
+msgstr ""
+
+#: Predilectura/forms.py:57 Predilectura/forms.py:72
+#: Predilectura/templates/generar_abt.jinja2:128
+#: Predilectura/templates/generar_abt.jinja2:172
+msgid "Devices used"
+msgstr ""
+
+#: Predilectura/forms.py:60 Predilectura/forms.py:75
+msgid "Used versions"
+msgstr ""
+
+#: Predilectura/forms.py:63 Predilectura/forms.py:69
+msgid "Types of events"
+msgstr ""
+
+#: Predilectura/forms.py:66
+msgid "Event objects"
+msgstr ""
+
+#: Predilectura/forms.py:78
+msgid "Chapters with events"
+msgstr ""
+
+#: Predilectura/forms.py:81
+msgid "Output format"
+msgstr ""
+
+#: Predilectura/forms.py:82
+msgid "Database"
+msgstr ""
+
+#: Predilectura/forms.py:82
+msgid "CSV"
+msgstr ""
+
+#: Predilectura/forms.py:85
+msgid "File name"
+msgstr ""
+
+#: Predilectura/forms.py:89 Predilectura/forms.py:174
+msgid "Apply"
+msgstr ""
+
+#: Predilectura/forms.py:97
 msgid "Name"
 msgstr ""
 
-#: Predilectura/forms.py:91 Predilectura/forms.py:122
+#: Predilectura/forms.py:101 Predilectura/forms.py:134
 msgid "Email"
 msgstr ""
 
-#: Predilectura/forms.py:94 Predilectura/forms.py:125
+#: Predilectura/forms.py:104 Predilectura/forms.py:137
 msgid "Enter a valid email"
 msgstr ""
 
-#: Predilectura/forms.py:99 Predilectura/forms.py:128
+#: Predilectura/forms.py:109 Predilectura/forms.py:140
 msgid "Password"
 msgstr ""
 
-#: Predilectura/forms.py:102
+#: Predilectura/forms.py:112
 msgid "Select a stronger password"
 msgstr ""
 
-#: Predilectura/forms.py:106
+#: Predilectura/forms.py:116
 msgid "Confirm Your Password"
 msgstr ""
 
-#: Predilectura/forms.py:109
+#: Predilectura/forms.py:119
 msgid "Passwords must match"
 msgstr ""
 
-#: Predilectura/forms.py:113 Predilectura/templates/navbar.jinja2:24
+#: Predilectura/forms.py:123 Predilectura/templates/navbar.jinja2:25
 msgid "Admin"
 msgstr ""
 
-#: Predilectura/forms.py:116
+#: Predilectura/forms.py:126
 msgid "Register"
 msgstr ""
 
-#: Predilectura/forms.py:130
+#: Predilectura/forms.py:142
 msgid "Log In"
+msgstr ""
+
+#: Predilectura/forms.py:157
+msgid "Train"
 msgstr ""
 
 #: Predilectura/templates/calidad_abt.jinja2:2
 msgid "Quality Report Page"
+msgstr ""
+
+#: Predilectura/templates/calidad_abt.jinja2:12
+#: Predilectura/templates/lista_datos.jinja2:35
+#: Predilectura/templates/lista_datos.jinja2:36
+msgid "Data quality report"
 msgstr ""
 
 #: Predilectura/templates/calidad_abt.jinja2:13
@@ -139,7 +239,86 @@ msgid "Second Mode Percent"
 msgstr ""
 
 #: Predilectura/templates/calidad_abt.jinja2:87
+#: Predilectura/templates/generar_abt.jinja2:197
+#: Predilectura/templates/gestion_calidad_abt.jinja2:54
 msgid "Back to data management section"
+msgstr ""
+
+#: Predilectura/templates/generar_abt.jinja2:2
+msgid "Analysis Base Table generation page"
+msgstr ""
+
+#: Predilectura/templates/generar_abt.jinja2:13
+msgid "Generation of the Base Analysis Table"
+msgstr ""
+
+#: Predilectura/templates/generar_abt.jinja2:14
+msgid "SELECTION OF CHARACTERISTICS OF THE DOMAIN CONCEPTS"
+msgstr ""
+
+#: Predilectura/templates/generar_abt.jinja2:16
+msgid ""
+"In this section we will choose the characteristics of the data we have in"
+" order to create a data analysis table that we will use in the prediction"
+" algorithms.\n"
+"                To do so, we will create concepts of the domain from "
+"which we will derive the resulting features"
+msgstr ""
+
+#: Predilectura/templates/generar_abt.jinja2:21
+msgid "Output Format"
+msgstr ""
+
+#: Predilectura/templates/generar_abt.jinja2:42
+#: Predilectura/templates/generar_abt.jinja2:62
+#: Predilectura/templates/generar_abt.jinja2:82
+#: Predilectura/templates/generar_abt.jinja2:145
+msgid "Domain"
+msgstr ""
+
+#: Predilectura/templates/generar_abt.jinja2:42
+msgid "Reader data"
+msgstr ""
+
+#: Predilectura/templates/generar_abt.jinja2:44
+msgid "Reader details"
+msgstr ""
+
+#: Predilectura/templates/generar_abt.jinja2:62
+msgid "Book data"
+msgstr ""
+
+#: Predilectura/templates/generar_abt.jinja2:64
+msgid "Book details"
+msgstr ""
+
+#: Predilectura/templates/generar_abt.jinja2:82
+msgid "Reading history"
+msgstr ""
+
+#: Predilectura/templates/generar_abt.jinja2:84
+msgid "Chapter History"
+msgstr ""
+
+#: Predilectura/templates/generar_abt.jinja2:145
+msgid "Event History"
+msgstr ""
+
+#: Predilectura/templates/generar_abt.jinja2:147
+msgid "Event statistics"
+msgstr ""
+
+#: Predilectura/templates/gestion_calidad_abt.jinja2:2
+msgid "Handling Data Quality Issues Page"
+msgstr ""
+
+#: Predilectura/templates/gestion_calidad_abt.jinja2:16
+#: Predilectura/templates/lista_datos.jinja2:37
+msgid "Handling Data Quality Issues"
+msgstr ""
+
+#: Predilectura/templates/gestion_calidad_abt.jinja2:18
+msgid "Handling Data Quality Issues Area"
 msgstr ""
 
 #: Predilectura/templates/index.jinja2:2
@@ -198,6 +377,19 @@ msgid ""
 " to visualize different results and metrics on them"
 msgstr ""
 
+#: Predilectura/templates/lista_abt.jinja2:17
+msgid "Row Number"
+msgstr ""
+
+#: Predilectura/templates/lista_abt.jinja2:19
+msgid "Book"
+msgstr ""
+
+#: Predilectura/templates/lista_abt.jinja2:20
+#: Predilectura/templates/navbar.jinja2:36
+msgid "Language"
+msgstr ""
+
 #: Predilectura/templates/lista_datos.jinja2:2
 msgid "Data management page"
 msgstr ""
@@ -210,13 +402,41 @@ msgstr ""
 msgid "Visualization"
 msgstr ""
 
+#: Predilectura/templates/lista_datos.jinja2:19
+msgid "Events Table"
+msgstr ""
+
+#: Predilectura/templates/lista_datos.jinja2:20
+msgid "Readings Table"
+msgstr ""
+
+#: Predilectura/templates/lista_datos.jinja2:21
+#: Predilectura/templates/lista_datos.jinja2:22
+msgid "Base Analysis Table"
+msgstr ""
+
 #: Predilectura/templates/lista_datos.jinja2:30
 msgid "Extraction, Transformation and Loading"
 msgstr ""
 
-#: Predilectura/templates/lista_datos.jinja2:35
-#: Predilectura/templates/lista_datos.jinja2:36
-msgid "Informe de la calidad de los datos"
+#: Predilectura/templates/lista_datos.jinja2:34
+msgid "Base Analysis Table Generation"
+msgstr ""
+
+#: Predilectura/templates/lista_datos.jinja2:39
+msgid "Visualización de los datos del ABT"
+msgstr ""
+
+#: Predilectura/templates/lista_datos.jinja2:47
+msgid "Machine Learning Algorithms"
+msgstr ""
+
+#: Predilectura/templates/lista_datos.jinja2:51
+msgid "Algorithm selection and training"
+msgstr ""
+
+#: Predilectura/templates/lista_datos.jinja2:53
+msgid "Value prediction"
 msgstr ""
 
 #: Predilectura/templates/login.jinja2:2 Predilectura/templates/login.jinja2:21
@@ -235,27 +455,25 @@ msgstr ""
 msgid "Sign up"
 msgstr ""
 
-#: Predilectura/templates/navbar.jinja2:16
+#: Predilectura/templates/navbar.jinja2:17
 msgid "Home"
 msgstr ""
 
-#: Predilectura/templates/navbar.jinja2:21
+#: Predilectura/templates/navbar.jinja2:22
 msgid "Login"
 msgstr ""
 
-#: Predilectura/templates/navbar.jinja2:27
+#: Predilectura/templates/navbar.jinja2:28
 msgid "Contact"
 msgstr ""
 
-#: Predilectura/templates/navbar.jinja2:34
-msgid "Language"
-msgstr ""
-
-#: Predilectura/templates/navbar.jinja2:37
+#: Predilectura/templates/navbar.jinja2:41
+#: Predilectura/templates/navbar.jinja2:44
 msgid "English"
 msgstr ""
 
-#: Predilectura/templates/navbar.jinja2:38
+#: Predilectura/templates/navbar.jinja2:42
+#: Predilectura/templates/navbar.jinja2:45
 msgid "Spanish"
 msgstr ""
 

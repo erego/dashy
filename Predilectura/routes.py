@@ -260,12 +260,13 @@ def create_abt():
     dict_abt_features["devices_events"] = True if request.form.get("devices_events") is not None else False
     dict_abt_features["versions_events"] = True if request.form.get("versions_events") is not None else False
     dict_abt_features["chapters_events"] = True if request.form.get("chapters_events") is not None else False
-
+    output_ath = request.form.get("output_path")
+    path_to_data = Path(app.root_path).joinpath("data", output_ath)
     if request.form.get("output_format") == "pandas":
-        abt_to_create = ABTPandas(dict_abt_features)
+        abt_to_create = ABTPandas(dict_abt_features, path_to_data)
         abt_to_create.create_ABT()
     elif request.form.get("output_format") == "mongodb":
-        abt_to_create = ABTMongoDB(dict_abt_features)
+        abt_to_create = ABTMongoDB(dict_abt_features, path_to_data)
         abt_to_create.create_ABT()
     return render_template('lista_datos.jinja2')
 
