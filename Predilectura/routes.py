@@ -1,5 +1,8 @@
 """Routes for parent Flask app."""
 
+import pickle
+import json
+
 from pathlib import Path
 
 from flask import current_app as app
@@ -12,7 +15,10 @@ import pandas as pd
 from Predilectura import mongo, babel
 from Predilectura.statistics.abt import ABTMongoDB, ABTPandas
 from Predilectura.statistics.feature import Feature, FeatureContinuous, FeatureCategorical
-from Predilectura.mlearning.information_based import CARTAlgorithm
+from Predilectura.mlearning.information_based import CARTAlgorithm, C4dot5Algorithm
+from Predilectura.mlearning.similarity_based import KNearestNeighboursAlgorithm, KMeansAlgorithm
+from Predilectura.mlearning.probability_based import NaiveBayesAlgorithm
+from Predilectura.mlearning.multilayer_perceptron_based import PerceptronsAlgorithm
 from Predilectura.forms import FormAlgorithm, FormHandlingQuality, FormABT
 
 from Predilectura.mlearning import model
@@ -359,24 +365,102 @@ def algorithm_train():
 @app.route('/train_algorithm', methods=["POST"])
 def train_algorithm():
 
-    # TODO load training data from field
-    path_to_data = Path(app.root_path).joinpath("data", "abt.csv")
+    filename = request.files['data_file'].filename
+    filename_noextension = filename.split(".")[0]
+    path_to_data = Path(app.root_path).joinpath("data", filename)
+
+    path_to_model_folder = Path(app.root_path).joinpath("model")
+
+    x_train, x_test, y_train, y_test = model.get_train_test(path_to_data.as_posix())
 
     if request.form.get("cart_select") is not None:
         # Train cart selection
-        x_train, x_test, y_train, y_test = model.get_train_test(path_to_data.as_posix())
-
         cart_model = CARTAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values, request.form.get("cart_criterion"))
         cart_model.build_model()
-        prediction = cart_model.get_predictions(x_test.values)
+        file_model = f'{filename_noextension}_CART.pkl'
+        path_to_model = path_to_model_folder.joinpath(file_model)
+        file_metrics = f'{filename_noextension}_CART.json'
+        path_to_metrics = path_to_model_folder.joinpath(file_metrics)
+
+        with open(path_to_model, 'wb') as f:
+            pickle.dump(cart_model, f)
 
         scores = cart_model.get_statistical_metrics()
 
-        # print("The prediction accuracy is: ", cart_model.score(test_features, test_targets) * 100, "%")
-        a = 5
+        with open(path_to_metrics, 'w') as fp:
+            json.dump(scores, fp)
 
+    if request.form.get("knearestneighbours_select") is not None:
+        # Train KNN selection
+        knn_model = KNearestNeighboursAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values,
+                                                 request.form.get("knearestneighbours_weights"))
+        knn_model.build_model()
+        file_model = f'{filename_noextension}_KNN.pkl'
+        path_to_model = path_to_model_folder.joinpath(file_model)
+        file_metrics = f'{filename_noextension}_KNN.json'
+        path_to_metrics = path_to_model_folder.joinpath(file_metrics)
 
+        with open(path_to_model, 'wb') as f:
+            pickle.dump(knn_model, f)
 
+        scores = knn_model.get_statistical_metrics()
+
+        with open(path_to_metrics, 'w') as fp:
+            json.dump(scores, fp)
+
+    if request.form.get("kmeans_select") is not None:
+        # Train Kmeans selection
+        kmeans_model = KMeansAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values,
+                                                 request.form.get("kmeans_algorithm"))
+        kmeans_model.build_model()
+        file_model = f'{filename_noextension}_kmeans.pkl'
+        path_to_model = path_to_model_folder.joinpath(file_model)
+        file_metrics = f'{filename_noextension}_kmeans.json'
+        path_to_metrics = path_to_model_folder.joinpath(file_metrics)
+
+        with open(path_to_model, 'wb') as f:
+            pickle.dump(kmeans_model, f)
+
+        scores = kmeans_model.get_statistical_metrics()
+
+        with open(path_to_metrics, 'w') as fp:
+            json.dump(scores, fp)
+
+    if request.form.get("naivebayes_select") is not None:
+        # Train naive bayes selection
+        naivebayes_model = NaiveBayesAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values)
+        naivebayes_model.build_model()
+        file_model = f'{filename_noextension}_naivebayes.pkl'
+        path_to_model = path_to_model_folder.joinpath(file_model)
+        file_metrics = f'{filename_noextension}_naivebayes.json'
+        path_to_metrics = path_to_model_folder.joinpath(file_metrics)
+
+        with open(path_to_model, 'wb') as f:
+            pickle.dump(naivebayes_model, f)
+
+        scores = naivebayes_model.get_statistical_metrics()
+
+        with open(path_to_metrics, 'w') as fp:
+            json.dump(scores, fp)
+
+    if request.form.get("mlp_select") is not None:
+        # Train multilayer perceptron selection
+        mlp_model = PerceptronsAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values)
+        mlp_model.build_model()
+        file_model = f'{filename_noextension}_mlp.pkl'
+        path_to_model = path_to_model_folder.joinpath(file_model)
+        file_metrics = f'{filename_noextension}_mlp.json'
+        path_to_metrics = path_to_model_folder.joinpath(file_metrics)
+
+        with open(path_to_model, 'wb') as f:
+            pickle.dump(mlp_model, f)
+
+        scores = mlp_model.get_statistical_metrics()
+
+        with open(path_to_metrics, 'w') as fp:
+            json.dump(scores, fp)
+
+    return render_template('lista_datos.jinja2')
 
 
 

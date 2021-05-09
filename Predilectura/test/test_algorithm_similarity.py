@@ -26,7 +26,7 @@ class TestKMeansAlgorithm(TestCase):
         self.y_test = self.data_test['target']
 
     def test_kmeans(self):
-        kmeans_model = KMeansAlgorithm(self.x_train, self.y_train, self.x_test, self.y_test)
+        kmeans_model = KMeansAlgorithm(self.x_train, self.y_train, self.x_test, self.y_test, "elkan")
         kmeans_model.build_model()
 
         a = kmeans_model.model.cluster_centers_

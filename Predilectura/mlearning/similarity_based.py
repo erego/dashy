@@ -14,14 +14,17 @@ class KMeansAlgorithm:
        classification(read or not read)
        """
 
-    def __init__(self, data_train, target_train, data_test, target_test):
+    def __init__(self, data_train, target_train, data_test, target_test, algorithm):
         """
 
         :param data_train: features data used to train
         :param data_test: features data used to tes
-        :param target_test: target data used to test
+        :param target_test: target data used to test:
+        :param algorithm: K-means algorithm to use. The classical EM-style algorithm is “full”.
+                          The “elkan” variation is more efficient on data with well-defined clusters,
+                          by using the triangle inequality
         """
-        self.model = KMeans(n_clusters=2, random_state=0)
+        self.model = KMeans(n_clusters=2, random_state=0, algorithm=algorithm)
         self.data_train = data_train
         self.target_train = target_train
         self.data_test = data_test
@@ -61,7 +64,7 @@ class KMeansAlgorithm:
         predictions = self.get_predictions(self.data_test)
 
         if self.cluster["read"] == 0:
-            test_values = self.target_test.copy().replace({0: 1, 1: 0})
+            test_values = pd.Series(self.target_test.copy()).replace({0: 1, 1: 0})
         else:
             test_values = self.target_test.copy()
         tn, fp, fn, tp = confusion_matrix(test_values, predictions).ravel()
@@ -90,16 +93,20 @@ class KNearestNeighboursAlgorithm:
        inferred from the data features
        """
 
-    def __init__(self, data_train, target_train, data_test, target_test):
+    def __init__(self, data_train, target_train, data_test, target_test, weight_function):
         """
 
         :param data_train: features data used to train
         :param target_train: target data used to train
         :param data_test: features data used to tes
         :param target_test: target data used to test
+        :param weight_function: weight function used in prediction. Possible values:
+            ‘uniform’ : uniform weights. All points in each neighborhood are weighted equally.
+            ‘distance’ : weight points by the inverse of their distance. in this case, closer neighbors of a query point
+                         will have a greater influence than neighbors which are further away.
 
         """
-        self.model = KNeighborsClassifier(n_neighbors=2)
+        self.model = KNeighborsClassifier(n_neighbors=2, weights=weight_function)
         self.data_train = data_train
         self.target_train = target_train
         self.data_test = data_test
