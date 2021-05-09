@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-05-08 18:35+0200\n"
+"POT-Creation-Date: 2021-05-09 10:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -92,18 +92,18 @@ msgid "Output format"
 msgstr ""
 
 #: Predilectura/forms.py:82
-msgid "Database"
+msgid "CSV"
 msgstr ""
 
 #: Predilectura/forms.py:82
-msgid "CSV"
+msgid "Database"
 msgstr ""
 
 #: Predilectura/forms.py:85
 msgid "File name"
 msgstr ""
 
-#: Predilectura/forms.py:89 Predilectura/forms.py:174
+#: Predilectura/forms.py:89 Predilectura/forms.py:202
 msgid "Apply"
 msgstr ""
 
@@ -147,8 +147,134 @@ msgstr ""
 msgid "Log In"
 msgstr ""
 
-#: Predilectura/forms.py:157
+#: Predilectura/forms.py:152
+msgid "Impurity Metrics"
+msgstr ""
+
+#: Predilectura/forms.py:152
+msgid "Entropy"
+msgstr ""
+
+#: Predilectura/forms.py:153
+msgid "Gini index"
+msgstr ""
+
+#: Predilectura/forms.py:155
+msgid "Select CART algorithm to train"
+msgstr ""
+
+#: Predilectura/forms.py:159
+msgid "Select C4.5 algorithm to train"
+msgstr ""
+
+#: Predilectura/forms.py:163
+msgid "Select KMeans algorithm to train"
+msgstr ""
+
+#: Predilectura/forms.py:166
+msgid "Algorithm to use"
+msgstr ""
+
+#: Predilectura/forms.py:170
+msgid "Select KNN algorithm to train"
+msgstr ""
+
+#: Predilectura/forms.py:173
+msgid "Weight function to use"
+msgstr ""
+
+#: Predilectura/forms.py:174
+msgid "Uniform"
+msgstr ""
+
+#: Predilectura/forms.py:175
+msgid "Distance"
+msgstr ""
+
+#: Predilectura/forms.py:178
+msgid "Select Naive Bayes algorithm to train"
+msgstr ""
+
+#: Predilectura/forms.py:182
+msgid "Select Multilayer Perceptron to train"
+msgstr ""
+
+#: Predilectura/forms.py:185
 msgid "Train"
+msgstr ""
+
+#: Predilectura/forms.py:194
+msgid "Complete Case Analysis"
+msgstr ""
+
+#: Predilectura/forms.py:195
+msgid "Drop Features"
+msgstr ""
+
+#: Predilectura/forms.py:196
+msgid "Imputation"
+msgstr ""
+
+#: Predilectura/forms.py:197
+msgid "Clamp Transformation"
+msgstr ""
+
+#: Predilectura/forms.py:198
+msgid "mean"
+msgstr ""
+
+#: Predilectura/forms.py:199
+msgid "median"
+msgstr ""
+
+#: Predilectura/forms.py:201
+msgid "Select Features"
+msgstr ""
+
+#: Predilectura/templates/algorithm_train.jinja2:2
+msgid "Algorithm train page"
+msgstr ""
+
+#: Predilectura/templates/algorithm_train.jinja2:13
+msgid "Algorithm train section"
+msgstr ""
+
+#: Predilectura/templates/algorithm_train.jinja2:15
+msgid ""
+"In this section we will select the different algorithms to be used for "
+"training"
+msgstr ""
+
+#: Predilectura/templates/algorithm_train.jinja2:19
+msgid "Select data to train"
+msgstr ""
+
+#: Predilectura/templates/algorithm_train.jinja2:24
+msgid "Select file to upload"
+msgstr ""
+
+#: Predilectura/templates/algorithm_train.jinja2:36
+msgid "CART Algorithm"
+msgstr ""
+
+#: Predilectura/templates/algorithm_train.jinja2:58
+msgid "C4.5 Algorithm"
+msgstr ""
+
+#: Predilectura/templates/algorithm_train.jinja2:75
+msgid "KMeans Algorithm"
+msgstr ""
+
+#: Predilectura/templates/algorithm_train.jinja2:98
+msgid "KNN Algorithm"
+msgstr ""
+
+#: Predilectura/templates/algorithm_train.jinja2:120
+msgid "Naive Bayes Algorithm"
+msgstr ""
+
+#: Predilectura/templates/algorithm_train.jinja2:136
+msgid "Multilayer Perceptron Algorithm"
 msgstr ""
 
 #: Predilectura/templates/calidad_abt.jinja2:2

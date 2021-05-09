@@ -2,7 +2,7 @@ from unittest import TestCase
 
 import pandas as pd
 
-from Predilectura.mlearning.similarity_based import KMeansAlgorithm, KNearstNeighboursAlgorithm
+from Predilectura.mlearning.similarity_based import KMeansAlgorithm, KNearestNeighboursAlgorithm
 
 
 class TestKMeansAlgorithm(TestCase):
@@ -61,7 +61,7 @@ class TestKNNAlgorithm(TestCase):
         self.y_test = self.data_test['target']
 
     def test_knn(self):
-        knn_model = KNearstNeighboursAlgorithm(self.x_train, self.y_train, self.x_test, self.y_test)
+        knn_model = KNearestNeighboursAlgorithm(self.x_train, self.y_train, self.x_test, self.y_test)
         knn_model.build_model()
         predict = knn_model.get_predictions([[3., 3.]])
         self.assertEqual(predict[0], 0)

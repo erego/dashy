@@ -83,7 +83,7 @@ class KMeansAlgorithm:
         return results
 
 
-class KNearstNeighboursAlgorithm:
+class KNearestNeighboursAlgorithm:
     """
        Class which represents the C4.5 Algorithm(Classification and Regression Trees) for Decision Trees
        in order goal to to create a model that predicts the value of a target variable by learning simple decision rules

@@ -149,9 +149,37 @@ class FormAlgorithm(FlaskForm):
     # TODO Set the validator
     # data_file = FileField(validators=[FileRequired()])
     data_file = FileField()
-    cart_criterion = SelectField(u'Impurity Metrics', choices=[('entropy', 'Entropy'), ('gini', 'Gini index')])
+    cart_criterion = SelectField(lazy_gettext(u'Impurity Metrics'), choices=[('entropy', lazy_gettext('Entropy')),
+                                                                             ('gini', lazy_gettext('Gini index'))])
     cart_select = BooleanField(
-        'Select Cart algorithm to train', default=True
+        lazy_gettext('Select CART algorithm to train'), default=True
+    )
+
+    c4dot5_select = BooleanField(
+        lazy_gettext('Select C4.5 algorithm to train'), default=True
+    )
+
+    kmeans_select = BooleanField(
+        lazy_gettext('Select KMeans algorithm to train'), default=True
+    )
+
+    kmeans_algorithm = SelectField(lazy_gettext(u'Algorithm to use'), choices=[('elkan', 'Elkan'),
+                                                                               ('full', 'Full')])
+
+    knearestneighbours_select = BooleanField(
+        lazy_gettext('Select KNN algorithm to train'), default=True
+    )
+
+    knearestneighbours_weights = SelectField(lazy_gettext(u'Weight function to use'),
+                                            choices=[('uniform', lazy_gettext('Uniform')),
+                                                     ('distance', lazy_gettext('Distance'))])
+
+    naivebayes_select = BooleanField(
+        lazy_gettext('Select Naive Bayes algorithm to train'), default=True
+    )
+
+    mlp_select = BooleanField(
+        lazy_gettext('Select Multilayer Perceptron to train'), default=True
     )
 
     submit = SubmitField(lazy_gettext('Train'))
@@ -163,12 +191,12 @@ class FormHandlingQuality(FlaskForm):
     """
     handler = RadioField('Label',
                          default='complete_case',
-                         choices=[('complete_case', 'Complete Case Analysis'),
-                                  ('drop_features', 'Drop Features'),
-                                  ('imputation', 'Imputation'),
-                                  ('clamp', 'Clamp Transformation')])
-    imputation = SelectField(u'Type Of Imputation', choices=[('mean', 'mean'),
-                                                             ('median', 'median')])
+                         choices=[('complete_case', lazy_gettext('Complete Case Analysis')),
+                                  ('drop_features', lazy_gettext('Drop Features')),
+                                  ('imputation', lazy_gettext('Imputation')),
+                                  ('clamp', lazy_gettext('Clamp Transformation'))])
+    imputation = SelectField(u'Type Of Imputation', choices=[('mean', lazy_gettext('mean')),
+                                                             ('median', lazy_gettext('median'))])
 
-    features_select = SelectMultipleField(u'Select Features')
+    features_select = SelectMultipleField(lazy_gettext(u'Select Features'))
     submit = SubmitField(lazy_gettext('Apply'))

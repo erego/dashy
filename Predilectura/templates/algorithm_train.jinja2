@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Algorithm train page{% endblock %}
+{% block title %}{{ _('Algorithm train page')}}{% endblock %}
 {% block styles %}
     {{super()}}
 <link rel="stylesheet"
@@ -8,20 +8,20 @@
 {% block content %}
 {% include 'navbar.jinja2' %}
     <form action={{url_for("train_algorithm")}} method="post"  enctype="multipart/form-data">
-     <h1 class="font-weight-light">Algorithm train section</h1>
+
             <div class="container">
-             <h2 class="font-weight-light">SELECTION OF THE ALGORITHM TO BE USED</h2>
+                <h1 class="font-weight-light">{{ _('Algorithm train section')}}</h1>
             <p>
-                In this section we will select the different algorithms to be used for training.
+               {{ _('In this section we will select the different algorithms to be used for training')}}.
             </p>
 
           <fieldset class="form-group border p-3">
-            <legend class="w-auto px-2">Select data to train</legend>
+            <legend class="w-auto px-2">{{ _('Select data to train')}}</legend>
             <div class="row">
                 <div class="col">
                     <div class="form-check">
                         <label class="form-check-label" for="data_file">
-                        Select file to upload:
+                        {{ _('Select file to upload')}}:
                         </label>
                         {{ form.data_file }}
 
@@ -30,11 +30,10 @@
 
             </div>
 
-
         </fieldset>
 
                 <fieldset class="form-group border p-3">
-                    <legend class="w-auto px-2">CART Algorithm</legend>
+                    <legend class="w-auto px-2">{{ _('CART Algorithm')}}</legend>
                     <div class="row">
                         <div class="col">
                             <div class="form-check">
@@ -53,6 +52,97 @@
                         </div>
                     </div>
 
+
+                </fieldset>
+                <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">{{ _('C4.5 Algorithm')}}</legend>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+
+                                {{ form.c4dot5_select(class_="form-check-input") }}
+                                {{ form.c4dot5_select.label(class_="form-check-label") }}
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+                <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">{{ _('KMeans Algorithm')}}</legend>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+
+                                {{ form.kmeans_select(class_="form-check-input") }}
+                                {{ form.kmeans_select.label(class_="form-check-label") }}
+
+
+                            </div>
+                        </div>
+                        <div class="col">
+                           <div class="form-check">
+                                {{ form.kmeans_algorithm.label }}:
+                                {{ form.kmeans_algorithm }}
+                            </div>
+                        </div>
+                    </div>
+
+
+                </fieldset>
+
+                <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">{{ _('KNN Algorithm')}}</legend>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+
+                                {{ form.knearestneighbours_select(class_="form-check-input") }}
+                                {{ form.knearestneighbours_select.label(class_="form-check-label") }}
+
+
+                            </div>
+                        </div>
+                        <div class="col">
+                           <div class="form-check">
+                                {{ form.knearestneighbours_weights.label }}:
+                                {{ form.knearestneighbours_weights }}
+                            </div>
+                        </div>
+                    </div>
+
+
+                </fieldset>
+               <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">{{ _('Naive Bayes Algorithm')}}</legend>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+
+                                {{ form.naivebayes_select(class_="form-check-input") }}
+                                {{ form.naivebayes_select.label(class_="form-check-label") }}
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </fieldset>
+               <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">{{ _('Multilayer Perceptron Algorithm')}}</legend>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+                                {{ form.mlp_select(class_="form-check-input") }}
+                                {{ form.mlp_select.label(class_="form-check-label") }}
+                            </div>
+                        </div>
+
+                    </div>
 
                 </fieldset>
 
