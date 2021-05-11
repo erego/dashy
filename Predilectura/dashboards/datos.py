@@ -5,6 +5,7 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 import dash_table
 from dash.dependencies import Input, Output
+import pandas as pd
 from flask import url_for
 
 import plotly.express as px
@@ -123,20 +124,17 @@ def init_dashboard(server):
     def update_graph_algorithm(select_algorithm, select_dataset):
 
         if select_algorithm is not None and select_dataset is not None:
-            data = get_json_algorithm(select_algorithm, select_dataset)
-
+            data_alg = pd.DataFrame([get_json_algorithm(select_algorithm, select_dataset)])
             table = dash_table.DataTable(
                 id="database-algorithm",
-                columns=[{"name": i, "id": i} for i in data.keys()],
-                data=data,
+                columns=[{"name": i, "id": i} for i in data_alg.columns],
+                data=data_alg.to_dict("records"),
                 sort_action="native",
                 sort_mode="native",
                 page_size=300,
             )
 
             return table
-
-
 
 
     return dash_app.server
