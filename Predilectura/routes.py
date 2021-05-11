@@ -341,19 +341,25 @@ def handling_quality_abt():
 
 @app.route("/handle_quality_issues", methods=["POST"])
 def handle_quality_issues():
-    #TODO crear una columna binaria para decir si un valor está o no está en caso de que haya mucho nan
     selected_option = request.form.get("handler")
     lst_features = request.form.getlist("features_select")
-    path_to_data = Path(app.root_path).joinpath("data", "abt.csv")
+    path_to_data = Path(app.root_path).joinpath("data", request.form.get("abts"))
+    if request.form.get("filename", None) is not None:
+        path_to_output = Path(app.root_path).joinpath("data", request.form.get("filename"))
+    else:
+        path_to_output = path_to_data
+
     dataset_abt = DataSetABT(path_to_data.as_posix())
     if selected_option == "drop_features":
-        dataset_abt.drop_features(lst_features)
+        dataset_abt.drop_features(lst_features, path_to_output.as_posix())
+    elif selected_option == "missing_reading":
+        dataset_abt.missing_reading_indicator(path_to_output.as_posix())
     elif selected_option == "complete_case":
-        dataset_abt.complete_case_analysis()
+        dataset_abt.complete_case_analysis(path_to_output.as_posix())
     elif selected_option == "imputation":
-        dataset_abt.imputation(lst_features, request.form.get("imputation"))
+        dataset_abt.imputation(lst_features, request.form.get("imputation"), path_to_output.as_posix())
     elif selected_option == "clamp":
-        dataset_abt.clamp(lst_features)
+        dataset_abt.clamp(lst_features, path_to_output.as_posix())
 
     return redirect(url_for('quality_abt', format_data="pandas"))
     return render_template('lista_datos.jinja2')
