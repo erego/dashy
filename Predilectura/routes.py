@@ -9,6 +9,7 @@ from flask import current_app as app
 from flask import render_template, request, g, redirect, url_for
 
 from Predilectura.statistics.dataset_abt import DataSetABT
+from Predilectura.statistics.abt import ABTPandas
 
 import pandas as pd
 
@@ -327,6 +328,8 @@ def quality_abt(format_data):
 @app.route('/gestion_calidad_abt')
 def handling_quality_abt():
     form = FormHandlingQuality()
+
+    form.abts.choices = [(element, element) for element in ABTPandas.get_list_abt()]
 
     path_to_data = Path(app.root_path).joinpath("data", "abt.csv")
 

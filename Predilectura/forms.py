@@ -189,12 +189,20 @@ class FormHandlingQuality(FlaskForm):
     """
         Form related to handling quality issues in dataset
     """
+
+    abts = SelectField(u'Select ABT')
+
+    filename = StringField(
+        lazy_gettext('Output filename(If blank will be overwrite)'),
+    )
+
     handler = RadioField('Label',
                          default='complete_case',
-                         choices=[('complete_case', lazy_gettext('Complete Case Analysis')),
+                         choices=[('complete_case', lazy_gettext('Complete Case Analysis(all rows with value NaN will be deleted)')),
                                   ('drop_features', lazy_gettext('Drop Features')),
                                   ('imputation', lazy_gettext('Imputation')),
-                                  ('clamp', lazy_gettext('Clamp Transformation'))])
+                                  ('clamp', lazy_gettext('Clamp Transformation')),
+                                  ('missing', lazy_gettext('Reading event missing indicator(Include a indicator for reading event, NaN values will be set to 0)'))])
     imputation = SelectField(u'Type Of Imputation', choices=[('mean', lazy_gettext('mean')),
                                                              ('median', lazy_gettext('median'))])
 

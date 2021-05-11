@@ -421,3 +421,15 @@ class ABTPandas(ABT):
         json.dump(self.features, dict_file)
 
         dict_file.close()
+
+    @staticmethod
+    def get_list_abt():
+        """
+        Get the list of all abts
+        :return:  list of abt
+        """
+
+        lst_datasets = list(Path(current_app.root_path).joinpath("data").glob('*.csv'))
+        lst_datasets = [dataset.name for dataset in lst_datasets]
+        return lst_datasets
+
