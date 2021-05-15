@@ -384,7 +384,8 @@ def train_algorithm():
 
     if request.form.get("cart_select") is not None:
         # Train cart selection
-        cart_model = CARTAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values, request.form.get("cart_criterion"))
+        cart_model = CARTAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values,
+                                   request.form.get("cart_criterion"))
         cart_model.build_model()
         file_model = f'{filename_noextension}_CART.pkl'
         path_to_model = path_to_model_folder.joinpath(file_model)
@@ -395,6 +396,25 @@ def train_algorithm():
             pickle.dump(cart_model, f)
 
         scores = cart_model.get_statistical_metrics()
+
+        with open(path_to_metrics, 'w') as fp:
+            json.dump(scores, fp)
+
+    if request.form.get("c4dot5_select") is not None:
+        # Train c4.5 selection
+
+
+        c4dot5_model = C4dot5Algorithm(x_train, y_train, x_test, y_test)
+        c4dot5_model.build_model()
+
+        file_model = f'{filename_noextension}_C4dot5.pkl'
+        path_to_model = path_to_model_folder.joinpath(file_model)
+        file_metrics = f'{filename_noextension}_C4dot5.json'
+        path_to_metrics = path_to_model_folder.joinpath(file_metrics)
+
+        c4dot5_model.save_model(path_to_model.as_posix())
+
+        scores = c4dot5_model.get_statistical_metrics()
 
         with open(path_to_metrics, 'w') as fp:
             json.dump(scores, fp)

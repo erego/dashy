@@ -1,6 +1,8 @@
 """
 Class to define machine learning models related to information based learning
 """
+
+import pickle
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import confusion_matrix
@@ -36,6 +38,10 @@ class CARTAlgorithm:
         :return: None, model attribute is updated according to data
         """
         self.model.fit(self.data_train, self.target_train)
+        # from sklearn import tree
+        # text_representation = tree.export_text(self.model, feature_names=self.columns)
+        # with open("./decistion_tree.log", "w") as fout:
+        #     fout.write(text_representation)
 
     def get_statistical_metrics(self):
         predictions = self.get_predictions(self.data_test)
@@ -73,6 +79,11 @@ class C4dot5Algorithm:
         :param data_test: features data used to tes
         :param target_test: target data used to test
         """
+        target_train = target_train.rename('Decision', inplace=True)
+        target_train.replace({0: "No", 1: "Yes"}, inplace=True)
+        target_test = target_test.rename('Decision', inplace=True)
+        target_test.replace({0: "No", 1: "Yes"}, inplace=True)
+
         self.model = None
         self.data_train = data_train
         self.target_train = target_train
@@ -89,6 +100,27 @@ class C4dot5Algorithm:
         df_to_build = pd.concat([self.data_train, self.target_train], axis=1)
 
         self.model = chef.fit(df_to_build, config=self.config, validation_df=pd.concat([self.data_test, self.target_test], axis=1))
+
+    def save_model(self, path_to_save):
+        """
+        Save a C4.5 model to an specific path
+        :param path_to_save: path to save the mode
+        :return: None, model saved in the specific path
+        """
+
+        model = self.model.copy()
+
+        # modules cannot be saved. Save its reference instead.
+        module_names = []
+        for tree in model["trees"]:
+            module_names.append(tree.__name__)
+
+        model["trees"] = module_names
+
+        f = open(path_to_save, "wb")
+        pickle.dump(model, f)
+        f.close()
+
 
     def get_predictions(self, data_to_predict):
         """
