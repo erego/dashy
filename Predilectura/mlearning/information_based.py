@@ -7,7 +7,8 @@ import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import confusion_matrix
 
-from chefboost import Chefboost as chef
+from chefboost import Chefboost
+
 
 
 class CARTAlgorithm:
@@ -99,7 +100,7 @@ class C4dot5Algorithm:
 
         df_to_build = pd.concat([self.data_train, self.target_train], axis=1)
 
-        self.model = chef.fit(df_to_build, config=self.config, validation_df=pd.concat([self.data_test, self.target_test], axis=1))
+        self.model = Chefboost.fit(df_to_build, config=self.config, validation_df=pd.concat([self.data_test, self.target_test], axis=1))
 
     def save_model(self, path_to_save):
         """
@@ -129,7 +130,7 @@ class C4dot5Algorithm:
         """
         results = []
         for index, row in data_to_predict.iterrows():
-            prediction = chef.predict(self.model, param=row)
+            prediction = Chefboost.predict(self.model, param=row)
             actual = row["Decision"]
             results.append((prediction, actual))
 
