@@ -16,6 +16,25 @@
             <h1 class="font-weight-light">{{ _('Handling Data Quality Issues') }}.</h1>
                 <fieldset class="form-group border p-3">
                     <legend class="w-auto px-2">{{ _('Handling Data Quality Issues Area') }}</legend>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+                                {{ form.abts.label}}
+                                {{ form.abts }}
+
+                            </div>
+                        </div>
+                   </div>
+                   <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+                                {{ form.filename.label}}
+                                {{ form.filename }}
+
+                            </div>
+                        </div>
+                   </div>
                    <div class="row">
                         <div class="col">
                             <div class="form-check">

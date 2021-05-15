@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Analysis Base Table generation page{% endblock %}
+{% block title %}{{ _('Analysis Base Table generation page')}}{% endblock %}
 {% block styles %}
     {{super()}}
 <link rel="stylesheet"
@@ -10,15 +10,15 @@
     <div class="container-fluid">
     <form action={{url_for("create_abt")}} method="post">
             <div class="container">
-                <h1 class="font-weight-light">Generation of the Base Analysis Table.</h1>
-             <h2 class="font-weight-light">SELECCION DE CARACTERISTICAS DE LOS CONCEPTOS DEL DOMINIO</h2>
+                <h1 class="font-weight-light">{{ _('Generation of the Base Analysis Table')}}.</h1>
+             <h2 class="font-weight-light">{{ _('SELECTION OF CHARACTERISTICS OF THE DOMAIN CONCEPTS')}}</h2>
             <p>
-                En esta sección eligiremos las características de los datos que tenemos con el objetivo de crear una tabla de análisis de datos que usaremos en los algoritmos de predicción.
-                Para ello crearemos crearemos conceptos del dominio del cual derivaremos las características resultante.
+                {{ _('In this section we will choose the characteristics of the data we have in order to create a data analysis table that we will use in the prediction algorithms.
+                To do so, we will create concepts of the domain from which we will derive the resulting features')}}.
             </p>
 
                 <fieldset class="form-group border p-3">
-                    <legend class="w-auto px-2">Formato Salida</legend>
+                    <legend class="w-auto px-2">{{ _('Output Format')}}</legend>
                     <div class="row">
                         <div class="col">
                             <div class="form-check">
@@ -29,14 +29,19 @@
                         </div>
 
                     </div>
-
-
-
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+                                {{ form.output_path.label }}:
+                                {{ form.output_path}}
+                            </div>
+                        </div>
+                    </div>
                 </fieldset>
 
-                <h3 class="font-weight-light ">Dominio: Datos del lector</h3>
+                <h3 class="font-weight-light ">{{ _('Domain')}}: {{ _('Reader data')}}</h3>
                 <fieldset class="form-group border p-3">
-                    <legend class="w-auto px-2">Detalles del lector</legend>
+                    <legend class="w-auto px-2">{{ _('Reader details')}}</legend>
                     <div class="row">
                         <div class="col">
                             <div class="form-check">
@@ -52,15 +57,11 @@
                         </div>
                     </div>
                     </div>
-
-
-
                 </fieldset>
 
-
-                <h3 class="font-weight-light ">Dominio: Datos del libro</h3>
+                <h3 class="font-weight-light ">{{ _('Domain')}}: {{ _('Book data')}}</h3>
                <fieldset class="form-group border p-3">
-                    <legend class="w-auto px-2">Detalles del libro</legend>
+                    <legend class="w-auto px-2">{{ _('Book details')}}</legend>
                    <div class="row">
                        <div class="col">
                            <div class="form-check">
@@ -72,15 +73,15 @@
                             <div class="form-check">
                                 {{ form.language(class_="form-check-input", disabled='disabled') }}
                                 {{ form.language.label(class_="form-check-label") }}
-                                  </label>
+
                             </div>
                        </div>
                    </div>
                 </fieldset>
 
-                <h3 class="font-weight-light ">Dominio: Histórico de lectura</h3>
+                <h3 class="font-weight-light ">{{ _('Domain')}}: {{ _('Reading history')}}</h3>
                 <fieldset class="form-group border p-3">
-                    <legend class="w-auto px-2">Histórico de capítulos</legend>
+                    <legend class="w-auto px-2">{{ _('Chapter History')}}</legend>
                     <div class="row">
                         <div class="col">
                            <div class="form-check">
@@ -124,7 +125,7 @@
                 </fieldset>
 
                <fieldset class="form-group border p-3">
-                    <legend class="w-auto px-2">Dispositivos usados</legend>
+                    <legend class="w-auto px-2">{{ _('Devices used')}}</legend>
                    <div class="row">
                        <div class="col">
                             <div class="form-check">
@@ -141,9 +142,9 @@
                    </div>
                 </fieldset>
 
-                <h3 class="font-weight-light ">Dominio: Histórico de eventos</h3>
+                <h3 class="font-weight-light ">{{ _('Domain')}}: {{ _('Event History')}}</h3>
                 <fieldset class="form-group border p-3">
-                    <legend class="w-auto px-2">Estadísticas de eventos</legend>
+                    <legend class="w-auto px-2">{{ _('Event statistics')}}</legend>
 
                     <div class="row">
                         <div class="col">
@@ -168,7 +169,7 @@
                 </fieldset>
 
               <fieldset class="form-group border p-3">
-                    <legend class="w-auto px-2">Dispositivos usados</legend>
+                    <legend class="w-auto px-2">{{ _('Devices used')}}</legend>
                     <div class="row">
                         <div class="col">
                              <div class="form-check">
@@ -193,7 +194,7 @@
             </div>
 
     </form>
-    <a href="/datos" class="link_tfg">Back to data management section</a>
+    <a href="/datos" class="link_tfg">{{ _('Back to data management section')}}</a>
     <br><br>
     </div>
 {% endblock %}

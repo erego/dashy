@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
+import json
 
 from flask import current_app
 import pandas as pd
@@ -10,6 +11,7 @@ from Predilectura import mongo
 @dataclass
 class ABT:
     features: dict
+    path: Path
 
 
 class ABTMongoDB(ABT):
@@ -340,7 +342,7 @@ class ABTPandas(ABT):
 
     def create_ABT(self):
 
-        path_to_readings = Path(current_app.root_path).joinpath("data", "readings.csv")
+        path_to_readings = Path(current_app.root_path).joinpath("data", "../data/readings.csv")
 
         result_readings = ABTPandas.get_readings_stats(path_to_readings)
 
@@ -376,7 +378,7 @@ class ABTPandas(ABT):
         if self.features["chapters_readings"] is not True:
             columns_to_delete.append("chapters_readings")
 
-        path_to_events = Path(current_app.root_path).joinpath("data", "events.csv")
+        path_to_events = Path(current_app.root_path).joinpath("data", "../data/events.csv")
 
         result_events = ABTPandas.get_events_stats(path_to_events)
 
@@ -401,9 +403,33 @@ class ABTPandas(ABT):
 
         result = pd.merge(result_readings, result_events, on=['user_id', 'edition_id', "edition_language"], how='outer')
         result.drop(columns_to_delete, axis=1,  inplace=True)
-        path_to_output = Path(current_app.root_path).joinpath("data", "abt.csv")
+
+        path_to_predictive = Path(current_app.root_path).joinpath("data", "../data/valor-predictivo.csv")
+        predictive = pd.read_csv(path_to_predictive.as_posix())
+        result = pd.merge(result, predictive, on=['user_id', 'edition_id'], how='outer')
+        result.rename(columns={"read": "target"}, inplace=True)
+        path_to_output = self.path
 
         if path_to_output.exists():
             path_to_output.unlink()
 
         result.to_csv(path_to_output.as_posix(), index=False)
+
+        path_to_json = path_to_output.with_suffix('.json')
+        dict_file = open(path_to_json.as_posix(), "w")
+
+        json.dump(self.features, dict_file)
+
+        dict_file.close()
+
+    @staticmethod
+    def get_list_abt():
+        """
+        Get the list of all abts
+        :return:  list of abt
+        """
+
+        lst_datasets = list(Path(current_app.root_path).joinpath("data").glob('*.csv'))
+        lst_datasets = [dataset.name for dataset in lst_datasets]
+        return lst_datasets
+

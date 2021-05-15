@@ -1,19 +1,25 @@
 """Routes for parent Flask app."""
 
+import pickle
+import json
+
 from pathlib import Path
 
 from flask import current_app as app
 from flask import render_template, request, g, redirect, url_for
-from flask_login import login_required
 
 from Predilectura.statistics.dataset_abt import DataSetABT
+from Predilectura.statistics.abt import ABTPandas
 
 import pandas as pd
 
 from Predilectura import mongo, babel
-from Predilectura.data.abt import ABTMongoDB, ABTPandas
+from Predilectura.statistics.abt import ABTMongoDB, ABTPandas
 from Predilectura.statistics.feature import Feature, FeatureContinuous, FeatureCategorical
-from Predilectura.mlearning.information_based import CARTAlgorithm
+from Predilectura.mlearning.information_based import CARTAlgorithm, C4dot5Algorithm
+from Predilectura.mlearning.similarity_based import KNearestNeighboursAlgorithm, KMeansAlgorithm
+from Predilectura.mlearning.probability_based import NaiveBayesAlgorithm
+from Predilectura.mlearning.multilayer_perceptron_based import PerceptronsAlgorithm
 from Predilectura.forms import FormAlgorithm, FormHandlingQuality, FormABT
 
 from Predilectura.mlearning import model
@@ -261,12 +267,13 @@ def create_abt():
     dict_abt_features["devices_events"] = True if request.form.get("devices_events") is not None else False
     dict_abt_features["versions_events"] = True if request.form.get("versions_events") is not None else False
     dict_abt_features["chapters_events"] = True if request.form.get("chapters_events") is not None else False
-
+    output_ath = request.form.get("output_path")
+    path_to_data = Path(app.root_path).joinpath("data", output_ath)
     if request.form.get("output_format") == "pandas":
-        abt_to_create = ABTPandas(dict_abt_features)
+        abt_to_create = ABTPandas(dict_abt_features, path_to_data)
         abt_to_create.create_ABT()
     elif request.form.get("output_format") == "mongodb":
-        abt_to_create = ABTMongoDB(dict_abt_features)
+        abt_to_create = ABTMongoDB(dict_abt_features, path_to_data)
         abt_to_create.create_ABT()
     return render_template('lista_datos.jinja2')
 
@@ -322,6 +329,8 @@ def quality_abt(format_data):
 def handling_quality_abt():
     form = FormHandlingQuality()
 
+    form.abts.choices = [(element, element) for element in ABTPandas.get_list_abt()]
+
     path_to_data = Path(app.root_path).joinpath("data", "abt.csv")
 
     columns = pd.read_csv(path_to_data.as_posix(), index_col=0, nrows=0).columns.tolist()
@@ -332,19 +341,25 @@ def handling_quality_abt():
 
 @app.route("/handle_quality_issues", methods=["POST"])
 def handle_quality_issues():
-    #TODO crear una columna binaria para decir si un valor está o no está en caso de que haya mucho nan
     selected_option = request.form.get("handler")
     lst_features = request.form.getlist("features_select")
-    path_to_data = Path(app.root_path).joinpath("data", "abt.csv")
+    path_to_data = Path(app.root_path).joinpath("data", request.form.get("abts"))
+    if request.form.get("filename", None) is not None:
+        path_to_output = Path(app.root_path).joinpath("data", request.form.get("filename"))
+    else:
+        path_to_output = path_to_data
+
     dataset_abt = DataSetABT(path_to_data.as_posix())
     if selected_option == "drop_features":
-        dataset_abt.drop_features(lst_features)
+        dataset_abt.drop_features(lst_features, path_to_output.as_posix())
+    elif selected_option == "missing_reading":
+        dataset_abt.missing_reading_indicator(path_to_output.as_posix())
     elif selected_option == "complete_case":
-        dataset_abt.complete_case_analysis()
+        dataset_abt.complete_case_analysis(path_to_output.as_posix())
     elif selected_option == "imputation":
-        dataset_abt.imputation(lst_features, request.form.get("imputation"))
+        dataset_abt.imputation(lst_features, request.form.get("imputation"), path_to_output.as_posix())
     elif selected_option == "clamp":
-        dataset_abt.clamp(lst_features)
+        dataset_abt.clamp(lst_features, path_to_output.as_posix())
 
     return redirect(url_for('quality_abt', format_data="pandas"))
     return render_template('lista_datos.jinja2')
@@ -359,24 +374,122 @@ def algorithm_train():
 @app.route('/train_algorithm', methods=["POST"])
 def train_algorithm():
 
-    # TODO load training data from field
-    path_to_data = Path(app.root_path).joinpath("data", "abt.csv")
+    filename = request.files['data_file'].filename
+    filename_noextension = filename.split(".")[0]
+    path_to_data = Path(app.root_path).joinpath("data", filename)
+
+    path_to_model_folder = Path(app.root_path).joinpath("model")
+
+    x_train, x_test, y_train, y_test = model.get_train_test(path_to_data.as_posix())
 
     if request.form.get("cart_select") is not None:
         # Train cart selection
-        x_train, x_test, y_train, y_test = model.get_train_test(path_to_data.as_posix())
-
-        cart_model = CARTAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values, request.form.get("cart_criterion"))
+        cart_model = CARTAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values,
+                                   request.form.get("cart_criterion"))
         cart_model.build_model()
-        prediction = cart_model.get_predictions(x_test.values)
+        file_model = f'{filename_noextension}_CART.pkl'
+        path_to_model = path_to_model_folder.joinpath(file_model)
+        file_metrics = f'{filename_noextension}_CART.json'
+        path_to_metrics = path_to_model_folder.joinpath(file_metrics)
 
-        scores = cart_model.get_statistical_measures()
+        with open(path_to_model, 'wb') as f:
+            pickle.dump(cart_model, f)
 
-        # print("The prediction accuracy is: ", cart_model.score(test_features, test_targets) * 100, "%")
-        a = 5
+        scores = cart_model.get_statistical_metrics()
+
+        with open(path_to_metrics, 'w') as fp:
+            json.dump(scores, fp)
+
+    if request.form.get("c4dot5_select") is not None:
+        # Train c4.5 selection
 
 
+        c4dot5_model = C4dot5Algorithm(x_train, y_train, x_test, y_test)
+        c4dot5_model.build_model()
 
+        file_model = f'{filename_noextension}_C4dot5.pkl'
+        path_to_model = path_to_model_folder.joinpath(file_model)
+        file_metrics = f'{filename_noextension}_C4dot5.json'
+        path_to_metrics = path_to_model_folder.joinpath(file_metrics)
+
+        c4dot5_model.save_model(path_to_model.as_posix())
+
+        scores = c4dot5_model.get_statistical_metrics()
+
+        with open(path_to_metrics, 'w') as fp:
+            json.dump(scores, fp)
+
+    if request.form.get("knearestneighbours_select") is not None:
+        # Train KNN selection
+        knn_model = KNearestNeighboursAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values,
+                                                 request.form.get("knearestneighbours_weights"))
+        knn_model.build_model()
+        file_model = f'{filename_noextension}_KNN.pkl'
+        path_to_model = path_to_model_folder.joinpath(file_model)
+        file_metrics = f'{filename_noextension}_KNN.json'
+        path_to_metrics = path_to_model_folder.joinpath(file_metrics)
+
+        with open(path_to_model, 'wb') as f:
+            pickle.dump(knn_model, f)
+
+        scores = knn_model.get_statistical_metrics()
+
+        with open(path_to_metrics, 'w') as fp:
+            json.dump(scores, fp)
+
+    if request.form.get("kmeans_select") is not None:
+        # Train Kmeans selection
+        kmeans_model = KMeansAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values,
+                                                 request.form.get("kmeans_algorithm"))
+        kmeans_model.build_model()
+        file_model = f'{filename_noextension}_kmeans.pkl'
+        path_to_model = path_to_model_folder.joinpath(file_model)
+        file_metrics = f'{filename_noextension}_kmeans.json'
+        path_to_metrics = path_to_model_folder.joinpath(file_metrics)
+
+        with open(path_to_model, 'wb') as f:
+            pickle.dump(kmeans_model, f)
+
+        scores = kmeans_model.get_statistical_metrics()
+
+        with open(path_to_metrics, 'w') as fp:
+            json.dump(scores, fp)
+
+    if request.form.get("naivebayes_select") is not None:
+        # Train naive bayes selection
+        naivebayes_model = NaiveBayesAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values)
+        naivebayes_model.build_model()
+        file_model = f'{filename_noextension}_naivebayes.pkl'
+        path_to_model = path_to_model_folder.joinpath(file_model)
+        file_metrics = f'{filename_noextension}_naivebayes.json'
+        path_to_metrics = path_to_model_folder.joinpath(file_metrics)
+
+        with open(path_to_model, 'wb') as f:
+            pickle.dump(naivebayes_model, f)
+
+        scores = naivebayes_model.get_statistical_metrics()
+
+        with open(path_to_metrics, 'w') as fp:
+            json.dump(scores, fp)
+
+    if request.form.get("mlp_select") is not None:
+        # Train multilayer perceptron selection
+        mlp_model = PerceptronsAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values)
+        mlp_model.build_model()
+        file_model = f'{filename_noextension}_mlp.pkl'
+        path_to_model = path_to_model_folder.joinpath(file_model)
+        file_metrics = f'{filename_noextension}_mlp.json'
+        path_to_metrics = path_to_model_folder.joinpath(file_metrics)
+
+        with open(path_to_model, 'wb') as f:
+            pickle.dump(mlp_model, f)
+
+        scores = mlp_model.get_statistical_metrics()
+
+        with open(path_to_metrics, 'w') as fp:
+            json.dump(scores, fp)
+
+    return render_template('lista_datos.jinja2')
 
 
 

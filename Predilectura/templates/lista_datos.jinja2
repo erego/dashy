@@ -18,7 +18,7 @@
               <ul class="list-group" >
                   <li class="list-group-item link_tfg"><a href="/listar_events" class="link_tfg">{{ _('Events Table')}}</a>
                   <li class="list-group-item link_tfg"><a href="/listar_readings" class="link_tfg">{{ _('Readings Table')}}</a></li>
-                  <li class="list-group-item link_tfg"><a href="/listar_ABT/mongodb" class="link_tfg">{{ _('Base Analysis Table')}}(ABT)-MongoDB</a></li>
+                  <!---<li class="list-group-item link_tfg"><a href="/listar_ABT/mongodb" class="link_tfg">{{ _('Base Analysis Table')}}(ABT)-MongoDB</a></li>--->
                   <li class="list-group-item link_tfg"><a href="/listar_ABT/pandas" class="link_tfg">{{ _('Base Analysis Table')}}(ABT)-CSV</a></li>
               </ul>
 
@@ -32,8 +32,8 @@
           <div class="row">
               <ul class="list-group">
                   <li class="list-group-item"><a href="/generar_abt" class="link_tfg">{{ _('Base Analysis Table Generation')}}(ABT)</a></li>
-                  <li class="list-group-item"><a href="/calidad_abt/mongodb" class="link_tfg">{{ _('Data quality report')}}(mongodb)</a></li>
-                  <li class="list-group-item"><a href="/calidad_abt/pandas" class="link_tfg">{{ _('Data quality report')}}(pandas)</a></li>
+                  <!---<li class="list-group-item"><a href="/calidad_abt/mongodb" class="link_tfg">{{ _('Data quality report')}}(mongodb)</a></li>--->
+                  <li class="list-group-item"><a href="/calidad_abt/pandas" class="link_tfg">{{ _('Data quality report')}}</a></li>
                   <li class="list-group-item"><a href="/gestion_calidad_abt" class="link_tfg">{{ _('Handling Data Quality Issues')}}</a></li>
 
                   <li class="list-group-item"><a href="/dashapp" class="link_tfg">{{ _('Visualización de los datos del ABT')}}</a></li>
@@ -44,13 +44,13 @@
         <br>
         <div class="container-fluid">
           <div class="row">
-             <h2 class="bg-dark text-light p-2">Machine Learning Algorithms</h2><br>
+             <h2 class="bg-dark text-light p-2">{{ _('Machine Learning Algorithms') }}</h2><br>
           </div>
           <div class="row">
               <ul class="list-group">
-                  <li class="list-group-item"><a href="/algorithm_train" class="link_tfg">Algorithm selection and training</a></li>
+                  <li class="list-group-item"><a href="/algorithm_train" class="link_tfg">{{ _('Algorithm selection and training') }}</a></li>
 
-                  <li class="list-group-item"><a href="/algorithm_prediction" class="link_tfg">Value prediction</a></li>
+                  <li class="list-group-item"><a href="/algorithm_prediction" class="link_tfg">{{ _('Value prediction') }}</a></li>
               </ul>
           </div>
        </div>
