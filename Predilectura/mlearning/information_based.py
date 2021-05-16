@@ -3,12 +3,15 @@ Class to define machine learning models related to information based learning
 """
 
 import pickle
+import multiprocessing
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import RepeatedKFold
 from sklearn.metrics import confusion_matrix
 
 from chefboost import Chefboost
-
 
 
 class CARTAlgorithm:
@@ -41,8 +44,8 @@ class CARTAlgorithm:
         self.model.fit(self.data_train, self.target_train)
         # from sklearn import tree
         # text_representation = tree.export_text(self.model, feature_names=self.columns)
-        # with open("./decistion_tree.log", "w") as fout:
-        #     fout.write(text_representation)
+        # with open("./decision_tree.log", "w") as file_out:
+        #     file_out.write(text_representation)
 
     def get_statistical_metrics(self):
         predictions = self.get_predictions(self.data_test)
@@ -100,7 +103,9 @@ class C4dot5Algorithm:
 
         df_to_build = pd.concat([self.data_train, self.target_train], axis=1)
 
-        self.model = Chefboost.fit(df_to_build, config=self.config, validation_df=pd.concat([self.data_test, self.target_test], axis=1))
+        self.model = Chefboost.fit(df_to_build,
+                                   config=self.config,
+                                   validation_df=pd.concat([self.data_test, self.target_test], axis=1))
 
     def save_model(self, path_to_save):
         """
@@ -121,7 +126,6 @@ class C4dot5Algorithm:
         f = open(path_to_save, "wb")
         pickle.dump(model, f)
         f.close()
-
 
     def get_predictions(self, data_to_predict):
         """
@@ -159,3 +163,71 @@ class C4dot5Algorithm:
         dict_metrics = {"accuracy": accuracy, "recall": recall, "specificity": specificity,
                         "precision": precision, "f1_score": f1_score}
         return dict_metrics
+
+
+class RandomForestAlgorithm:
+    """
+    Class which represents the Random Forest for Decision Trees
+    in order goal to to create a model that predicts the value of a target variable by learning simple decision rules
+    inferred from the data features
+    """
+
+    def __init__(self, data_train, target_train, data_test, target_test):
+        """
+
+        :param data_train: features data used to train
+        :param target_train: target data used to train
+        :param data_test: features data used to tes
+        :param target_test: target data used to test
+         """
+        self.model = None
+        self.data_train = data_train
+        self.target_train = target_train
+        self.data_test = data_test
+        self.target_test = target_test
+
+    def build_model(self):
+        """
+        Build a decision tree classifier from the training set
+        :return: None, model attribute is updated according to data
+        """
+        param_grid = {'n_estimators': [150],
+                      'max_features': [5, 7, 9],
+                      'max_depth': [None, 3, 10, 20],
+                      'criterion': ['gini', 'entropy']
+                      }
+
+        grid = GridSearchCV(
+            estimator=RandomForestClassifier(random_state=123),
+            param_grid=param_grid,
+            scoring='accuracy',
+            n_jobs=multiprocessing.cpu_count() - 1,
+            cv=RepeatedKFold(n_splits=5, n_repeats=3, random_state=123),
+            refit=True,
+            verbose=0,
+            return_train_score=True
+        )
+
+        grid.fit(X=self.data_train, y=self.target_train)
+        self.model = grid.best_estimator_
+
+    def get_statistical_metrics(self):
+
+        predictions = self.get_predictions(self.data_test)
+        tn, fp, fn, tp = confusion_matrix(self.target_test, predictions).ravel()
+        accuracy = (tp + tn) / (tn + fn + tp + fp)
+        recall = tp / (tp + fn)
+        specificity = tn / (tn + fp)
+        precision = tp / (tp + fp)
+        f1_score = 2 * (recall * precision) / (recall + precision)
+        dict_metrics = {"accuracy": accuracy, "recall": recall, "specificity": specificity,
+                        "precision": precision, "f1_score": f1_score}
+        return dict_metrics
+
+    def get_predictions(self, data_to_predict):
+        """
+        Get prediction
+        :return:
+        """
+        results = self.model.predict(data_to_predict)
+        return results

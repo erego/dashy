@@ -2,10 +2,10 @@ from unittest import TestCase
 
 import pandas as pd
 
-from Predilectura.mlearning.information_based import CARTAlgorithm, C4dot5Algorithm
+from Predilectura.mlearning.information_based import CARTAlgorithm, C4dot5Algorithm, RandomForestAlgorithm
 
 
-class TestTreeAlgortihm(TestCase):
+class TestTreeAlgorithm(TestCase):
     def setUp(self):
         self.data_train = pd.DataFrame([{'col1': 1, 'col2': 1, 'target': 0},
                                         {'col1': 7, 'col2': 7, 'target': 1}])
@@ -25,7 +25,7 @@ class TestTreeAlgortihm(TestCase):
         self.x_test = self.data_test[['col1', 'col2']]
         self.y_test = self.data_test['target']
 
-        self.data_train_c45 = pd.DataFrame([{'Outlook': 'Sunny', 'Temperature': 85, 'Humidity':85, 'Wind':'Weak',
+        self.data_train_c45 = pd.DataFrame([{'Outlook': 'Sunny', 'Temperature': 85, 'Humidity': 85, 'Wind': 'Weak',
                                             'Decision': 'No'},
                                            {'Outlook': 'Sunny', 'Temperature': 80, 'Humidity': 90, 'Wind': 'Strong',
                                             'Decision': 'No'},
@@ -40,14 +40,12 @@ class TestTreeAlgortihm(TestCase):
                                            {'Outlook': 'Rain', 'Temperature': 64, 'Humidity': 65, 'Wind': 'Strong',
                                             'Decision': 'Yes'}])
 
-        self.data_test_c45 = pd.DataFrame([{'Outlook': 'Sunny', 'Temperature': 72, 'Humidity':95, 'Wind':'Weak',
+        self.data_test_c45 = pd.DataFrame([{'Outlook': 'Sunny', 'Temperature': 72, 'Humidity': 95, 'Wind': 'Weak',
                                             'Decision': 'No'},
                                            {'Outlook': 'Sunny', 'Temperature': 69, 'Humidity': 70, 'Wind': 'Weak',
                                             'Decision': 'Yes'},
                                            {'Outlook': 'Rain', 'Temperature': 75, 'Humidity': 80, 'Wind': 'Weak',
                                             'Decision': 'Yes'}])
-
-
 
         self.x_train_c45 = self.data_train_c45[['Outlook', 'Temperature', 'Humidity', 'Wind']]
         self.y_train_c45 = self.data_train_c45['Decision']
@@ -63,9 +61,7 @@ class TestTreeAlgortihm(TestCase):
         statistical_measures = cart_model.get_statistical_metrics()
         self.assertEqual(statistical_measures["accuracy"], 0.5)
 
-
     def test_c4dot5(self):
-
 
         c4dot5_model = C4dot5Algorithm(self.x_train_c45, self.y_train_c45, self.x_test_c45, self.y_test_c45)
         c4dot5_model.build_model()
