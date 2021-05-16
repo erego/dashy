@@ -185,6 +185,13 @@ class FormAlgorithm(FlaskForm):
     submit = SubmitField(lazy_gettext('Train'))
 
 
+class FormABTDetail(FlaskForm):
+    """
+        Form related to show ABT details
+    """
+
+    abts = SelectField(u'Select ABT')
+
 class FormHandlingQuality(FlaskForm):
     """
         Form related to handling quality issues in dataset

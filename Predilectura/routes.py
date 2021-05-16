@@ -42,7 +42,6 @@ def add_language_code(endpoint, values):
 
 @app.url_value_preprocessor
 def pull_lang_code(endpoint, values):
-
     if values is None and 'lang_code' not in request.args:
         g.lang_code = request.accept_languages.best_match(app.config['LANGUAGES'])
     elif 'lang_code' not in request.args and 'lang_code' not in values:
@@ -53,13 +52,14 @@ def pull_lang_code(endpoint, values):
         else:
             g.lang_code = values.pop('lang_code')
 
+
 @app.route("/")
 def home():
     """Landing page."""
 
     return render_template(
         "index.jinja2",
-        title="Visualizatio Data",
+        title="Visualization Data",
         description="Embed Plotly Dash into your Flask applications.",
         template="home-template",
         body="This is a homepage served with Flask.",
@@ -68,9 +68,8 @@ def home():
 
 @app.route("/datos")
 # TODO uncomment login_required
-#@login_required
+# @login_required
 def lista_datos():
-
     """
     Page which list different types of data to work with
     """
@@ -81,46 +80,60 @@ def lista_datos():
 
 @app.route("/listar_events")
 def lista_events():
-
     """
     Page which list events collection from db
     """
 
-    total_records = mongo.db.events.count()
-    number_of_records = 10
-    total_pages = int(total_records/10) + 1
-    current_page = int(request.args.get('page', default=1))
-    number_to_skip = number_of_records * (current_page-1)
+    path_to_events = Path(app.root_path).joinpath("data", "../data/events.csv")
+    events = pd.read_csv(path_to_events.as_posix())
 
-    data = list(mongo.db.events.find().skip(number_to_skip).limit(number_of_records))
-    return render_template('lista_events.jinja2', events=data, prev=current_page-1, current=current_page,
-                           next=current_page+1, total_pages=total_pages)
+    total_records = len(events.index)
+    number_of_records = 10
+    total_pages = int(total_records / 10) + 1
+    current_page = int(request.args.get('page', default=1))
+    number_to_skip = number_of_records * (current_page - 2)
+    if current_page == 1:
+        data = pd.read_csv(path_to_events.as_posix(), nrows=number_of_records)
+    else:
+        data = pd.read_csv(path_to_events.as_posix(), skiprows=range(number_to_skip + 1,
+                                                                     number_to_skip + number_of_records + 1),
+                           nrows=number_of_records)
+    data = data.copy().T.to_dict().values()
+    return render_template('lista_events.jinja2', events=data, prev=current_page - 1, current=current_page,
+                           next=current_page + 1, total_pages=total_pages)
 
 
 @app.route("/listar_readings")
 def lista_readings():
-
     """
-    Page which list reading collection from db
+    Page which list reading collection
     """
 
-    total_records = mongo.db.readings.count()
+    path_to_readings = Path(app.root_path).joinpath("data", "../data/readings.csv")
+    readings = pd.read_csv(path_to_readings.as_posix())
+
+    total_records = len(readings.index)
+
     number_of_records = 10
     total_pages = int(total_records / 10) + 1
     current_page = int(request.args.get('page', default=1))
-    number_to_skip = number_of_records * (current_page-1)
+    number_to_skip = number_of_records * (current_page - 2)
 
-    # convert the mongodb object to a list
-    data = list(mongo.db.readings.find().skip(number_to_skip).limit(number_of_records))
+    if current_page == 1:
+        data = pd.read_csv(path_to_readings.as_posix(), nrows=number_of_records)
+    else:
+        data = pd.read_csv(path_to_readings.as_posix(), skiprows=range(number_to_skip + 1,
+                                                                       number_to_skip + number_of_records + 1),
+                           nrows=number_of_records)
+    data = data.copy().T.to_dict().values()
 
-    return render_template('lista_readings.jinja2', readings=data, prev=current_page-1, current=current_page,
-                           next=current_page+1, total_pages=total_pages)
+    return render_template('lista_readings.jinja2', readings=data, prev=current_page - 1, current=current_page,
+                           next=current_page + 1, total_pages=total_pages)
 
 
 @app.route("/listar_ABT", defaults={'format_data': "mongodb"})
 @app.route('/listar_ABT/<format_data>')
 def list_abt(format_data):
-
     """
     Page which list reading collection from db
     """
@@ -135,7 +148,7 @@ def list_abt(format_data):
         total_records = mongo.db.abt.count()
         total_pages = int(total_records / 10) + 1
         current_page = int(request.args.get('page', default=1))
-        number_to_skip = number_of_records * (current_page-1)
+        number_to_skip = number_of_records * (current_page - 1)
 
         # get headers
         dict_header = dict()
@@ -227,13 +240,12 @@ def list_abt(format_data):
 
         data = data.to_dict('records')
 
-    return render_template('lista_abt.jinja2', abt=data, prev=current_page-1, current=current_page,
-                           next=current_page+1, total_pages=total_pages, header=dict_header, format_data=format_data)
+    return render_template('lista_abt.jinja2', abt=data, prev=current_page - 1, current=current_page,
+                           next=current_page + 1, total_pages=total_pages, header=dict_header, format_data=format_data)
 
 
 @app.route("/generar_abt")
 def generar_abt():
-
     """
     Page where you are able to select the field which will be part of the analytics base table
     """
@@ -243,7 +255,6 @@ def generar_abt():
 
 @app.route("/create_abt", methods=["POST"])
 def create_abt():
-
     """
     Create the analytics base table from selected fields before
     """
@@ -281,7 +292,6 @@ def create_abt():
 @app.route("/calidad_abt", defaults={'format_data': "mongodb"})
 @app.route('/calidad_abt/<format_data>')
 def quality_abt(format_data):
-
     data_continuous = None
     data_categorical = None
 
@@ -325,6 +335,7 @@ def quality_abt(format_data):
     return render_template('calidad_abt.jinja2', data_continuous=dict_quality_continuous,
                            data_categorical=dict_quality_categorical)
 
+
 @app.route('/gestion_calidad_abt')
 def handling_quality_abt():
     form = FormHandlingQuality()
@@ -338,6 +349,7 @@ def handling_quality_abt():
     form.features_select.choices = [(column, column) for column in columns]
 
     return render_template('gestion_calidad_abt.jinja2', form=form)
+
 
 @app.route("/handle_quality_issues", methods=["POST"])
 def handle_quality_issues():
@@ -364,16 +376,15 @@ def handle_quality_issues():
     return redirect(url_for('quality_abt', format_data="pandas"))
     return render_template('lista_datos.jinja2')
 
+
 @app.route('/algorithm_train')
 def algorithm_train():
-
     form = FormAlgorithm()
     return render_template('algorithm_train.jinja2', form=form)
 
 
 @app.route('/train_algorithm', methods=["POST"])
 def train_algorithm():
-
     filename = request.files['data_file'].filename
     filename_noextension = filename.split(".")[0]
     path_to_data = Path(app.root_path).joinpath("data", filename)
@@ -403,7 +414,6 @@ def train_algorithm():
     if request.form.get("c4dot5_select") is not None:
         # Train c4.5 selection
 
-
         c4dot5_model = C4dot5Algorithm(x_train, y_train, x_test, y_test)
         c4dot5_model.build_model()
 
@@ -422,7 +432,7 @@ def train_algorithm():
     if request.form.get("knearestneighbours_select") is not None:
         # Train KNN selection
         knn_model = KNearestNeighboursAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values,
-                                                 request.form.get("knearestneighbours_weights"))
+                                                request.form.get("knearestneighbours_weights"))
         knn_model.build_model()
         file_model = f'{filename_noextension}_KNN.pkl'
         path_to_model = path_to_model_folder.joinpath(file_model)
@@ -440,7 +450,7 @@ def train_algorithm():
     if request.form.get("kmeans_select") is not None:
         # Train Kmeans selection
         kmeans_model = KMeansAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values,
-                                                 request.form.get("kmeans_algorithm"))
+                                       request.form.get("kmeans_algorithm"))
         kmeans_model.build_model()
         file_model = f'{filename_noextension}_kmeans.pkl'
         path_to_model = path_to_model_folder.joinpath(file_model)
@@ -490,6 +500,3 @@ def train_algorithm():
             json.dump(scores, fp)
 
     return render_template('lista_datos.jinja2')
-
-
-
