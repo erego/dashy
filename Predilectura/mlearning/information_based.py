@@ -3,14 +3,11 @@ Class to define machine learning models related to information based learning
 """
 
 import pickle
-import multiprocessing
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import GridSearchCV
-from sklearn.model_selection import RepeatedKFold
 from sklearn.metrics import confusion_matrix
-
+from xgboost import XGBClassifier
 from chefboost import Chefboost
 
 
@@ -182,6 +179,58 @@ class RandomForestAlgorithm:
          """
         self.model = RandomForestClassifier(criterion='entropy', max_depth=3, max_features=5,
                                                n_estimators=150)
+        self.data_train = data_train
+        self.target_train = target_train
+        self.data_test = data_test
+        self.target_test = target_test
+
+    def build_model(self):
+        """
+        Build a decision tree classifier from the training set
+        :return: None, model attribute is updated according to data
+        """
+
+        self.model.fit(X=self.data_train, y=self.target_train)
+
+    def get_statistical_metrics(self):
+
+        predictions = self.get_predictions(self.data_test)
+        tn, fp, fn, tp = confusion_matrix(self.target_test, predictions).ravel()
+        accuracy = (tp + tn) / (tn + fn + tp + fp)
+        recall = tp / (tp + fn)
+        specificity = tn / (tn + fp)
+        precision = tp / (tp + fp)
+        f1_score = 2 * (recall * precision) / (recall + precision)
+        dict_metrics = {"accuracy": accuracy, "recall": recall, "specificity": specificity,
+                        "precision": precision, "f1_score": f1_score}
+        return dict_metrics
+
+    def get_predictions(self, data_to_predict):
+        """
+        Get prediction
+        :return:
+        """
+        results = self.model.predict(data_to_predict)
+        return results
+
+
+
+class GradientBoostingAlgorithm:
+    """
+    Class which represents the Gradient Boostings for Decision Trees
+    in order goal to to create a model that predicts the value of a target variable by learning simple decision rules
+    inferred from the data features
+    """
+
+    def __init__(self, data_train, target_train, data_test, target_test):
+        """
+
+        :param data_train: features data used to train
+        :param target_train: target data used to train
+        :param data_test: features data used to tes
+        :param target_test: target data used to test
+         """
+        self.model = XGBClassifier()
         self.data_train = data_train
         self.target_train = target_train
         self.data_test = data_test

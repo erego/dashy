@@ -81,6 +81,18 @@
 
                     </div>
                 </fieldset>
+               <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">{{ _('Gradient Boosting Algorithm')}}</legend>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+                                {{ form.xgboost_select(class_="form-check-input") }}
+                                {{ form.xgboost_select.label(class_="form-check-label") }}
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
                 <fieldset class="form-group border p-3">
                     <legend class="w-auto px-2">{{ _('KMeans Algorithm')}}</legend>
                     <div class="row">

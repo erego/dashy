@@ -146,10 +146,6 @@ class FormAlgorithm(FlaskForm):
     """
         Form to select algorithm to train
     """
-    # TODO Set the validator
-    # data_file = FileField(validators=[FileRequired()])
-    #data_file = FileField()
-
     abts = SelectField(u'Select ABT')
 
     cart_criterion = SelectField(lazy_gettext(u'Impurity Metrics'), choices=[('entropy', lazy_gettext('Entropy')),
@@ -164,6 +160,10 @@ class FormAlgorithm(FlaskForm):
 
     random_forest_select = BooleanField(
         lazy_gettext('Select Random Forest to train'), default=True
+    )
+
+    xgboost_select = BooleanField(
+        lazy_gettext('Select Gradient Boosting to train'), default=True
     )
 
     kmeans_select = BooleanField(
