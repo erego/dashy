@@ -88,6 +88,7 @@ def init_dashboard(server):
                           options=[
                               {'label': 'CART', 'value': 'CART'},
                               {'label': 'C4.5', 'value': 'C4dot5'},
+                              {'label': 'Random Forest', 'value': 'RF'},
                               {'label': 'KMeans', 'value': 'kmeans'},
                               {'label': 'KNearestNeighbours', 'value': 'KNN'},
                               {'label': 'Naive Bayes', 'value': 'naivebayes'},
