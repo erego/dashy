@@ -17,17 +17,25 @@
 
           <fieldset class="form-group border p-3">
             <legend class="w-auto px-2">{{ _('Select data to train')}}</legend>
+{#            <div class="row">#}
+{#                <div class="col">#}
+{#                    <div class="form-check">#}
+{#                        <label class="form-check-label" for="data_file">#}
+{#                        {{ _('Select file to upload')}}:#}
+{#                        </label>#}
+{#                        {{ form.data_file }}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
             <div class="row">
-                <div class="col">
-                    <div class="form-check">
-                        <label class="form-check-label" for="data_file">
-                        {{ _('Select file to upload')}}:
-                        </label>
-                        {{ form.data_file }}
-                    </div>
-                </div>
-            </div>
+                        <div class="col">
+                            <div class="form-check">
+                                {{ form.abts.label}}
+                                {{ form.abts }}
 
+                            </div>
+                        </div>
+                   </div>
         </fieldset>
 
                 <fieldset class="form-group border p-3">
@@ -60,7 +68,19 @@
 
                     </div>
                 </fieldset>
+                <fieldset class="form-group border p-3">
+                    <legend class="w-auto px-2">{{ _('Random Forest Algorithm')}}</legend>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
 
+                                {{ form.random_forest_select(class_="form-check-input") }}
+                                {{ form.random_forest_select.label(class_="form-check-label") }}
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
                 <fieldset class="form-group border p-3">
                     <legend class="w-auto px-2">{{ _('KMeans Algorithm')}}</legend>
                     <div class="row">
