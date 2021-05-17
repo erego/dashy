@@ -180,7 +180,8 @@ class RandomForestAlgorithm:
         :param data_test: features data used to tes
         :param target_test: target data used to test
          """
-        self.model = None
+        self.model = RandomForestClassifier(criterion='entropy', max_depth=3, max_features=5,
+                                               n_estimators=150)
         self.data_train = data_train
         self.target_train = target_train
         self.data_test = data_test
@@ -191,25 +192,8 @@ class RandomForestAlgorithm:
         Build a decision tree classifier from the training set
         :return: None, model attribute is updated according to data
         """
-        param_grid = {'n_estimators': [150],
-                      'max_features': [5, 7, 9],
-                      'max_depth': [None, 3, 10, 20],
-                      'criterion': ['gini', 'entropy']
-                      }
 
-        grid = GridSearchCV(
-            estimator=RandomForestClassifier(random_state=123),
-            param_grid=param_grid,
-            scoring='accuracy',
-            n_jobs=multiprocessing.cpu_count() - 1,
-            cv=RepeatedKFold(n_splits=5, n_repeats=3, random_state=123),
-            refit=True,
-            verbose=0,
-            return_train_score=True
-        )
-
-        grid.fit(X=self.data_train, y=self.target_train)
-        self.model = grid.best_estimator_
+        self.model.fit(X=self.data_train, y=self.target_train)
 
     def get_statistical_metrics(self):
 
