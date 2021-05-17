@@ -16,7 +16,8 @@ import pandas as pd
 from Predilectura import mongo, babel
 from Predilectura.statistics.abt import ABTMongoDB, ABTPandas
 from Predilectura.statistics.feature import Feature, FeatureContinuous, FeatureCategorical
-from Predilectura.mlearning.information_based import CARTAlgorithm, C4dot5Algorithm, RandomForestAlgorithm
+from Predilectura.mlearning.information_based import CARTAlgorithm, C4dot5Algorithm, RandomForestAlgorithm, \
+    GradientBoostingAlgorithm
 from Predilectura.mlearning.similarity_based import KNearestNeighboursAlgorithm, KMeansAlgorithm
 from Predilectura.mlearning.probability_based import NaiveBayesAlgorithm
 from Predilectura.mlearning.multilayer_perceptron_based import PerceptronsAlgorithm
@@ -429,6 +430,22 @@ def train_algorithm():
         with open(path_to_metrics, 'w') as fp:
             json.dump(scores, fp)
 
+    if request.form.get("xgboost_select") is not None:
+        # Train gradient boosting selection
+        xgboost_model = GradientBoostingAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values)
+        xgboost_model.build_model()
+        file_model = f'{filename_noextension}_GB.pkl'
+        path_to_model = path_to_model_folder.joinpath(file_model)
+        file_metrics = f'{filename_noextension}_GB.json'
+        path_to_metrics = path_to_model_folder.joinpath(file_metrics)
+
+        with open(path_to_model, 'wb') as f:
+            pickle.dump(xgboost_model, f)
+
+        scores = xgboost_model.get_statistical_metrics()
+
+        with open(path_to_metrics, 'w') as fp:
+            json.dump(scores, fp)
 
     if request.form.get("c4dot5_select") is not None:
         # Train c4.5 selection
