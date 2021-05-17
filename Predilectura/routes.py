@@ -16,7 +16,7 @@ import pandas as pd
 from Predilectura import mongo, babel
 from Predilectura.statistics.abt import ABTMongoDB, ABTPandas
 from Predilectura.statistics.feature import Feature, FeatureContinuous, FeatureCategorical
-from Predilectura.mlearning.information_based import CARTAlgorithm, C4dot5Algorithm
+from Predilectura.mlearning.information_based import CARTAlgorithm, C4dot5Algorithm, RandomForestAlgorithm
 from Predilectura.mlearning.similarity_based import KNearestNeighboursAlgorithm, KMeansAlgorithm
 from Predilectura.mlearning.probability_based import NaiveBayesAlgorithm
 from Predilectura.mlearning.multilayer_perceptron_based import PerceptronsAlgorithm
@@ -380,17 +380,18 @@ def handle_quality_issues():
 @app.route('/algorithm_train')
 def algorithm_train():
     form = FormAlgorithm()
+    form.abts.choices = [(element, element) for element in ABTPandas.get_list_abt()]
+
     return render_template('algorithm_train.jinja2', form=form)
 
 
 @app.route('/train_algorithm', methods=["POST"])
 def train_algorithm():
-    filename = request.files['data_file'].filename
-    filename_noextension = filename.split(".")[0]
-    path_to_data = Path(app.root_path).joinpath("data", filename)
 
+    path_to_data = Path(app.root_path).joinpath("data", request.form.get("abts"))
+    filename_noextension = path_to_data.stem
     path_to_model_folder = Path(app.root_path).joinpath("model")
-
+    path_to_model_folder.mkdir(parents=True, exist_ok=True)
     x_train, x_test, y_train, y_test = model.get_train_test(path_to_data.as_posix())
 
     if request.form.get("cart_select") is not None:
@@ -410,6 +411,24 @@ def train_algorithm():
 
         with open(path_to_metrics, 'w') as fp:
             json.dump(scores, fp)
+
+    if request.form.get("random_forest_select") is not None:
+        # Train random forest selection
+        random_forest_model = RandomForestAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values)
+        random_forest_model.build_model()
+        file_model = f'{filename_noextension}_RF.pkl'
+        path_to_model = path_to_model_folder.joinpath(file_model)
+        file_metrics = f'{filename_noextension}_RF.json'
+        path_to_metrics = path_to_model_folder.joinpath(file_metrics)
+
+        with open(path_to_model, 'wb') as f:
+            pickle.dump(random_forest_model, f)
+
+        scores = random_forest_model.get_statistical_metrics()
+
+        with open(path_to_metrics, 'w') as fp:
+            json.dump(scores, fp)
+
 
     if request.form.get("c4dot5_select") is not None:
         # Train c4.5 selection
