@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-05-22 14:21+0200\n"
-"PO-Revision-Date: 2021-05-22 14:41+0200\n"
+"POT-Creation-Date: 2021-05-22 19:14+0200\n"
+"PO-Revision-Date: 2021-05-22 19:15+0200\n"
 "Last-Translator: \n"
 "Language: es\n"
 "Language-Team: es <LL@li.org>\n"
@@ -68,11 +68,11 @@ msgid "Average number of words read"
 msgstr "Número medio de palabras leídas"
 
 #: Predilectura/forms.py:58
-msgid "Maximun time between sessions"
+msgid "Maximum time between sessions"
 msgstr "Tiempo máximo entre sesiones"
 
 #: Predilectura/forms.py:61
-msgid "Minimun time between sessions"
+msgid "Minimum time between sessions"
 msgstr "Tiempo mínimo entre sesiones"
 
 #: Predilectura/forms.py:64
@@ -235,8 +235,7 @@ msgstr "Fichero de salida(Dejar en blanco para escribir)"
 
 #: Predilectura/forms.py:229
 msgid "Complete Case Analysis(all rows with value NaN will be deleted)"
-msgstr ""
-"Análisis completo de casos (se eliminarán todas las filas con valor NaN)"
+msgstr "Análisis completo de casos (se eliminarán todas las filas con valor NaN)"
 
 #: Predilectura/forms.py:230
 msgid "Drop Features"
@@ -255,8 +254,8 @@ msgid ""
 "Reading event missing indicator(Include a indicator for reading event, NaN "
 "values will be set to 0)"
 msgstr ""
-"Indicador de ausencia de eventos de lectura(Incluir un indicador de evento "
-"de lectura, los valores NaN se pondrán a 0)"
+"Indicador de ausencia de eventos de lectura(Incluir un indicador de evento de "
+"lectura, los valores NaN se pondrán a 0)"
 
 #: Predilectura/forms.py:234
 msgid "mean"
@@ -280,8 +279,7 @@ msgstr "Área de entrenamiento de algoritmos"
 
 #: Predilectura/templates/algorithm_train.jinja2:15
 msgid ""
-"In this section we will select the different algorithms to be used for "
-"training"
+"In this section we will select the different algorithms to be used for training"
 msgstr ""
 "En esta sección seleccionaremos los diferentes algoritmos que se utilizarán "
 "para el entrenamiento"
@@ -432,8 +430,8 @@ msgid ""
 "In this section we will choose the characteristics of the data we have in "
 "order to create a data analysis table that we will use in the prediction "
 "algorithms.\n"
-"                To do so, we will create concepts of the domain from which "
-"we will derive the resulting features"
+"                To do so, we will create concepts of the domain from which we "
+"will derive the resulting features"
 msgstr ""
 "En esta sección elegiremos las características de los datos que tenemos para "
 "crear una tabla de análisis de datos que utilizaremos en los algoritmos de "
@@ -509,17 +507,16 @@ msgstr ""
 
 #: Predilectura/templates/index.jinja2:21
 msgid ""
-"The objective of the project is the development of a scorecard that, based "
-"on real data on reading behavior, provides indicators of the risk of reading "
+"The objective of the project is the development of a scorecard that, based on "
+"real data on reading behavior, provides indicators of the risk of reading "
 "abandonment. For this purpose, several algorithms will be tested algorithms "
-"will be tested, and we will analyze the results to come up with what could "
-"be the best option"
+"will be tested, and we will analyze the results to come up with what could be "
+"the best option"
 msgstr ""
-"El objetivo del proyecto es el desarrollo de un cuadro de mando que, a "
-"partir de datos reales sobre el comportamiento lector, proporcione "
-"indicadores del riesgo de abandono de la lectura.  Para ello, se probarán "
-"varios algoritmos y se analizarán los resultados para llegar a la mejor "
-"opción"
+"El objetivo del proyecto es el desarrollo de un cuadro de mando que, a partir "
+"de datos reales sobre el comportamiento lector, proporcione indicadores del "
+"riesgo de abandono de la lectura.  Para ello, se probarán varios algoritmos y "
+"se analizarán los resultados para llegar a la mejor opción"
 
 #: Predilectura/templates/index.jinja2:24
 msgid ""
@@ -527,9 +524,9 @@ msgid ""
 "dashboard that, a set of rules, heuristics, algorithms and machine learning, "
 "provides indicators of reading abandonment risk. Interventions will also be "
 "considered in order to validate some results (e.g. reading comprehension "
-"tests). The result will be a responsive web application and a backend "
-"composed of the above elements. It will be realized in the context of a "
-"microservices architecture"
+"tests). The result will be a responsive web application and a backend composed "
+"of the above elements. It will be realized in the context of a microservices "
+"architecture"
 msgstr ""
 "Utilizando datos reales del comportamiento de los lectores, el proyecto se "
 "centrará en la creación de un cuadro de mando que, un conjunto de reglas, "
@@ -554,11 +551,10 @@ msgid ""
 msgstr ""
 "En esta sección obtendremos de los datos iniciales una Tabla de Análisis de "
 "Datos (ABT) que\n"
-"                se utilizarán más adelante en los algoritmos de predicción "
-"que usaremos más adelante en los algoritmos de predicción"
+"                se utilizarán más adelante en los algoritmos de predicción que "
+"usaremos más adelante en los algoritmos de predicción"
 
-#: Predilectura/templates/index.jinja2:50
-#: Predilectura/templates/index.jinja2:63
+#: Predilectura/templates/index.jinja2:50 Predilectura/templates/index.jinja2:63
 msgid "More Info"
 msgstr "Más Información"
 
@@ -572,9 +568,9 @@ msgid ""
 "will be able to select the most appropriate one. We will also be able to "
 "visualize different results and metrics on them"
 msgstr ""
-"Probaremos diferentes algoritmos sobre la tabla de análisis de datos "
-"generada y podremos seleccionar el más adecuado. También podremos visualizar "
-"diferentes resultados y métricas sobre ellos"
+"Probaremos diferentes algoritmos sobre la tabla de análisis de datos generada "
+"y podremos seleccionar el más adecuado. También podremos visualizar diferentes "
+"resultados y métricas sobre ellos"
 
 #: Predilectura/templates/lista_abt.jinja2:17
 msgid "Row Number"
@@ -676,8 +672,7 @@ msgstr "Inglés"
 msgid "Spanish"
 msgstr "Español"
 
-#: Predilectura/templates/signup.jinja2:2
-#: Predilectura/templates/signup.jinja2:20
+#: Predilectura/templates/signup.jinja2:2 Predilectura/templates/signup.jinja2:20
 msgid "Signup user page"
 msgstr "Página de inscripción de usuario"
 

@@ -319,9 +319,9 @@ class ABTPandas(ABT):
 
         df_readings = readings.groupby(["user_id", "edition_id", "edition_language"], as_index=False)
 
-        result_readings = df_readings.agg(min_words=('words', 'min'),
-                                          max_words=('words', 'max'),
-                                          avg_words=('words', 'mean'),
+        result_readings = df_readings.agg(min_words=('new_words', 'min'),
+                                          max_words=('new_words', 'max'),
+                                          avg_words=('new_words', 'mean'),
                                           min_percent=('percent', 'min'),
                                           max_percent=('percent', 'max'),
                                           avg_percent=('percent', 'mean'),
@@ -357,6 +357,7 @@ class ABTPandas(ABT):
                                       devices_events=('device', 'nunique'),
                                       versions_events=('version', 'nunique'),
                                       chapters_events=('chapter_id', 'nunique'))
+        result_events["bookmark_event"] = [1 if 'Bookmark' in x else 0 for x in result_events["event_classes"]]
         return result_events
 
     def create_ABT(self):
