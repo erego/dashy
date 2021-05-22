@@ -53,6 +53,20 @@ class FormABT(FlaskForm):
     avg_words = BooleanField(
         lazy_gettext('Average number of words read'), default=True
     )
+
+    max_time_session = BooleanField(
+        lazy_gettext('Maximun time between sessions'), default=True
+    )
+    min_time_session = BooleanField(
+        lazy_gettext('Minimun time between sessions'), default=True
+    )
+    avg_time_session = BooleanField(
+        lazy_gettext('Avg time between sessions'), default=True
+    )
+    time_last_session = BooleanField(
+        lazy_gettext('Time since last between session'), default=True
+    )
+
     devices_readings = BooleanField(
         lazy_gettext('Devices used'), default=True
     )

@@ -121,6 +121,24 @@
                                 {{ form.avg_words.label(class_="form-check-label") }}
                             </div>
                         </div>
+                        <div class="col">
+                           <div class="form-check">
+                                {{ form.min_time_session(class_="form-check-input") }}
+                                {{ form.min_time_session.label(class_="form-check-label") }}
+                            </div>
+                            <div class="form-check">
+                                {{ form.max_time_session(class_="form-check-input") }}
+                                {{ form.max_time_session.label(class_="form-check-label") }}
+                            </div>
+                            <div class="form-check">
+                                {{ form.avg_time_session(class_="form-check-input") }}
+                                {{ form.avg_time_session.label(class_="form-check-label") }}
+                            </div>
+                            <div class="form-check">
+                                {{ form.time_last_session(class_="form-check-input") }}
+                                {{ form.time_last_session.label(class_="form-check-label") }}
+                            </div>
+                        </div>
                     </div>
                 </fieldset>
 
