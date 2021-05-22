@@ -53,11 +53,7 @@ class TestDateTime(TestCase):
 
         self.datetime_test['time_diff'] = self.datetime_test.groupby(["user_id", "edition_id"])['created_at'].diff()
 
-        self.datetime_test['time_diff'] = (self.datetime_test['time_diff'].dt.seconds) / 60
-
-        self.datetime_test['time_diff'] = (self.datetime_test['time_diff'])
-
-        self.assertEqual(self.datetime_test.iloc[3]['time_diff'], 0.08333333333333333)
+        self.assertEqual(self.datetime_test['time_diff'].iloc[2].total_seconds(), 412159)
 
 
 

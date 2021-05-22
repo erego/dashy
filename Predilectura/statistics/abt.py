@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from pathlib import Path
 import json
+from datetime import datetime
 
 from flask import current_app
 import pandas as pd
@@ -305,6 +306,17 @@ class ABTPandas(ABT):
         """
         readings = pd.read_csv(path_to_readings.as_posix())
 
+        readings['created_at'] = pd.to_datetime(readings['created_at'],
+                                                format='%Y-%m-%dT%H:%M:%S.%fZ', errors='coerce')
+        readings['updated_at'] = pd.to_datetime(readings['updated_at'],
+                                                format='%Y-%m-%dT%H:%M:%S.%fZ', errors='coerce')
+
+        readings.sort_values('created_at', inplace=True)
+
+        readings['time_diff'] = readings.groupby(["user_id", "edition_id"])['created_at'].diff()
+
+        readings['time_diff'] = readings['time_diff'].dt.seconds / 60
+
         df_readings = readings.groupby(["user_id", "edition_id", "edition_language"], as_index=False)
 
         result_readings = df_readings.agg(min_words=('words', 'min'),
@@ -316,8 +328,15 @@ class ABTPandas(ABT):
                                           premium=('premium', 'max'),
                                           devices_readings=('device', 'nunique'),
                                           versions_readings=('version', 'nunique'),
-                                          chapters_readings=('chapter_id', 'nunique')
+                                          chapters_readings=('chapter_id', 'nunique'),
+                                          min_time_diff=('time_diff', 'min'),
+                                          max_time_diff=('time_diff', 'max'),
+                                          avg_time_diff=('time_diff', 'mean'),
+                                          last_time_session=('created_at', 'max')
                                           )
+
+        result_readings["last_time_session"] = datetime.now() - result_readings["last_time_session"]
+        result_readings["last_time_session"] = result_readings["last_time_session"].dt.total_seconds()/(60*60)
         return result_readings
 
     @staticmethod
@@ -377,6 +396,18 @@ class ABTPandas(ABT):
 
         if self.features["chapters_readings"] is not True:
             columns_to_delete.append("chapters_readings")
+
+        if self.features["min_time_session"] is not True:
+            columns_to_delete.append("min_time_session")
+
+        if self.features["max_time_session"] is not True:
+            columns_to_delete.append("max_time_session")
+
+        if self.features["avg_time_session"] is not True:
+            columns_to_delete.append("avg_time_sessions")
+
+        if self.features["time_last_session"] is not True:
+            columns_to_delete.append("time_last_session")
 
         path_to_events = Path(current_app.root_path).joinpath("data", "../data/events.csv")
 

@@ -279,6 +279,11 @@ def create_abt():
     dict_abt_features["devices_events"] = True if request.form.get("devices_events") is not None else False
     dict_abt_features["versions_events"] = True if request.form.get("versions_events") is not None else False
     dict_abt_features["chapters_events"] = True if request.form.get("chapters_events") is not None else False
+    dict_abt_features["min_time_session"] = True if request.form.get("min_time_session") is not None else False
+    dict_abt_features["max_time_session"] = True if request.form.get("max_time_session") is not None else False
+    dict_abt_features["avg_time_session"] = True if request.form.get("avg_time_session") is not None else False
+    dict_abt_features["time_last_session"] = True if request.form.get("time_last_session") is not None else False
+
     output_ath = request.form.get("output_path")
     path_to_data = Path(app.root_path).joinpath("data", output_ath)
     if request.form.get("output_format") == "pandas":

@@ -55,10 +55,10 @@ class FormABT(FlaskForm):
     )
 
     max_time_session = BooleanField(
-        lazy_gettext('Maximun time between sessions'), default=True
+        lazy_gettext('Maximum time between sessions'), default=True
     )
     min_time_session = BooleanField(
-        lazy_gettext('Minimun time between sessions'), default=True
+        lazy_gettext('Minimum time between sessions'), default=True
     )
     avg_time_session = BooleanField(
         lazy_gettext('Avg time between sessions'), default=True
