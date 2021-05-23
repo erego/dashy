@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-05-09 10:20+0200\n"
+"POT-Creation-Date: 2021-05-22 19:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,169 +65,203 @@ msgstr ""
 msgid "Average number of words read"
 msgstr ""
 
-#: Predilectura/forms.py:57 Predilectura/forms.py:72
-#: Predilectura/templates/generar_abt.jinja2:128
-#: Predilectura/templates/generar_abt.jinja2:172
+#: Predilectura/forms.py:58
+msgid "Maximum time between sessions"
+msgstr ""
+
+#: Predilectura/forms.py:61
+msgid "Minimum time between sessions"
+msgstr ""
+
+#: Predilectura/forms.py:64
+msgid "Avg time between sessions"
+msgstr ""
+
+#: Predilectura/forms.py:67
+msgid "Time since last between session"
+msgstr ""
+
+#: Predilectura/forms.py:71 Predilectura/forms.py:86
+#: Predilectura/templates/generar_abt.jinja2:146
+#: Predilectura/templates/generar_abt.jinja2:190
 msgid "Devices used"
 msgstr ""
 
-#: Predilectura/forms.py:60 Predilectura/forms.py:75
+#: Predilectura/forms.py:74 Predilectura/forms.py:89
 msgid "Used versions"
 msgstr ""
 
-#: Predilectura/forms.py:63 Predilectura/forms.py:69
+#: Predilectura/forms.py:77 Predilectura/forms.py:83
 msgid "Types of events"
 msgstr ""
 
-#: Predilectura/forms.py:66
+#: Predilectura/forms.py:80
 msgid "Event objects"
 msgstr ""
 
-#: Predilectura/forms.py:78
+#: Predilectura/forms.py:92
 msgid "Chapters with events"
 msgstr ""
 
-#: Predilectura/forms.py:81
+#: Predilectura/forms.py:95
 msgid "Output format"
 msgstr ""
 
-#: Predilectura/forms.py:82
+#: Predilectura/forms.py:96
 msgid "CSV"
 msgstr ""
 
-#: Predilectura/forms.py:82
+#: Predilectura/forms.py:96
 msgid "Database"
 msgstr ""
 
-#: Predilectura/forms.py:85
+#: Predilectura/forms.py:99
 msgid "File name"
 msgstr ""
 
-#: Predilectura/forms.py:89 Predilectura/forms.py:202
+#: Predilectura/forms.py:103 Predilectura/forms.py:238
 msgid "Apply"
 msgstr ""
 
-#: Predilectura/forms.py:97
+#: Predilectura/forms.py:111
 msgid "Name"
 msgstr ""
 
-#: Predilectura/forms.py:101 Predilectura/forms.py:134
+#: Predilectura/forms.py:115 Predilectura/forms.py:148
 msgid "Email"
 msgstr ""
 
-#: Predilectura/forms.py:104 Predilectura/forms.py:137
+#: Predilectura/forms.py:118 Predilectura/forms.py:151
 msgid "Enter a valid email"
 msgstr ""
 
-#: Predilectura/forms.py:109 Predilectura/forms.py:140
+#: Predilectura/forms.py:123 Predilectura/forms.py:154
 msgid "Password"
 msgstr ""
 
-#: Predilectura/forms.py:112
+#: Predilectura/forms.py:126
 msgid "Select a stronger password"
 msgstr ""
 
-#: Predilectura/forms.py:116
+#: Predilectura/forms.py:130
 msgid "Confirm Your Password"
 msgstr ""
 
-#: Predilectura/forms.py:119
+#: Predilectura/forms.py:133
 msgid "Passwords must match"
 msgstr ""
 
-#: Predilectura/forms.py:123 Predilectura/templates/navbar.jinja2:25
+#: Predilectura/forms.py:137 Predilectura/templates/navbar.jinja2:25
 msgid "Admin"
 msgstr ""
 
-#: Predilectura/forms.py:126
+#: Predilectura/forms.py:140
 msgid "Register"
 msgstr ""
 
-#: Predilectura/forms.py:142
+#: Predilectura/forms.py:156
 msgid "Log In"
 msgstr ""
 
-#: Predilectura/forms.py:152
+#: Predilectura/forms.py:165
 msgid "Impurity Metrics"
 msgstr ""
 
-#: Predilectura/forms.py:152
+#: Predilectura/forms.py:165
 msgid "Entropy"
 msgstr ""
 
-#: Predilectura/forms.py:153
+#: Predilectura/forms.py:166
 msgid "Gini index"
 msgstr ""
 
-#: Predilectura/forms.py:155
+#: Predilectura/forms.py:168
 msgid "Select CART algorithm to train"
 msgstr ""
 
-#: Predilectura/forms.py:159
+#: Predilectura/forms.py:172
 msgid "Select C4.5 algorithm to train"
 msgstr ""
 
-#: Predilectura/forms.py:163
+#: Predilectura/forms.py:176
+msgid "Select Random Forest to train"
+msgstr ""
+
+#: Predilectura/forms.py:180
+msgid "Select Gradient Boosting to train"
+msgstr ""
+
+#: Predilectura/forms.py:184
 msgid "Select KMeans algorithm to train"
 msgstr ""
 
-#: Predilectura/forms.py:166
+#: Predilectura/forms.py:187
 msgid "Algorithm to use"
 msgstr ""
 
-#: Predilectura/forms.py:170
+#: Predilectura/forms.py:191
 msgid "Select KNN algorithm to train"
 msgstr ""
 
-#: Predilectura/forms.py:173
+#: Predilectura/forms.py:194
 msgid "Weight function to use"
 msgstr ""
 
-#: Predilectura/forms.py:174
+#: Predilectura/forms.py:195
 msgid "Uniform"
 msgstr ""
 
-#: Predilectura/forms.py:175
+#: Predilectura/forms.py:196
 msgid "Distance"
 msgstr ""
 
-#: Predilectura/forms.py:178
+#: Predilectura/forms.py:199
 msgid "Select Naive Bayes algorithm to train"
 msgstr ""
 
-#: Predilectura/forms.py:182
+#: Predilectura/forms.py:203
 msgid "Select Multilayer Perceptron to train"
 msgstr ""
 
-#: Predilectura/forms.py:185
+#: Predilectura/forms.py:206
 msgid "Train"
 msgstr ""
 
-#: Predilectura/forms.py:194
-msgid "Complete Case Analysis"
+#: Predilectura/forms.py:224
+msgid "Output filename(If blank will be overwrite)"
 msgstr ""
 
-#: Predilectura/forms.py:195
+#: Predilectura/forms.py:229
+msgid "Complete Case Analysis(all rows with value NaN will be deleted)"
+msgstr ""
+
+#: Predilectura/forms.py:230
 msgid "Drop Features"
 msgstr ""
 
-#: Predilectura/forms.py:196
+#: Predilectura/forms.py:231
 msgid "Imputation"
 msgstr ""
 
-#: Predilectura/forms.py:197
+#: Predilectura/forms.py:232
 msgid "Clamp Transformation"
 msgstr ""
 
-#: Predilectura/forms.py:198
+#: Predilectura/forms.py:233
+msgid ""
+"Reading event missing indicator(Include a indicator for reading event, "
+"NaN values will be set to 0)"
+msgstr ""
+
+#: Predilectura/forms.py:234
 msgid "mean"
 msgstr ""
 
-#: Predilectura/forms.py:199
+#: Predilectura/forms.py:235
 msgid "median"
 msgstr ""
 
-#: Predilectura/forms.py:201
+#: Predilectura/forms.py:237
 msgid "Select Features"
 msgstr ""
 
@@ -249,31 +283,35 @@ msgstr ""
 msgid "Select data to train"
 msgstr ""
 
-#: Predilectura/templates/algorithm_train.jinja2:24
-msgid "Select file to upload"
-msgstr ""
-
-#: Predilectura/templates/algorithm_train.jinja2:36
+#: Predilectura/templates/algorithm_train.jinja2:42
 msgid "CART Algorithm"
 msgstr ""
 
-#: Predilectura/templates/algorithm_train.jinja2:58
+#: Predilectura/templates/algorithm_train.jinja2:59
 msgid "C4.5 Algorithm"
 msgstr ""
 
-#: Predilectura/templates/algorithm_train.jinja2:75
+#: Predilectura/templates/algorithm_train.jinja2:72
+msgid "Random Forest Algorithm"
+msgstr ""
+
+#: Predilectura/templates/algorithm_train.jinja2:85
+msgid "Gradient Boosting Algorithm"
+msgstr ""
+
+#: Predilectura/templates/algorithm_train.jinja2:97
 msgid "KMeans Algorithm"
 msgstr ""
 
-#: Predilectura/templates/algorithm_train.jinja2:98
+#: Predilectura/templates/algorithm_train.jinja2:115
 msgid "KNN Algorithm"
 msgstr ""
 
-#: Predilectura/templates/algorithm_train.jinja2:120
+#: Predilectura/templates/algorithm_train.jinja2:134
 msgid "Naive Bayes Algorithm"
 msgstr ""
 
-#: Predilectura/templates/algorithm_train.jinja2:136
+#: Predilectura/templates/algorithm_train.jinja2:147
 msgid "Multilayer Perceptron Algorithm"
 msgstr ""
 
@@ -365,8 +403,8 @@ msgid "Second Mode Percent"
 msgstr ""
 
 #: Predilectura/templates/calidad_abt.jinja2:87
-#: Predilectura/templates/generar_abt.jinja2:197
-#: Predilectura/templates/gestion_calidad_abt.jinja2:54
+#: Predilectura/templates/generar_abt.jinja2:215
+#: Predilectura/templates/gestion_calidad_abt.jinja2:73
 msgid "Back to data management section"
 msgstr ""
 
@@ -398,7 +436,7 @@ msgstr ""
 #: Predilectura/templates/generar_abt.jinja2:42
 #: Predilectura/templates/generar_abt.jinja2:62
 #: Predilectura/templates/generar_abt.jinja2:82
-#: Predilectura/templates/generar_abt.jinja2:145
+#: Predilectura/templates/generar_abt.jinja2:163
 msgid "Domain"
 msgstr ""
 
@@ -426,11 +464,11 @@ msgstr ""
 msgid "Chapter History"
 msgstr ""
 
-#: Predilectura/templates/generar_abt.jinja2:145
+#: Predilectura/templates/generar_abt.jinja2:163
 msgid "Event History"
 msgstr ""
 
-#: Predilectura/templates/generar_abt.jinja2:147
+#: Predilectura/templates/generar_abt.jinja2:165
 msgid "Event statistics"
 msgstr ""
 

@@ -40,7 +40,10 @@ class PerceptronsAlgorithm:
         accuracy = (tp + tn) / (tn + fn + tp + fp)
         recall = tp / (tp + fn)
         specificity = tn / (tn + fp)
-        precision = tp / (tp + fp)
+        if (tp + fp) == 0:
+            precision = float("NaN")
+        else:
+            precision = tp / (tp + fp)
         f1_score = 2 * (recall * precision) / (recall + precision)
         dict_metrics = {"accuracy": accuracy, "recall": recall, "specificity": specificity,
                         "precision": precision, "f1_score": f1_score}

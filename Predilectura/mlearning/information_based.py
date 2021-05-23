@@ -7,6 +7,7 @@ import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix
+from sklearn import tree
 from xgboost import XGBClassifier
 from chefboost import Chefboost
 
@@ -39,10 +40,17 @@ class CARTAlgorithm:
         :return: None, model attribute is updated according to data
         """
         self.model.fit(self.data_train, self.target_train)
-        # from sklearn import tree
-        # text_representation = tree.export_text(self.model, feature_names=self.columns)
-        # with open("./decision_tree.log", "w") as file_out:
-        #     file_out.write(text_representation)
+
+    def export_tree(self, lst_features):
+        """
+        Export the decision tree in text format
+        :param lst_features: List of features of dataset
+        :return: Decision tree in text format
+        """
+
+        text_representation = tree.export_text(self.model, feature_names=lst_features)
+        with open("./decision_tree_cart.log", "w") as file_out:
+            file_out.write(text_representation)
 
     def get_statistical_metrics(self):
         predictions = self.get_predictions(self.data_test)
@@ -192,6 +200,17 @@ class RandomForestAlgorithm:
 
         self.model.fit(X=self.data_train, y=self.target_train)
 
+    def export_tree(self, lst_features):
+        """
+        Export the decision tree in text format
+        :param lst_features: List of features of dataset
+        :return: Decision tree in text format
+        """
+
+        text_representation = tree.export_text(self.model.estimators_[0], feature_names=lst_features)
+        with open("./decision_tree_rf.log", "w") as file_out:
+            file_out.write(text_representation)
+
     def get_statistical_metrics(self):
 
         predictions = self.get_predictions(self.data_test)
@@ -222,7 +241,7 @@ class GradientBoostingAlgorithm:
     inferred from the data features
     """
 
-    def __init__(self, data_train, target_train, data_test, target_test):
+    def __init__(self, data_train, target_train, data_test, target_test, lst_features):
         """
 
         :param data_train: features data used to train
@@ -230,7 +249,7 @@ class GradientBoostingAlgorithm:
         :param data_test: features data used to tes
         :param target_test: target data used to test
          """
-        self.model = XGBClassifier()
+        self.model = XGBClassifier(feature_names=lst_features)
         self.data_train = data_train
         self.target_train = target_train
         self.data_test = data_test
@@ -243,6 +262,25 @@ class GradientBoostingAlgorithm:
         """
 
         self.model.fit(X=self.data_train, y=self.target_train)
+
+        print(self.model.feature_importances_)
+
+
+    def export_tree(self):
+        """
+        Export the decision tree in text format
+        :param lst_features: List of features of dataset
+        :return: Decision tree in text format
+        """
+        import matplotlib.pyplot as plt
+        from xgboost import plot_tree, plot_importance
+        ##set up the parameters
+        plot_importance(self.model)
+        plt.savefig('importance.png')
+        plot_tree(self.model)
+
+        plt.savefig('tree.png')
+        plt.show()
 
     def get_statistical_metrics(self):
 
