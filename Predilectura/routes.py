@@ -405,6 +405,10 @@ def train_algorithm():
         cart_model = CARTAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values,
                                    request.form.get("cart_criterion"))
         cart_model.build_model()
+
+        lst_features = list(x_train.columns)
+        cart_model.export_tree(lst_features)
+
         file_model = f'{filename_noextension}_CART.pkl'
         path_to_model = path_to_model_folder.joinpath(file_model)
         file_metrics = f'{filename_noextension}_CART.json'
@@ -422,6 +426,10 @@ def train_algorithm():
         # Train random forest selection
         random_forest_model = RandomForestAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values)
         random_forest_model.build_model()
+
+        lst_features = list(x_train.columns)
+        random_forest_model.export_tree(lst_features)
+
         file_model = f'{filename_noextension}_RF.pkl'
         path_to_model = path_to_model_folder.joinpath(file_model)
         file_metrics = f'{filename_noextension}_RF.json'
@@ -437,8 +445,14 @@ def train_algorithm():
 
     if request.form.get("xgboost_select") is not None:
         # Train gradient boosting selection
-        xgboost_model = GradientBoostingAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values)
+
+        lst_features = list(x_train.columns)
+        lst_features.append("target")
+        print(lst_features)
+        xgboost_model = GradientBoostingAlgorithm(x_train.values, y_train.values, x_test.values, y_test.values, lst_features)
         xgboost_model.build_model()
+
+        xgboost_model.export_tree()
         file_model = f'{filename_noextension}_GB.pkl'
         path_to_model = path_to_model_folder.joinpath(file_model)
         file_metrics = f'{filename_noextension}_GB.json'
